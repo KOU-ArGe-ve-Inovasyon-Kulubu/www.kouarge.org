@@ -23,3 +23,4 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
+//CU-27yeqze_TEST-TASK
