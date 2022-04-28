@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -12,6 +13,11 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+void ConfigureServices(IServiceCollection services)
+{
+    services.AddMvc();
+    services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x => { x.LoginPath = "/Account/Login"; });
+}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -23,3 +29,4 @@ app.UseAuthorization();
 app.MapRazorPages();
 
 app.Run();
+

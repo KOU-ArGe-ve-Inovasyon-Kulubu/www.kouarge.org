@@ -1,24 +1,122 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using www.kouarge.org.Extensions;
+using www.kouarge.org.Identity;
+using www.kouarge.org.Models;
 namespace www.kouarge.org.Controllers
 {
+    [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
-        public IActionResult Index()
+
+        private RoleManager<IdentityRole> _roleManager;
+        private UserManager<User> _userManager;
+        public AdminController(RoleManager<IdentityRole> roleManager,UserManager<User> userManager)
         {
-            return View();
+            _roleManager = roleManager;
+            _userManager = userManager;
         }
         public IActionResult RoleList()
         {
-            return View();
+            return View(_roleManager.Roles);
         }
+
         public IActionResult RoleCreate()
         {
             return View();
         }
-        public IActionResult Sayfa()
+        [HttpPost]
+        public async Task<IActionResult> RoleCreate(RoleModel model)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                var result = await _roleManager.CreateAsync(new IdentityRole(model.Name));
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("RoleList");
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            return View(model);
         }
+
+
+        public async Task<IActionResult> RoleEdit(string id)
+        {
+            var role = await _roleManager.FindByIdAsync(id);
+
+            var members = new List<User>();
+            var nonmembers = new List<User>();
+
+            foreach (var user in _userManager.Users)
+            {
+                var list = await _userManager.IsInRoleAsync(user, role.Name)
+                                ? members : nonmembers;
+                list.Add(user);
+            }
+            var model = new RoleDetails()
+            {
+                Role = role,
+                Members = members,
+                NonMembers = nonmembers
+            };
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> RoleEdit(RoleEditModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                foreach (var userId in model.IdsToAdd ?? new string[] { })
+                {
+                    var user = await _userManager.FindByIdAsync(userId);
+                    if (user != null)
+                    {
+                        var result = await _userManager.AddToRoleAsync(user, model.RoleName);
+                        if (!result.Succeeded)
+                        {
+                            foreach (var error in result.Errors)
+                            {
+                                ModelState.AddModelError("", error.Description);
+                            }
+                        }
+                    }
+                }
+
+                foreach (var userId in model.IdsToDelete ?? new string[] { })
+                {
+                    var user = await _userManager.FindByIdAsync(userId);
+                    if (user != null)
+                    {
+                        var result = await _userManager.RemoveFromRoleAsync(user, model.RoleName);
+                        if (!result.Succeeded)
+                        {
+                            foreach (var error in result.Errors)
+                            {
+                                ModelState.AddModelError("", error.Description);
+                            }
+                        }
+                    }
+                }
+            }
+            return Redirect("/admin/role/" + model.RoleId);
+        }
+
+
+
     }
 }
