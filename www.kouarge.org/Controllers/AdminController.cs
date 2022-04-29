@@ -1,29 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using www.kouarge.org.Extensions;
 using www.kouarge.org.Identity;
 using www.kouarge.org.Models;
+
 namespace www.kouarge.org.Controllers
 {
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
-
         private RoleManager<IdentityRole> _roleManager;
         private UserManager<User> _userManager;
-        public AdminController(RoleManager<IdentityRole> roleManager,UserManager<User> userManager)
+        public AdminController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
         {
             _roleManager = roleManager;
             _userManager = userManager;
         }
+
+        public IActionResult Users()
+        {
+            return View(_userManager.Users);
+        }
+
         public IActionResult RoleList()
         {
             return View(_roleManager.Roles);
@@ -53,7 +51,6 @@ namespace www.kouarge.org.Controllers
             }
             return View(model);
         }
-
 
         public async Task<IActionResult> RoleEdit(string id)
         {
@@ -116,7 +113,49 @@ namespace www.kouarge.org.Controllers
             return Redirect("/admin/role/" + model.RoleId);
         }
 
+        public IActionResult RoleAssign(string id)
+        {
+            TempData["userId"] = id;
+            User user = _userManager.FindByIdAsync(id).Result;
+            ViewBag.userName = user.UserName;
+
+            IQueryable<IdentityRole> roles = _roleManager.Roles;
+            List<string> userroles = _userManager.GetRolesAsync(user).Result as List<string>;
+
+            List<RoleAssignViewModel> roleAssignViewModels = new List<RoleAssignViewModel>();
+
+            foreach (var role in roles)
+            {
+                RoleAssignViewModel r = new RoleAssignViewModel();
+                r.RoleId = role.Id;
+                r.RoleName = role.Name;
+                if (userroles.Contains(role.Name))
+                    r.Exist = true;
+                else
+                    r.Exist = false;
 
 
+                roleAssignViewModels.Add(r);
+            }
+
+            return View(roleAssignViewModels);
+        }
+        [HttpPost]
+        public async Task<IActionResult> RoleAssign(List<RoleAssignViewModel> roleAssignViewModels)
+        {
+            User user = _userManager.FindByIdAsync(TempData["userId"].ToString()).Result;
+            foreach (var item in roleAssignViewModels)
+            {
+                if (item.Exist)
+                {
+                    await _userManager.AddToRoleAsync(user, item.RoleName);
+                }
+                else
+                {
+                    await _userManager.RemoveFromRoleAsync(user, item.RoleName);
+                }
+            }
+            return RedirectToAction("Users");
+        }
     }
 }

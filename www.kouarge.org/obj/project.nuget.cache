@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "KacYvT46VeJ0kTzSYQ+ScfrhJSJppQhp0To6XOdZJkhP/bIFduEYMpm5aZXCCWXxFDWKZ4oNAIxDF+ctlPn5cg==",
+  "dgSpecHash": "9lH0wfWd1Ry0KYThbzTcy0Ux7z4vQbWze5AZWbhF4/Jd6bWFJhNZUszRozuhbvoX+wvoDYp6GwZVfimyJoTIkQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\PC\\OneDrive\\Belgeler\\GitHub\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj",
+  "projectFilePath": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\PC\\.nuget\\packages\\humanizer.core\\2.2.0\\humanizer.core.2.2.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",

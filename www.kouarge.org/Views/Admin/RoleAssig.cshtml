@@ -1,0 +1,26 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "RoleAssign";
+    Layout = "C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Pages/Shared/_Layout.cshtml";
+}
+
+<h2>Kullanıcıya rol atama(@ViewBag.userName)</h2>
+<hr />
+
+<form asp-controller="Admin" asp-acrion="RoleAssign" method="post">
+    @for(int i=0;i<Model.Count();i++)
+    {
+        <div class="forö-check">
+            <input asp-for="@Model[i].Exist" type="checkbox" class="form-check-input">
+            <label asp-for="@Model[i].RoleId" class="form-check-label" >@Model[i].RoleName</label>
+            
+            <input asp-for="@Model[i].RoleName" type="hidden"/>
+            <input asp-for="@Model[i].RoleId" type="hidden"/>
+
+        </div>
+    }
+   <input class="btn btn-success" type="submit" value="Rol ata"/>
+
+</form>

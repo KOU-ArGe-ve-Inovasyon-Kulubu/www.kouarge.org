@@ -8,73 +8,81 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = www.kouarge.org
 build_property.RootNamespace = www.kouarge.org
-build_property.ProjectDir = C:\Users\PC\OneDrive\Belgeler\GitHub\www.kouarge.org\www.kouarge.org\
+build_property.ProjectDir = C:\Users\PC\Masaüstü\www.kouarge.org\www.kouarge.org\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\PC\OneDrive\Belgeler\GitHub\www.kouarge.org\www.kouarge.org
+build_property.MSBuildProjectDirectory = C:\Users\PC\Masaüstü\www.kouarge.org\www.kouarge.org
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/PC/OneDrive/Belgeler/GitHub/www.kouarge.org/www.kouarge.org/Pages/Error.cshtml]
+[C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Pages/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/OneDrive/Belgeler/GitHub/www.kouarge.org/www.kouarge.org/Pages/Index.cshtml]
+[C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/OneDrive/Belgeler/GitHub/www.kouarge.org/www.kouarge.org/Pages/Privacy.cshtml]
+[C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Pages/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/OneDrive/Belgeler/GitHub/www.kouarge.org/www.kouarge.org/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/OneDrive/Belgeler/GitHub/www.kouarge.org/www.kouarge.org/Pages/_ViewImports.cshtml]
+[C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/OneDrive/Belgeler/GitHub/www.kouarge.org/www.kouarge.org/Pages/_ViewStart.cshtml]
+[C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/OneDrive/Belgeler/GitHub/www.kouarge.org/www.kouarge.org/Views/Account/AccessDenied.cshtml]
+[C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Views/Account/AccessDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc3NEZW5pZWQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/OneDrive/Belgeler/GitHub/www.kouarge.org/www.kouarge.org/Views/Account/ConfirmEmail.cshtml]
+[C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Views/Account/ConfirmEmail.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxDb25maXJtRW1haWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/OneDrive/Belgeler/GitHub/www.kouarge.org/www.kouarge.org/Views/Account/ForgotPassword.cshtml]
+[C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Views/Account/ForgotPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxGb3Jnb3RQYXNzd29yZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/OneDrive/Belgeler/GitHub/www.kouarge.org/www.kouarge.org/Views/Account/Login.cshtml]
+[C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/OneDrive/Belgeler/GitHub/www.kouarge.org/www.kouarge.org/Views/Account/Register.cshtml]
+[C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/OneDrive/Belgeler/GitHub/www.kouarge.org/www.kouarge.org/Views/Account/ResetPassword.cshtml]
+[C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Views/Account/ResetPassword.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZXNldFBhc3N3b3JkLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/OneDrive/Belgeler/GitHub/www.kouarge.org/www.kouarge.org/Views/Admin/RoleCreate.cshtml]
+[C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Views/Admin/RoleAssig.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUm9sZUFzc2lnLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Views/Admin/RoleCreate.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUm9sZUNyZWF0ZS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/OneDrive/Belgeler/GitHub/www.kouarge.org/www.kouarge.org/Views/Admin/RoleEdit.cshtml]
+[C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Views/Admin/RoleEdit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUm9sZUVkaXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/OneDrive/Belgeler/GitHub/www.kouarge.org/www.kouarge.org/Views/Admin/RoleList.cshtml]
+[C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Views/Admin/RoleList.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUm9sZUxpc3QuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/PC/OneDrive/Belgeler/GitHub/www.kouarge.org/www.kouarge.org/Pages/Shared/_Layout.cshtml]
+[C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Views/Admin/Users.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-62vz0lw1xy
