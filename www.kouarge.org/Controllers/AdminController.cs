@@ -1,16 +1,20 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
+using System.Security.Claims;
 using www.kouarge.org.Identity;
 using www.kouarge.org.Models;
 
 namespace www.kouarge.org.Controllers
 {
     //[Authorize(Roles = "admin")]
+    [Authorize]
     public class AdminController : Controller
     {
         private RoleManager<IdentityRole> _roleManager;
         private UserManager<User> _userManager;
+
         public AdminController(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
         {
             _roleManager = roleManager;
