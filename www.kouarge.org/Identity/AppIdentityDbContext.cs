@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace www.kouarge.org.Identity
 {
-    public class ApplicationContext : IdentityDbContext<User>
+    public class AppIdentityDbContext: IdentityDbContext<AppUser>
     {
-        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
+        public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options): base (options)
         {
 
         }

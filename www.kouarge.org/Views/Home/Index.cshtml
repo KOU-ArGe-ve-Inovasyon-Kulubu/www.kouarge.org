@@ -1,14 +1,17 @@
 ﻿@using Microsoft.AspNetCore.Identity
+@using www.kouarge.org.Identity
+@model AppIdentityDbContext
 @{
-    ViewData["Title"] = "index";
+    ViewData["Title"] = "Users";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
 }
-@model List<IdentityRole>
+
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     <ul>
-        @foreach (var item in Model)
+        @foreach (var item in Model.Roles)
         {
             <li>@item.Name</li>
         }
