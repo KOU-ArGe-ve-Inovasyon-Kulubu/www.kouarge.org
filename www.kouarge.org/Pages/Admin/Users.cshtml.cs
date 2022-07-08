@@ -7,8 +7,9 @@ namespace www.kouarge.org.Pages.Admin
 {
     public class UsersModel : PageModel
     {
-        public void OnGet(UserManager<AppUser> userManager)
+        public void OnGet()
         {
+           
         }
     }
 }

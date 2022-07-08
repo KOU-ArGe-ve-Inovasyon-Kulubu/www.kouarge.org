@@ -5,7 +5,8 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+//builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer("Server=sql.athena.domainhizmetleri.com;Initial Catalog=abdullah_kulup2;User ID=abdullah_kulup;Password=Ar.Ge-2021@"));
 builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<AppIdentityDbContext>()
@@ -47,7 +48,7 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
-    app.UseExceptionHandler("/Home/Error");
+    app.UseExceptionHandler("/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
@@ -55,8 +56,12 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAuthentication();
-app.UseRouting(); 
+app.UseRouting();
 app.UseAuthorization();
+app.MapRazorPages();
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{Page=Home}/{action=Index}/{id?}");
 SeedUser.AddUser(builder.Services.BuildServiceProvider());
 app.Run();
 

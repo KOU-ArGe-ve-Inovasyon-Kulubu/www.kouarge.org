@@ -1,18 +1,10 @@
-﻿@using Microsoft.AspNetCore.Identity
+﻿@page
+@model IndexModel
 @{
-    ViewData["Title"] = "index";
+    ViewData["Title"] = "Home page";
 }
-@model List<IdentityRole>
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    <ul>
-        @foreach (var item in Model)
-        {
-            <li>@item.Name</li>
-        }
-    </ul>
-
-
 </div>
