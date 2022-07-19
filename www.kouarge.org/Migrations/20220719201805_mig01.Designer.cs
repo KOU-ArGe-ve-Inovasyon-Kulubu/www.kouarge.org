@@ -12,8 +12,8 @@ using www.kouarge.org.Identity;
 namespace www.kouarge.org.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20220718210252_mi01")]
-    partial class mi01
+    [Migration("20220719201805_mig01")]
+    partial class mig01
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -169,10 +169,11 @@ namespace www.kouarge.org.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime?>("Date")
+                    b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("DepartmentID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
@@ -183,6 +184,7 @@ namespace www.kouarge.org.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FacultyID")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsActive")
@@ -194,10 +196,11 @@ namespace www.kouarge.org.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<DateTime?>("ModifiedDate")
+                    b.Property<DateTime>("ModifiedDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NormalizedEmail")
@@ -221,9 +224,11 @@ namespace www.kouarge.org.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("StudentNo")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Surname")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("TwoFactorEnabled")
@@ -233,7 +238,7 @@ namespace www.kouarge.org.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<byte?>("Year")
+                    b.Property<byte>("Year")
                         .HasColumnType("tinyint");
 
                     b.HasKey("Id");
