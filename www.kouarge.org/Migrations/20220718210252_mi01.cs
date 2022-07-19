@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace www.kouarge.org.Migrations
 {
-    public partial class mig01 : Migration
+    public partial class mi01 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,14 +28,14 @@ namespace www.kouarge.org.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StudentNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    FacultyID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DepartmentID = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Year = table.Column<byte>(type: "tinyint", nullable: false),
-                    Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Surname = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    StudentNo = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FacultyID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DepartmentID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Year = table.Column<byte>(type: "tinyint", nullable: true),
+                    Date = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsActive = table.Column<bool>(type: "bit", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),

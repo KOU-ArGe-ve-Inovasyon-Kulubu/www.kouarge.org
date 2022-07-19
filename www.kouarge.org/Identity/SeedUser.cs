@@ -4,13 +4,13 @@ namespace www.kouarge.org.Identity
 {
     public class SeedUser
     {
-        
+
         public static async void AddUser(IServiceProvider serviceProvider)
         {
             var userManager = serviceProvider.GetService<UserManager<AppUser>>();
             var roleManager = serviceProvider.GetService<RoleManager<IdentityRole>>();
 
-            if(await userManager.FindByEmailAsync("admin@kouarege.org") == null)
+            if (await userManager.FindByEmailAsync("admin@kouarege.org") == null)
             {
                 var adminUser = new AppUser
                 {
@@ -33,11 +33,13 @@ namespace www.kouarge.org.Identity
 
                 var result = await userManager.CreateAsync(adminUser, "Aasfa124f*");
 
-                if(result.Succeeded)
+                if (result.Succeeded)
                 {
                     await userManager.AddToRoleAsync(adminUser, "Admin");
                 }
             }
+
+
         }
     }
 }

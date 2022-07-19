@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 //builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer("Server=sql.athena.domainhizmetleri.com;Initial Catalog=abdullah_kulup2;User ID=abdullah_kulup;Password=Ar.Ge-2021@"));
+builder.Services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer("Server=sql.athena.domainhizmetleri.com;Initial Catalog=abdullah_dev;User ID=abdullah_dev;Password=Zu06a3r%0"));
 builder.Services.AddIdentity<AppUser, IdentityRole>()
     .AddEntityFrameworkStores<AppIdentityDbContext>()
     .AddDefaultTokenProviders();
