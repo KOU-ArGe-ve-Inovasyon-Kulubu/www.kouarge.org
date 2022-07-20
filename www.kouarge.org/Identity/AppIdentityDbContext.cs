@@ -8,7 +8,7 @@ namespace www.kouarge.org.Identity
     {
         public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options): base (options)
         {
-         
-        }
+           
+        }        
     }
 }

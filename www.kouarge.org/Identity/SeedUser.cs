@@ -4,7 +4,6 @@ namespace www.kouarge.org.Identity
 {
     public class SeedUser
     {
-
         public static async void AddUser(IServiceProvider serviceProvider)
         {
             var userManager = serviceProvider.GetService<UserManager<AppUser>>();
@@ -12,6 +11,13 @@ namespace www.kouarge.org.Identity
 
             if (await userManager.FindByEmailAsync("admin@kouarege.org") == null)
             {
+                await roleManager.CreateAsync(new IdentityRole("Admin"));
+                await roleManager.CreateAsync(new IdentityRole("Iletisim"));
+                await roleManager.CreateAsync(new IdentityRole("Tasarim"));
+                await roleManager.CreateAsync(new IdentityRole("Etkinlik"));
+                await roleManager.CreateAsync(new IdentityRole("SosyalMedya"));
+                await roleManager.CreateAsync(new IdentityRole("Webino"));
+
                 var adminUser = new AppUser
                 {
                     Name = "Admin",
@@ -24,12 +30,6 @@ namespace www.kouarge.org.Identity
                     DepartmentID = "-",
                     StudentNo = "-"
                 };
-                await roleManager.CreateAsync(new IdentityRole("Admin"));
-                await roleManager.CreateAsync(new IdentityRole("Iletisim"));
-                await roleManager.CreateAsync(new IdentityRole("Tasarim"));
-                await roleManager.CreateAsync(new IdentityRole("Etkinlik"));
-                await roleManager.CreateAsync(new IdentityRole("SosyalMedya"));
-                await roleManager.CreateAsync(new IdentityRole("Webino"));
 
                 var result = await userManager.CreateAsync(adminUser, "Aasfa124f*");
 
@@ -38,8 +38,6 @@ namespace www.kouarge.org.Identity
                     await userManager.AddToRoleAsync(adminUser, "Admin");
                 }
             }
-
-
         }
     }
 }

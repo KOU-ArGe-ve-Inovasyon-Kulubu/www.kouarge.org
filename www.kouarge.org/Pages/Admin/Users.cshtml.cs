@@ -7,14 +7,26 @@ namespace www.kouarge.org.Pages.Admin
 {
     public class UsersModel : PageModel
     {
-        //public List<string> sayýlar = new List<string>() { "1", "2", "3", "4" };
-        public AppIdentityDbContext app1 { get; set; }
-        public void OnGet()
+        private readonly AppIdentityDbContext _app1 ;
+        public IEnumerable<AppUser> Users { get; set; }
+
+        #region
+        //public IEnumerable<IdentityUserRole<string>> UserRole { get; set; }
+        //public IEnumerable<IdentityRole<string>> Roles { get; set; }
+        //public string userrolename { get; set; }
+        #endregion
+
+        public UsersModel(AppIdentityDbContext app1)
         {
-            //app1.Users.Count();
-            app1.UserRoles.Count();
-            //sayýlar[0] = "musti";
+            _app1=app1 ;  
         }
 
+        public void OnGet()
+        {
+            Users = _app1.Users;
+            //UserRole = _app1.UserRoles;
+            //Roles = _app1.Roles;
+        }
+    
     }
 }

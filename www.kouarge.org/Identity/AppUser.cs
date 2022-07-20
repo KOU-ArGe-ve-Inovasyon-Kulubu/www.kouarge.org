@@ -8,7 +8,6 @@ namespace www.kouarge.org.Identity
         public string Surname { get; set; }
         public string StudentNo { get; set; }
         public string FacultyID { get; set; }
-        
         public string DepartmentID { get; set; }
         public byte Year { get; set; }
         public DateTime Date { get; set; }

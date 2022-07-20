@@ -59,9 +59,6 @@ app.UseAuthentication();
 app.UseRouting();
 app.UseAuthorization();
 app.MapRazorPages();
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{Page=Home}/{action=Index}/{id?}");
 SeedUser.AddUser(builder.Services.BuildServiceProvider());
 app.Run();
 

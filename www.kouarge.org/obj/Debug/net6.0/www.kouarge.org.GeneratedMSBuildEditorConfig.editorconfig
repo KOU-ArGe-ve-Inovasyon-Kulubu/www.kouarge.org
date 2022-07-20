@@ -15,6 +15,10 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\PC\Masaüstü\www.kouarge.org\www.kouarge.org
 build_property._RazorSourceGeneratorDebug = 
 
+[C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Pages/Admin/Roles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUm9sZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/PC/Masaüstü/www.kouarge.org/www.kouarge.org/Pages/Admin/Users.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cVXNlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
