@@ -17,18 +17,14 @@
                 <th>
                     Surname
                 </th>
-                <th>
-                    User ıd
-                </th>
             </tr>
         </thead>
         <tbody>
             @foreach (var user in @Model.Users)
             {
                 <tr>
-                    <td width="30%">@user.UserName</td>
-                    <td width="30%">@user.Surname</td>
-                    <td width="80%">@user.Id</td>
+                    <td width="50%">@user.UserName</td>
+                    <td width="50%">@user.Surname</td>
                 </tr>
             }
         </tbody>

@@ -6,6 +6,7 @@ using www.kouarge.org.Identity;
 
 namespace www.kouarge.org.Pages.Admin
 {
+    //Sadece admin rolüne sahip kiþiler bu sayfaya eriþebilir 
     [Authorize(Roles ="Admin")]
     public class RolesModel : PageModel
     {

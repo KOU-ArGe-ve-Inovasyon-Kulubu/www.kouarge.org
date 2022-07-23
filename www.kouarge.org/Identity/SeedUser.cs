@@ -37,6 +37,7 @@ namespace www.kouarge.org.Identity
                 {
                     await userManager.AddToRoleAsync(adminUser, "Admin");
                 }
+
             }
         }
     }
