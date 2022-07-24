@@ -31,7 +31,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 
 builder.Services.ConfigureApplicationCookie(options =>
 {
-    options.LoginPath = "/Login";
+    options.LoginPath = "/Account/Login";
     options.LogoutPath = "/Home/Index";
     options.AccessDeniedPath = "/AccesDenied";
     options.ExpireTimeSpan = TimeSpan.FromHours(1);
