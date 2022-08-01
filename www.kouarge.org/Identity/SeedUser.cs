@@ -9,37 +9,7 @@ namespace www.kouarge.org.Identity
             var userManager = serviceProvider.GetService<UserManager<AppUser>>();
             var roleManager = serviceProvider.GetService<RoleManager<IdentityRole>>();
 
-            if (await userManager.FindByEmailAsync("musti@kouarege.org") == null)
-            {
-                //await roleManager.CreateAsync(new IdentityRole("Admin"));
-                //await roleManager.CreateAsync(new IdentityRole("Iletisim"));
-                //await roleManager.CreateAsync(new IdentityRole("Tasarim"));
-                //await roleManager.CreateAsync(new IdentityRole("Etkinlik"));
-                //await roleManager.CreateAsync(new IdentityRole("SosyalMedya"));
-                //await roleManager.CreateAsync(new IdentityRole("Webino"));
-
-                var adminUser = new AppUser
-                {
-                    Name = "musti",
-                    Surname = "-",
-                    Email = "musti@kouarege.org",
-                    EmailConfirmed = true,
-                    UserName = "musti",
-                    PhoneNumber = "5555 55 55555",
-                    FacultyID = "-",
-                    DepartmentID = "-",
-                    StudentNo = "-"
-                };
-
-                var result = await userManager.CreateAsync(adminUser, "musti");
-
-                if (result.Succeeded)
-                {
-                    await userManager.AddToRoleAsync(adminUser, "Admin");
-                }
-
-            }
-
+     
             if (await userManager.FindByEmailAsync("admin@kouarege.org") == null)
             {
                 await roleManager.CreateAsync(new IdentityRole("Admin"));

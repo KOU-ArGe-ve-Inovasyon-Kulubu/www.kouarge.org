@@ -5,54 +5,70 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using www.kouarge.org.Identity;
-using www.kouarge.org.Models;
+
 
 namespace www.kouarge.org.Pages
 {
     public class LoginModel : PageModel
     {
-        [Required]
-        [DataType(DataType.Text)]
-        public string Name { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
-        public string PasswordHash { get; set; }
-        public UserManager<AppUser> AppUsers { get; set; }
-        public AppUser AppUser { get; set; }
-        //public DbSet<AppUser> AppUsers;
-        public AppIdentityDbContext _db { get; set; }
-        public LoginModel(UserManager<AppUser> appUsers, AppIdentityDbContext db)
+        [BindProperty]
+        public InputModel Input { get; set; }
+        public class InputModel
         {
-            AppUsers = appUsers;
-            _db =db;
+
+            [DataType(DataType.Text)]
+            public string Name { get; set; }
+
+            [Required]
+            [DataType(DataType.Password)]
+            public string Password { get; set; }
+
         }
-        public void OnGet()
+        public string ReturnUrl { get; set; }
+
+        [TempData]
+        public string ErrorMessage { get; set; }
+
+        private readonly SignInManager<AppUser> _signInManager;
+
+        private readonly ILogger<LoginModel> _logger;
+
+        public LoginModel(SignInManager<AppUser> signInManager, ILogger<LoginModel> logger)
         {
-          
+            _signInManager = signInManager;
+            _logger = logger;
         }
 
-        public IActionResult OnPost(string name,string passwordhash)
+        public async Task OnGetAsync(string returnUrl = null)
         {
-            if (!ModelState.IsValid)
+            if (!string.IsNullOrEmpty(ErrorMessage))
             {
+                ModelState.AddModelError(string.Empty, ErrorMessage);
+            }
+
+            returnUrl ??= Url.Content("~/");
+
+            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+            ReturnUrl = returnUrl;
+        }
+        public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
+        {
+            returnUrl ??= Url.Content("~/");
+
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(Input.Name, Input.Password, true, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("Baþarýyla giriþ yaptýnýz.");
+
+                    return LocalRedirect(returnUrl);
+                }
+
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                 return Page();
             }
-
-            //var user = await AppUsers.FindByNameAsync(Name);
-            var user = _db.Users.FirstOrDefault(x => x.Name == name && x.PasswordHash == passwordhash);
-            if (user != null)
-            {
-
-                //IdentityUserLogin<string> userLogin = new IdentityUserLogin<string>() { UserId = user.Id };
-                //_db.UserLogins.Add(userLogin);
-                //_db.SaveChanges();
-                
-                return RedirectToPage("Index");
-
-            }
-
-            ModelState.AddModelError("", "Bu kullanýcý adý ile daha önce hesap oluþturulmamýþ");
             return Page();
         }
 

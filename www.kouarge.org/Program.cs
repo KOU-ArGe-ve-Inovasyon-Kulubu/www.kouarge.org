@@ -1,14 +1,17 @@
 using www.kouarge.org.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using www.kouarge.org.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews();
+//builder.Services.AddSession();
+//builder.Services.AddScoped<AppUserService, AppUserServiceImpl>();
 builder.Services.AddDbContext<AppIdentityDbContext>(options => options.UseSqlServer("Server=sql.athena.domainhizmetleri.com;Initial Catalog=abdullah_dev;User ID=abdullah_dev;Password=Zu06a3r%0"));
-builder.Services.AddIdentity<AppUser, IdentityRole>()
+builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount=false)
     .AddEntityFrameworkStores<AppIdentityDbContext>()
     .AddDefaultTokenProviders();
 
@@ -33,7 +36,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = "/Account/Login";
     options.LogoutPath = "/Home/Index";
-    options.AccessDeniedPath = "/AccesDenied";
+    options.AccessDeniedPath = "/Account/AccesDenied";
     options.ExpireTimeSpan = TimeSpan.FromHours(1);
     options.Cookie = new CookieBuilder
     {
@@ -45,6 +48,7 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 var app = builder.Build();
 
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -53,6 +57,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+//app.UseSession();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseAuthentication();
