@@ -1,7 +1,6 @@
 using www.kouarge.org.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using www.kouarge.org.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
