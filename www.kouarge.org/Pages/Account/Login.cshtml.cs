@@ -62,11 +62,10 @@ namespace www.kouarge.org.Pages
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("Baþarýyla giriþ yaptýnýz.");
-
                     return LocalRedirect(returnUrl);
                 }
 
-                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                ModelState.AddModelError(string.Empty, "Geçersiz giriþ denemesi.");
                 return Page();
             }
             return Page();
