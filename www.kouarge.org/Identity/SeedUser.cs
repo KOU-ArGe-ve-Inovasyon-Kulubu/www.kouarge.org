@@ -4,8 +4,10 @@ namespace www.kouarge.org.Identity
 {
     public class SeedUser
     {
+
         public static async void AddUser(IServiceProvider serviceProvider)
-        {
+        {   
+
             var userManager = serviceProvider.GetService<UserManager<AppUser>>();
             var roleManager = serviceProvider.GetService<RoleManager<IdentityRole>>();
 
