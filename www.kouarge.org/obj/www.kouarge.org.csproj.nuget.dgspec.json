@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Ar-Ge & İnovasyon\\Webino\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj": {}
+    "D:\\AbdullahAliGUN\\GitHub\\KOUAr-Ge\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj": {}
   },
   "projects": {
-    "D:\\Ar-Ge & İnovasyon\\Webino\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj": {
+    "D:\\AbdullahAliGUN\\GitHub\\KOUAr-Ge\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Ar-Ge & İnovasyon\\Webino\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj",
+        "projectUniqueName": "D:\\AbdullahAliGUN\\GitHub\\KOUAr-Ge\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj",
         "projectName": "www.kouarge.org",
-        "projectPath": "D:\\Ar-Ge & İnovasyon\\Webino\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj",
+        "projectPath": "D:\\AbdullahAliGUN\\GitHub\\KOUAr-Ge\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj",
         "packagesPath": "C:\\Users\\aagun\\.nuget\\packages\\",
-        "outputPath": "D:\\Ar-Ge & İnovasyon\\Webino\\www.kouarge.org\\www.kouarge.org\\obj\\",
+        "outputPath": "D:\\AbdullahAliGUN\\GitHub\\KOUAr-Ge\\www.kouarge.org\\www.kouarge.org\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\aagun\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,6 +39,38 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[6.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[6.0.5, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.3.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -57,7 +89,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }

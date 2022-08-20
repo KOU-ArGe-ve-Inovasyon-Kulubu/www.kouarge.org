@@ -8,37 +8,65 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = www.kouarge.org
 build_property.RootNamespace = www.kouarge.org
-build_property.ProjectDir = D:\Ar-Ge & İnovasyon\Webino\www.kouarge.org\www.kouarge.org\
+build_property.ProjectDir = D:\AbdullahAliGUN\GitHub\KOUAr-Ge\www.kouarge.org\www.kouarge.org\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\Ar-Ge & İnovasyon\Webino\www.kouarge.org\www.kouarge.org
+build_property.MSBuildProjectDirectory = D:\AbdullahAliGUN\GitHub\KOUAr-Ge\www.kouarge.org\www.kouarge.org
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/Ar-Ge & İnovasyon/Webino/www.kouarge.org/www.kouarge.org/Pages/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcRXJyb3IuY3NodG1s
+[D:/AbdullahAliGUN/GitHub/KOUAr-Ge/www.kouarge.org/www.kouarge.org/Pages/Account/AccesDenied.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxBY2Nlc0RlbmllZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Ar-Ge & İnovasyon/Webino/www.kouarge.org/www.kouarge.org/Pages/Index.cshtml]
+[D:/AbdullahAliGUN/GitHub/KOUAr-Ge/www.kouarge.org/www.kouarge.org/Pages/Account/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/AbdullahAliGUN/GitHub/KOUAr-Ge/www.kouarge.org/www.kouarge.org/Pages/Account/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/AbdullahAliGUN/GitHub/KOUAr-Ge/www.kouarge.org/www.kouarge.org/Pages/Account/Logout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxMb2dvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/AbdullahAliGUN/GitHub/KOUAr-Ge/www.kouarge.org/www.kouarge.org/Pages/Account/Register.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/AbdullahAliGUN/GitHub/KOUAr-Ge/www.kouarge.org/www.kouarge.org/Pages/Admin/Roles.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cUm9sZXMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/AbdullahAliGUN/GitHub/KOUAr-Ge/www.kouarge.org/www.kouarge.org/Pages/Admin/Users.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQWRtaW5cVXNlcnMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/AbdullahAliGUN/GitHub/KOUAr-Ge/www.kouarge.org/www.kouarge.org/Pages/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/AbdullahAliGUN/GitHub/KOUAr-Ge/www.kouarge.org/www.kouarge.org/Pages/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/AbdullahAliGUN/GitHub/KOUAr-Ge/www.kouarge.org/www.kouarge.org/Pages/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Ar-Ge & İnovasyon/Webino/www.kouarge.org/www.kouarge.org/Pages/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = UGFnZXNcUHJpdmFjeS5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
-[D:/Ar-Ge & İnovasyon/Webino/www.kouarge.org/www.kouarge.org/Pages/Shared/_ValidationScriptsPartial.cshtml]
+[D:/AbdullahAliGUN/GitHub/KOUAr-Ge/www.kouarge.org/www.kouarge.org/Pages/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Ar-Ge & İnovasyon/Webino/www.kouarge.org/www.kouarge.org/Pages/_ViewImports.cshtml]
+[D:/AbdullahAliGUN/GitHub/KOUAr-Ge/www.kouarge.org/www.kouarge.org/Pages/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Ar-Ge & İnovasyon/Webino/www.kouarge.org/www.kouarge.org/Pages/_ViewStart.cshtml]
+[D:/AbdullahAliGUN/GitHub/KOUAr-Ge/www.kouarge.org/www.kouarge.org/Pages/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/Ar-Ge & İnovasyon/Webino/www.kouarge.org/www.kouarge.org/Pages/Shared/_Layout.cshtml]
+[D:/AbdullahAliGUN/GitHub/KOUAr-Ge/www.kouarge.org/www.kouarge.org/Pages/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-62vz0lw1xy
