@@ -22,11 +22,11 @@ namespace www.kouarge.org.Identity
         public DbSet<Formatlarımız> Formatlarımız { get; set; }
         public DbSet<GenelKurul> GenelKurul { get; set; }
         public DbSet<GenelKurulBasvuru> GenelKurulBasvuru { get; set; }
-        public DbSet<SosyalMedya> SosyalMedya { get; set; }
-        public DbSet<SosyalMedyaTıpı> SosyalMedyaTıpı { get; set; }
-        public DbSet<SponsorVePartnerler> SponsorVePartnerler { get; set; }
-        public DbSet<Takım> Takım { get; set; }
-        public DbSet<TakımUyeleri> TakımUyeleri { get; set; }
+        public DbSet<SocialMedia> SosyalMedya { get; set; }
+        public DbSet<SocaialMediaType> SosyalMedyaTıpı { get; set; }
+        public DbSet<SponsorsAndPartners> SponsorVePartnerler { get; set; }
+        public DbSet<Team> Takım { get; set; }
+        public DbSet<TeamMember> TakımUyeleri { get; set; }
         #endregion
 
         //protected override void OnModelCreating(ModelBuilder modelBuilder)
