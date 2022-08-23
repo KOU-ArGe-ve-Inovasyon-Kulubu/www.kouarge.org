@@ -5,7 +5,7 @@
         public int id { get; set; }
         public int uyeId { get; set; }
         public string fotograf { get; set; }
-        public DateTime kayıtTarihi { get; set; }
-        public DateTime ayrılmaTarihi { get; set; }
+        public DateTime kayitTarihi { get; set; }
+        public DateTime ayrilmaTarihi { get; set; }
     }
 }

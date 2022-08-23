@@ -1,6 +1,6 @@
 ﻿namespace www.kouarge.org.Models.TablesDb
 {
-    public class TakımUyeleri
+    public class TakimUyeleri
     {
         public int id { get; set; }
         public int genelKurulId { get; set; }

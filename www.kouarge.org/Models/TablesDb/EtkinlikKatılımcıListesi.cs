@@ -1,6 +1,6 @@
 ﻿namespace www.kouarge.org.Models.TablesDb
 {
-    public class EtkinlikKatılımcıListesi
+    public class EtkinlikKatilimciListesi
     {
         public int id { get; set; }
         public int etkinlikId { get; set; }

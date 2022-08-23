@@ -7,7 +7,7 @@
         public string logo { get; set; }
         //public  bit tip  get; set; }
         public string title { get; set; }
-        public DateTime kayıtTarihi { get; set; }
-        public DateTime ayrılmaTarihi { get; set; }
+        public DateTime kayitTarihi { get; set; }
+        public DateTime ayrilmaTarihi { get; set; }
     }
 }
