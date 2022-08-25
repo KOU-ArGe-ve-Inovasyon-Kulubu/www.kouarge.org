@@ -1,10 +1,10 @@
-﻿@page
-@model www.kouarge.org.Pages.Admin.UsersModel
+﻿@using Microsoft.AspNetCore.Identity
+@model  IEnumerable<IdentityRole<string>>
 
 <div class="container p-3">
     <div class="row pt-4">
         <div class="col-6">
-            <h2 class="text-primary">Users List</h2>
+            <h2 class="text-primary">Roles List ....viewdeyiz.....</h2>
         </div>
     </div>
     <br /><br />
@@ -12,19 +12,19 @@
         <thead>
             <tr>
                 <th>
-                    User Name
+                    Role Name
                 </th>
                 <th>
-                    Surname
+                    Id
                 </th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var user in @Model.Users)
+            @foreach (var role in @Model)
             {
                 <tr>
-                    <td width="50%">@user.UserName</td>
-                    <td width="50%">@user.Surname</td>
+                    <td width="50%">@role.Name</td>
+                    <td width="50%">@role.Id</td>
                 </tr>
             }
         </tbody>
