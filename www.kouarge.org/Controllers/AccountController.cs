@@ -19,10 +19,12 @@ namespace www.kouarge.org.Controllers
         public AccountController(SignInManager<AppUser> signInManager)
         {
             _signInManager = signInManager;
+            Input = new();
         }
 
         public IActionResult Index()
         {
+            
             return View();
         }
 

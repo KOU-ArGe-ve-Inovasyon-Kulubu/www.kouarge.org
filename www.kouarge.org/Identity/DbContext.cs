@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using www.kouarge.org.Models;
 using www.kouarge.org.Models.TablesDb;
 
 namespace www.kouarge.org.Identity
@@ -24,20 +25,20 @@ namespace www.kouarge.org.Identity
         //}
 
         #region
-        public DbSet<Bolum> Bolum { get; set; }
-        public DbSet<Donem> Donem { get; set; }
-        public DbSet<Etkinlik> Etkinlik { get; set; }
-        public DbSet<EtkinlikKatilimciListesi> EtkinlikKatılımcıListesi { get; set; }
-        public DbSet<EtkinlikResim> EtkinlikResim { get; set; }
-        public DbSet<Fakulte> Fakulte { get; set; }
-        public DbSet<Formatlarimiz> Formatlarımız { get; set; }
-        public DbSet<GenelKurul> GenelKurul { get; set; }
-        public DbSet<GenelKurulBasvuru> GenelKurulBasvuru { get; set; }
-        public DbSet<SosyalMedya> SosyalMedya { get; set; }
-        public DbSet<SosyalMedyaTipi> SosyalMedyaTıpı { get; set; }
-        public DbSet<SponsorVePartnerler> SponsorVePartnerler { get; set; }
-        public DbSet<Takim> Takım { get; set; }
-        public DbSet<TakimUyeleri> TakımUyeleri { get; set; }
+        public DbSet<Department> Bolum { get; set; }
+        public DbSet<Semester> Donem { get; set; }
+        public DbSet<Event> Etkinlik { get; set; }
+        public DbSet<EventParticipantList> EtkinlikKatılımcıListesi { get; set; }
+        public DbSet<EventPicture> EtkinlikResim { get; set; }
+        public DbSet<Faculty> Fakulte { get; set; }
+        public DbSet<OurFormat> Formatlarımız { get; set; }
+        public DbSet<GeneralAssembly> GenelKurul { get; set; }
+        public DbSet<GeneralAssemblyApply> GenelKurulBasvuru { get; set; }
+        public DbSet<SocialMedia> SosyalMedya { get; set; }
+        public DbSet<SocaialMediaType> SosyalMedyaTıpı { get; set; }
+        public DbSet<SponsorsAndPartners> SponsorVePartnerler { get; set; }
+        public DbSet<Team> Takım { get; set; }
+        public DbSet<TeamMember> TakımUyeleri { get; set; }
         #endregion
     }
 }

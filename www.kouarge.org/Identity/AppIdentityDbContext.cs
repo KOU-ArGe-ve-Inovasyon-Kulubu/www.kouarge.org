@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using www.kouarge.org.Models;
 using www.kouarge.org.Models.TablesDb;
 
 namespace www.kouarge.org.Identity
@@ -12,17 +13,17 @@ namespace www.kouarge.org.Identity
            
         }
 
-<<<<<<< HEAD
+
         #region
-        public DbSet<Bolum> Bolum { get; set; }
-        public DbSet<Donem> Donem { get; set; }
-        public DbSet<Etkinlik> Etkinlik { get; set; }
-        public DbSet<EtkinlikKatılımcıListesi> EtkinlikKatılımcıListesi { get; set; }
-        public DbSet<EtkinlikResim> EtkinlikResim { get; set; }
-        public DbSet<Fakulte> Fakulte { get; set; }
-        public DbSet<Formatlarımız> Formatlarımız { get; set; }
-        public DbSet<GenelKurul> GenelKurul { get; set; }
-        public DbSet<GenelKurulBasvuru> GenelKurulBasvuru { get; set; }
+        public DbSet<Department> Bolum { get; set; }
+        public DbSet<Semester> Donem { get; set; }
+        public DbSet<Event> Etkinlik { get; set; }
+        public DbSet<EventParticipantList> EtkinlikKatılımcıListesi { get; set; }
+        public DbSet<EventPicture> EtkinlikResim { get; set; }
+        public DbSet<Faculty> Fakulte { get; set; }
+        public DbSet<OurFormat> Formatlarımız { get; set; }
+        public DbSet<GeneralAssembly> GenelKurul { get; set; }
+        public DbSet<GeneralAssemblyApply> GenelKurulBasvuru { get; set; }
         public DbSet<SocialMedia> SosyalMedya { get; set; }
         public DbSet<SocaialMediaType> SosyalMedyaTıpı { get; set; }
         public DbSet<SponsorsAndPartners> SponsorVePartnerler { get; set; }
@@ -48,7 +49,6 @@ namespace www.kouarge.org.Identity
         //    modelBuilder.Entity<TakımUyeleri>().ToTable("TAKIM_UYELERI");
         //}
 
-=======
->>>>>>> 7c417516c2f1977ebb158f4fd7cee7bcf0d5f59c
+
     }
 }
