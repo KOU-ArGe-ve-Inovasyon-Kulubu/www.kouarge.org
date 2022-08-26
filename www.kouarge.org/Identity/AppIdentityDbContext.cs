@@ -12,6 +12,7 @@ namespace www.kouarge.org.Identity
            
         }
 
+<<<<<<< HEAD
         #region
         public DbSet<Bolum> Bolum { get; set; }
         public DbSet<Donem> Donem { get; set; }
@@ -47,5 +48,7 @@ namespace www.kouarge.org.Identity
         //    modelBuilder.Entity<TakımUyeleri>().ToTable("TAKIM_UYELERI");
         //}
 
+=======
+>>>>>>> 7c417516c2f1977ebb158f4fd7cee7bcf0d5f59c
     }
 }
