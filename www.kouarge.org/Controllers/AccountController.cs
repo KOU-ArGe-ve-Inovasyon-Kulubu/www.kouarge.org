@@ -7,24 +7,20 @@ using www.kouarge.org.Models;
 
 namespace www.kouarge.org.Controllers
 {
-   
+
 
     public class AccountController : Controller
     {
-
         private readonly SignInManager<AppUser> _signInManager;
-
-        public InputModel Input { get; set; }
+        public String ErrorMessage { get; set; }
 
         public AccountController(SignInManager<AppUser> signInManager)
         {
             _signInManager = signInManager;
-            Input = new();
         }
 
         public IActionResult Index()
         {
-            
             return View();
         }
 
@@ -33,37 +29,32 @@ namespace www.kouarge.org.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Login(string? returnUrl = null)
+        public async Task<IActionResult> Login()
         {
-            if (!string.IsNullOrEmpty(Input.ErrorMessage))
+            if (!string.IsNullOrEmpty(ErrorMessage))
             {
-                ModelState.AddModelError(string.Empty, Input.ErrorMessage);
+                ModelState.AddModelError(string.Empty, ErrorMessage);
             }
-
-            returnUrl ??= Url.Content("~/");
-
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-            Input.ReturnUrl = returnUrl;
-            return View(Input);
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login()
+        public async Task<IActionResult> Login(string name, string password,string? returnUrl=null)
         {
-            Input.ReturnUrl ??= Url.Content("~/");
-
+            returnUrl ??= Url.Content("~/");
             if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(Input.Name, Input.Password, true, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(name, password, true, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    return LocalRedirect(Input.ReturnUrl);
+                    return LocalRedirect(returnUrl);
                 }
 
                 ModelState.AddModelError(string.Empty, "Geçersiz giriş denemesi.");
                 return View();
             }
-            return View(Input);
+            return View();
         }
 
         public IActionResult Logout()
@@ -71,7 +62,7 @@ namespace www.kouarge.org.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> Logout(string? returnUrl = null) 
+        public async Task<IActionResult> Logout(string? returnUrl = null)
         {
             await _signInManager.SignOutAsync();
             if (returnUrl != null)
@@ -86,7 +77,7 @@ namespace www.kouarge.org.Controllers
         //şimdilik eksik 
         public IActionResult Register()
         {
-            return View(Input);
+            return View();
         }
     }
 }

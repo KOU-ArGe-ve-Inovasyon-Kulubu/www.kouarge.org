@@ -7,15 +7,15 @@ namespace www.kouarge.org.Models
     {
 
         [DataType(DataType.Text)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        public string Password { get; set; }
+        public string? Password { get; set; }
 
-        public string ReturnUrl { get; set; }
+        public string? ReturnUrl { get; set; }
 
         [TempData]
-        public string ErrorMessage { get; set; }
+        public string? ErrorMessage { get; set; }
     }
 }
