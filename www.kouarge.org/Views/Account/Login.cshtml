@@ -1,0 +1,29 @@
+﻿@using www.kouarge.org.Models
+@model InputModel
+
+
+<form id="account" method="post">
+    <h2>Giriş yap.</h2>
+    <hr />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-floating">
+        <input asp-for="@Model.Name" class="form-control" autocomplete="username" aria-required="true" />
+        <label asp-for="@Model.Name" class="form-label"></label>
+        <span asp-validation-for="@Model.Name" class="text-danger"></span>
+    </div>
+    <div class="form-floating">
+        <input asp-for="@Model.Password" class="form-control" autocomplete="current-password" aria-required="true" />
+        <label asp-for="@Model.Password" class="form-label"></label>
+        <span asp-validation-for="@Model.Password" class="text-danger"></span>
+    </div>
+
+    <div>
+        <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Giriş yap</button>
+    </div>
+</form>
+
+@section Scripts
+{
+<script src="/modules/jquery-validation/dist/jquery.validate.min.js"></script>
+<script src="/modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+}
