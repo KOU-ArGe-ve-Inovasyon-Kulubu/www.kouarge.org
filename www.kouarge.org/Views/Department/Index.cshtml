@@ -1,0 +1,39 @@
+﻿@model List<DepartmentWithFacultyDto>
+@{
+	ViewData["Title"] = "Index";
+}
+<h1>Index</h1>
+<a class="btn btn-primary" asp-action="save" asp-controller="department">New</a>
+<table class="table table-stripped">
+	<thead>
+		<tr>
+			<td>Id</td>
+			<td>Name</td>
+			<td>FacultyId</td>
+			<td>Faculty</td>
+			<td>Created At</td>
+			<td>Update</td>
+		</tr>
+	</thead>
+	<tbody>
+
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@item.Id</td>
+				<td>@item.Name</td>
+				<td>@item.FacultyId</td>
+				<td>@item.Faculty.Name</td>
+				<td>@item.CreatedAt</td>
+				<td>
+				<a class="btn btn-warning" asp-action="update" asp-controller="department" asp-route-id="@item.Id">Update</a>	
+				</td>
+				<td> 
+				<a class="btn btn-danger" asp-action="delete" asp-controller="department" asp-route-id="@item.Id">Delete</a>	
+				</td>
+			</tr>
+		}
+
+	</tbody>
+</table>
+

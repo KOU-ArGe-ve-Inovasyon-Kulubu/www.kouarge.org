@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using KouArge.Core.Models;
+using KouArge.Repository;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using www.kouarge.org.Identity;
 
 namespace www.kouarge.org.Controllers
 {

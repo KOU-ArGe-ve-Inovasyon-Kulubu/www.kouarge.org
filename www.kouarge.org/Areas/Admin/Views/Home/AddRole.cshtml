@@ -1,0 +1,25 @@
+﻿@using KouArge.Core.Models
+
+@{
+    ViewData["Title"] = "Save";
+}
+<h1>Save</h1>
+@model AppRole
+<div class="row">
+
+    <div class="col-md-6">
+        <form asp-action="AddRole" asp-controller="Home" method="post">
+
+            <div class="form-group">
+                <label asp-for="Name" ></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger" ></span>
+            </div>
+
+            <input type="submit" value="Save" class="btn btn-primary" />
+
+        </form>
+    </div>
+    
+</div>
+
