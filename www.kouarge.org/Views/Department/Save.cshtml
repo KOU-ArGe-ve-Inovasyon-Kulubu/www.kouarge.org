@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "Save";
+}
+<h1>Save</h1>
+@model DepartmentDto
+<div class="row">
+
+    <div class="col-md-6">
+        <form asp-action="Save" asp-controller="department" method="post">
+
+            <div class="form-group">
+                <label asp-for="Name" ></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger" ></span>
+            </div>
+
+              <div  class="form-group">
+                <label asp-for="FacultyId" ></label>
+               <select asp-for="FacultyId" asp-items="ViewBag.Faculty" class="form-control">
+                   <option value="">Lütfen Fakülte Seçiniz</option>
+               </select>
+                <span asp-validation-for="FacultyId" class="text-danger" ></span>
+
+            </div>
+
+            <input type="submit" value="Save" class="btn btn-primary" />
+
+        </form>
+    </div>
+    
+</div>
+

@@ -1,22 +1,31 @@
-﻿@using www.kouarge.org.Models
-<form id="account" method="post">
-    <h2>Giriş yap.</h2>
-    <hr />
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-floating">
-        <input name="name" class="form-control" autocomplete="username" aria-required="true" />
-        <label  class="form-label">Kullanıcı Adı</label>
-        <span class="text-danger"></span>
-    </div>
-    <div class="form-floating">
-        <input name="password" class="form-control" autocomplete="current-password" aria-required="true" />
-        <label class="form-label">Şifre</label>
-        <span class="text-danger"></span>
-    </div>
+﻿@model AppUserLoginDto
+<form asp-action="login" method="post" asp-controller="Account">
+	<h2>Giriş yap.</h2>
+	<hr />
+	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <div>
-        <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Giriş yap</button>
-    </div>
+	<div class="form-group">
+		<label asp-for="Email"></label>
+		<input asp-for="Email" class="form-control" autocomplete="on" aria-required="true" />
+		<span asp-validation-for="Email" class="text-danger"></span>
+	</div>
+
+		<div class="form-control">
+		<label asp-for="Password"></label>
+		<input asp-for="Password" class="form-control" autocomplete="current-password" aria-required="true" />
+		<span asp-validation-for="Password" class="text-danger"></span>
+	</div>
+
+@*	<div class="form-floating">
+		<input name="password" class="form-control" autocomplete="current-password" aria-required="true" />
+		<label class="form-label">Şifre</label>
+		<span class="text-danger"></span>
+	</div>*@
+	<br />
+
+	<div>
+		<button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Giriş yap</button>
+	</div>
 </form>
 
 @section Scripts
