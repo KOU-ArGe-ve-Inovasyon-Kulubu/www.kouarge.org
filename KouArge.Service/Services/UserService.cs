@@ -49,7 +49,7 @@ namespace KouArge.Service.Services
                 var roles = await _userManager.GetRolesAsync(user);
                 if (roles.Count == 0)
                     roles = new List<string>();
-                Token token = _tokenHandler.CreateAccessToken(20,roles.ToList());
+                Token token = _tokenHandler.CreateAccessToken(60,roles.ToList());
                 var data = _mapper.Map<AppUserDto>(user);
                 data.Token = token;
                 return CustomResponseDto<AppUserDto>.Success(200, data);
@@ -58,23 +58,6 @@ namespace KouArge.Service.Services
             else
                 return CustomResponseDto<AppUserDto>.Fail(400, "E-Mail veya şifre yanlış.", 1);
         }
-
-
-        //***********************
-        //public async Task<AppUser> CheckEmail(string email)
-        //{
-        //    var result = await _userManager.FindByEmailAsync(email);
-
-        //    return result;
-        //}
-        //public async Task<AppUser> CheckStudentNumber(string studentNumber)
-        //{
-        //    var result = await _userManager.Users.FirstOrDefaultAsync(x => x.StudentNo == studentNumber);
-
-        //    return result;
-        //}
-        //***********************
-
 
         public async Task<CustomResponseDto<AppUserRegisterDto>> Register(AppUserRegisterDto appuserRegisterDto)
         {

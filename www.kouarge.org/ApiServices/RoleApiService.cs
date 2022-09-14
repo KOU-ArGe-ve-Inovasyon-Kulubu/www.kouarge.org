@@ -6,46 +6,29 @@ namespace www.kouarge.org.ApiServices
 {
     public class RoleApiService
     {
-        private HttpClient _httpClient;
+        private readonly RequestApiService _request;
 
-        public RoleApiService(HttpClient httpClient)
+        public RoleApiService(RequestApiService request)
         {
-            _httpClient = httpClient;
+            _request = request;
         }
 
         public async Task<AppRole> AddRoleAsync(AppRoleDto role)
         {
-            var response = await _httpClient.PostAsJsonAsync("Role", role);
-            if (response.IsSuccessStatusCode)
-            {
-                var responseBody = await response.Content.ReadFromJsonAsync<CustomResponseDto<AppRole>>();
-                return responseBody.Data;
-            }
-            return null;
-
+            var response = await _request.PostAsync<AppRole, AppRoleDto>("Role", role);
+            return response;
         }
 
         public async Task<List<AppRole>> GetRolesAsync()
         {
-            try
-            {
-                var response = await _httpClient.GetFromJsonAsync<CustomResponseDto<List<AppRole>>>("Role");
-                //var responseBody = await response.Content.ReadFromJsonAsync<CustomResponseDto<AppRole>>();
-                return response.Data;
-            }
-            catch (HttpRequestException ex)
-            {
-                throw;
-            }
-
+            var response = await _request.GetAsync<CustomResponseDto<List<AppRole>>>("Role");
+            return response.Data;
         }
 
         public async Task<bool> DeleteRoleAsync(string id)
         {
-
-            var response = await _httpClient.DeleteAsync($"Role/{id}");
-            //var responseBody = await response.Content.ReadFromJsonAsync<CustomResponseDto<AppRole>>();
-            return response.IsSuccessStatusCode;
+            var response = await _request.DeleteAsync($"Role/{id}");
+            return response;
         }
     }
 }

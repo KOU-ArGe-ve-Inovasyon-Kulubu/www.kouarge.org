@@ -594,12 +594,12 @@ namespace KouArge.Repository.Migrations
             migrationBuilder.InsertData(
                 table: "Faculties",
                 columns: new[] { "Id", "Campus", "CreatedAt", "Name", "UpdatedAt" },
-                values: new object[] { 1, "Kocaeli", new DateTime(2022, 8, 30, 15, 20, 32, 671, DateTimeKind.Local).AddTicks(3501), "Teknoloji", null });
+                values: new object[] { 1, "Kocaeli", new DateTime(2022, 9, 13, 16, 26, 43, 929, DateTimeKind.Local).AddTicks(8142), "Teknoloji", null });
 
             migrationBuilder.InsertData(
                 table: "Departments",
                 columns: new[] { "Id", "CreatedAt", "FacultyId", "Name", "UpdatedAt" },
-                values: new object[] { 1, new DateTime(2022, 8, 30, 15, 20, 32, 671, DateTimeKind.Local).AddTicks(3309), 1, "Bil Sis. Müh.", null });
+                values: new object[] { 1, new DateTime(2022, 9, 13, 16, 26, 43, 929, DateTimeKind.Local).AddTicks(7977), 1, "Bil Sis. Müh.", null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AppUserGeneralAssemblyApply_UsersId",

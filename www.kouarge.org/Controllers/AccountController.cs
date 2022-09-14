@@ -58,7 +58,7 @@ namespace www.kouarge.org.Controllers
                 if (result.Errors == null)
                 {
                     HttpContext.Session.SetString("X-Access-Token", result.Token.AccessToken);
-                    Response.Cookies.Append("X-Access-Token", result.Token.AccessToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict,Expires=result.Token.Expiration });
+                    Response.Cookies.Append("X-Access-Token", result.Token.AccessToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Expires = result.Token.Expiration });
                     return RedirectToAction("Index");
                 }
                 else
@@ -73,7 +73,7 @@ namespace www.kouarge.org.Controllers
                 }
             }
             else
-            { 
+            {
                 return View(user);
             }
         }

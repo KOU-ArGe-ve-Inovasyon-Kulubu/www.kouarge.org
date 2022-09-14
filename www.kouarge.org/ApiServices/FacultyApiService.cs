@@ -6,65 +6,41 @@ namespace www.kouarge.org.ApiServices
 {
     public class FacultyApiService
     {
-        private readonly HttpClient _httpClient;
+        private readonly RequestApiService _request;
 
-        public FacultyApiService(HttpClient httpClient)
+        public FacultyApiService(RequestApiService requestApiService)
         {
-            _httpClient = httpClient;
+            _request = requestApiService;
         }
 
         public async Task<List<FacultyDto>> GetAllAsync()
         {
-            try
-            {
-                var response = await _httpClient.GetFromJsonAsync<CustomResponseDto<List<FacultyDto>>>("faculty");
-                return response.Data;
-            }
-            catch (HttpRequestException ex)
-            {
-
-                if (ex.StatusCode == HttpStatusCode.Unauthorized)
-                    throw new UnAuthorizedException(ex.Message);
-
-                if (ex.StatusCode == HttpStatusCode.Forbidden)
-                    throw new ForbiddenException("yetki yok");
-
-                return null;
-
-            }
-  
+            var response = await _request.GetAsync<CustomResponseDto<List<FacultyDto>>>("faculty");
+            return response.Data;
         }
 
         public async Task<FacultyDto> Save(FacultyDto facultyDto)
         {
-            var response = await _httpClient.PostAsJsonAsync("faculty", facultyDto);
-            var responseBody = await response.Content.ReadFromJsonAsync<CustomResponseDto<FacultyDto>>();
-            return responseBody.Data;
+            var response = await _request.PostAsync<CustomResponseDto<FacultyDto>, FacultyDto>("faculty", facultyDto);
+            return response.Data;
         }
 
         public async Task<FacultyDto> GetByIdAsync(int id)
         {
-            try
-            {
-                var response = await _httpClient.GetFromJsonAsync<CustomResponseDto<FacultyDto>>($"faculty/{id}");
-                return response.Data;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            var response = await _request.PostAsync<CustomResponseDto<FacultyDto>>($"faculty/{id}");
+            return response.Data;
         }
 
         public async Task<bool> UpdateAsync(FacultyDto facultyDto)
         {
-            var response = await _httpClient.PutAsJsonAsync("faculty", facultyDto);
-            return response.IsSuccessStatusCode;
+            var response = await _request.PutAsync("faculty", facultyDto);
+            return response;
         }
 
         public async Task<bool> DeleteAsync(int id)
         {
-            var response = await _httpClient.DeleteAsync($"faculty/{id}");
-            return response.IsSuccessStatusCode;
+            var response = await _request.DeleteAsync($"faculty/{id}");
+            return response;
         }
     }
 }

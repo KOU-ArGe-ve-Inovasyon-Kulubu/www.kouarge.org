@@ -6,7 +6,6 @@ namespace www.kouarge.org.ApiServices
     public class AccountApiService
     {
         private readonly HttpClient _httpClient;
-
         public AccountApiService(HttpClient httpClient)
         {
             _httpClient = httpClient;

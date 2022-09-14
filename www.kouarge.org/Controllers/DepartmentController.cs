@@ -70,7 +70,7 @@ namespace www.kouarge.org.Controllers
 
             if (ModelState.IsValid)
             {
-               var success = await _departmentApiService.UpdateAsync(departmentDto);
+                var success = await _departmentApiService.UpdateAsync(departmentDto);
                 if (success)
                     return RedirectToAction(nameof(Index));
 
@@ -95,7 +95,6 @@ namespace www.kouarge.org.Controllers
 
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error(ErrorViewModel errorViewModel)
         {
             return View(errorViewModel);

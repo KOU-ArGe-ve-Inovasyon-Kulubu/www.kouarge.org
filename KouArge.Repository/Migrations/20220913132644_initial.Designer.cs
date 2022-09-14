@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KouArge.Repository.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20220830122032_initial")]
+    [Migration("20220913132644_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,6 +52,33 @@ namespace KouArge.Repository.Migrations
                     b.HasIndex("TeamMembersId");
 
                     b.ToTable("GeneralAssemblyTeamMember");
+                });
+
+            modelBuilder.Entity("KouArge.Core.Models.AppRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.AppUser", b =>
@@ -186,7 +213,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 8, 30, 15, 20, 32, 671, DateTimeKind.Local).AddTicks(3309),
+                            CreatedAt = new DateTime(2022, 9, 13, 16, 26, 43, 929, DateTimeKind.Local).AddTicks(7977),
                             FacultyId = 1,
                             Name = "Bil Sis. Müh."
                         });
@@ -337,7 +364,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 1,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 8, 30, 15, 20, 32, 671, DateTimeKind.Local).AddTicks(3501),
+                            CreatedAt = new DateTime(2022, 9, 13, 16, 26, 43, 929, DateTimeKind.Local).AddTicks(8142),
                             Name = "Teknoloji"
                         });
                 });
@@ -706,33 +733,6 @@ namespace KouArge.Repository.Migrations
                     b.ToTable("TeamMembers");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles", (string)null);
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -1019,7 +1019,7 @@ namespace KouArge.Repository.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("KouArge.Core.Models.AppRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1046,7 +1046,7 @@ namespace KouArge.Repository.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
+                    b.HasOne("KouArge.Core.Models.AppRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)

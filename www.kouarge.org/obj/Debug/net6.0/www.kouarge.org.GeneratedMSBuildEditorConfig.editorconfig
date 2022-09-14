@@ -8,133 +8,133 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = www.kouarge.org
 build_property.RootNamespace = www.kouarge.org
-build_property.ProjectDir = C:\Users\mustafa\Desktop\.net\core\yeni\www.kouarge.org\www.kouarge.org\
+build_property.ProjectDir = C:\Users\mustafa\Desktop\www.kouarge.org\www.kouarge.org\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\mustafa\Desktop\.net\core\yeni\www.kouarge.org\www.kouarge.org
+build_property.MSBuildProjectDirectory = C:\Users\mustafa\Desktop\www.kouarge.org\www.kouarge.org
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Areas/Admin/Views/Home/AddRole.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Areas/Admin/Views/Home/AddRole.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxBZGRSb2xlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Areas/Admin/Views/Home/Index.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Areas/Admin/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Areas/Admin/Views/Role/AddRole.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Areas/Admin/Views/Role/AddRole.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUm9sZVxBZGRSb2xlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Areas/Admin/Views/Role/Index.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Areas/Admin/Views/Role/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcUm9sZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Areas/Admin/Views/Shared/Error.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Areas/Admin/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Areas/Admin/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Areas/Admin/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Areas/Admin/Views/_ViewImports.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Areas/Admin/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Areas/Admin/Views/_ViewStart.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Areas/Admin/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/Account/AccesDenied.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/Account/AccesDenied.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxBY2Nlc0RlbmllZC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/Account/Index.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/Account/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/Account/Login.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/Account/Login.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/Account/Logout.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/Account/Logout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxMb2dvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/Account/Register.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/Admin/Roles.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/Admin/Roles.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cUm9sZXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/Admin/Users.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/Admin/Users.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5cVXNlcnMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/Department/Forbidden.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/Department/Forbidden.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0bWVudFxGb3JiaWRkZW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/Department/Index.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/Department/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0bWVudFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/Department/Save.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/Department/Save.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0bWVudFxTYXZlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/Department/Update.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/Department/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0bWVudFxVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/Faculty/Index.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/Faculty/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFjdWx0eVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/Faculty/Save.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/Faculty/Save.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFjdWx0eVxTYXZlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/Faculty/Update.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/Faculty/Update.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRmFjdWx0eVxVcGRhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/Home/Index.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/Home/Privacy.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/Index.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/Shared/Error.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/_ViewImports.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/_ViewStart.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Areas/Admin/Views/Shared/_Layout.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Areas/Admin/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-psl8myfe23
 
-[C:/Users/mustafa/Desktop/.net/core/yeni/www.kouarge.org/www.kouarge.org/Views/Shared/_Layout.cshtml]
+[C:/Users/mustafa/Desktop/www.kouarge.org/www.kouarge.org/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-u7sm9k3q5r

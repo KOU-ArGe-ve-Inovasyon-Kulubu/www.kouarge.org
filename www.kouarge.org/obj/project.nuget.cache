@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ej97q8aNYVT38j+yu9G9g/xyjJvSDYD8p9+P5tpZgynXMUCplJxcDgTP3Vx0pWtBoGllwHqLD4vwLQw3P3lmMg==",
+  "dgSpecHash": "naiYiV1pYa7Qi/4Cq6rWDHu/JAILkUV6eUZNpUti2DaV0vAcdOF5WwBH1Wl6GvrE1kjZEMarSIl72ZmUSMBkVA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\mustafa\\Desktop\\.net\\core\\yeni\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj",
+  "projectFilePath": "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mustafa\\.nuget\\packages\\autofac\\6.4.0\\autofac.6.4.0.nupkg.sha512",
     "C:\\Users\\mustafa\\.nuget\\packages\\autofac.extensions.dependencyinjection\\8.0.0\\autofac.extensions.dependencyinjection.8.0.0.nupkg.sha512",

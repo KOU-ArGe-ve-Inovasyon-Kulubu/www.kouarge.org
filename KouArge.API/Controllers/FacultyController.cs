@@ -27,7 +27,7 @@ namespace KouArge.API.Controllers
             return CreateActionResult(await _facultyService.GetAllFacultysWithDepartmentsAsync());
         }
 
-        [HttpGet("[Action]/{facultyId}")]
+        [HttpPost("[Action]/{facultyId}")]
         public async Task<IActionResult> GetSingleFacultyByIdWithDepartment(int facultyId)
         {
             return CreateActionResult(await _facultyService.GetSingleFacultyByIdWithDepartmentAsync(facultyId));
@@ -41,7 +41,7 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<List<FacultyDto>>.Success(200, facultyDto));
         }
 
-        [HttpGet("{id}")]
+        [HttpPost("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var faculty = await _facultyService.GetByIdAsync(id);

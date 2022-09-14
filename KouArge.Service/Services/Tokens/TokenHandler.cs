@@ -33,8 +33,9 @@ namespace KouArge.Service.Services.Tokens
             //claims
             var claims =new List<Claim>();
             if (roles.Count!=0)
-                claims = new List<Claim>(){new Claim(ClaimTypes.Role,roles[0])};
-        
+                foreach (var item in roles)
+                    claims.Add(new Claim(ClaimTypes.Role, item));
+
             JwtSecurityToken securityToken = new(
                 audience: _configruation["Token:Audience"],
                 issuer: _configruation["Token:Issuer"],
