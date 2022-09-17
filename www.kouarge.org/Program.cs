@@ -1,10 +1,16 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using FluentValidation.AspNetCore;
+using KouArge.Core.Services;
+using KouArge.Core.UnitOfWorks;
+using KouArge.Repository;
+using KouArge.Repository.UnitOfWork;
+using KouArge.Service.Services;
 using KouArge.Service.Validations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection;
 using www.kouarge.org.ApiServices;
 using www.kouarge.org.Filters;
 using www.kouarge.org.MiddleWares;
@@ -16,6 +22,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<DepartmentDtoValidator>());
 
+builder.Services.AddScoped<IRedirectService, RedirectService>();
 
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
@@ -24,6 +31,14 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
     containerBuilder.RegisterModule(new HttpModule());
 });
 
+//*************
+builder.Services.AddDbContext<AppIdentityDbContext>(x =>
+{
+    x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"), option =>
+    {
+    });
+});
+//*************
 
 builder.Services.AddControllers(options => {
     //options.Filters.Add<NotFoundFilter<>>();
@@ -39,7 +54,6 @@ builder.Services.AddControllers(options => {
 
 //*****
 //builder.Services.AddScoped(typeof(NotFoundFilter<>));
-
 builder.Services.AddScoped<TokenService>();
 
 //builder.Services.AddHttpClient<DepartmentApiService>(opt =>

@@ -34,12 +34,6 @@ namespace www.kouarge.org.MiddleWares
 
                     if (statusCode==404)
                         context.Response.Redirect("/Department/Error");
-
-                    //context.Response.StatusCode = statusCode;
-                    //var response = CustomResponseDto<NoContentDto>.Fail(statusCode, exceptionFeature.Error.Message);
-
-                    //await context.Response.WriteAsync(JsonSerializer.Serialize(response));
-
                 });
             });
         }

@@ -63,7 +63,7 @@ namespace www.kouarge.org.ApiServices
 
         }
 
-        public async Task<T> PostAsync<T,TData>(string path,TData data)
+        public async Task<T> PostAsync<T, TData>(string path, TData data)
         {
             var response = await _httpClient.PostAsJsonAsync(path, data);
             var responseBody = await response.Content.ReadFromJsonAsync<T>();
@@ -73,13 +73,18 @@ namespace www.kouarge.org.ApiServices
         //parameter post
         public async Task<T> PostAsync<T>(string path)
         {
-            var response = await _httpClient.PostAsJsonAsync(path,default(T));
+            var response = await _httpClient.PostAsJsonAsync(path, default(T));
             //var response = await _httpClient.PostAsync(path,null);
             var responseBody = await response.Content.ReadFromJsonAsync<T>();
             return responseBody;
         }
 
-        public async Task<bool> PutAsync<TData>(string path,TData data)
+        //public async Task OnlyPostAsync<T>(string path)
+        //{
+        //    await _httpClient.PostAsJsonAsync(path, default(T));
+        //}
+
+        public async Task<bool> PutAsync<TData>(string path, TData data)
         {
             var response = await _httpClient.PutAsJsonAsync(path, data);
             return response.IsSuccessStatusCode;

@@ -10,7 +10,6 @@ namespace KouArge.Repository
         public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options)
         {
         }
-
         public DbSet<Department> Departments { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<EventParticipant> EventParticipants { get; set; }
@@ -26,6 +25,9 @@ namespace KouArge.Repository
         public DbSet<Team> Teams { get; set; }
         public DbSet<TeamMember> TeamMembers { get; set; }
         public DbSet<GeneralAssemblyTeam> GeneralAssemblyTeams { get; set; }
+
+        //***************
+        public DbSet<Redirect> Redirects { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

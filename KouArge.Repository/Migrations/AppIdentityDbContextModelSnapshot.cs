@@ -211,7 +211,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 9, 13, 16, 26, 43, 929, DateTimeKind.Local).AddTicks(7977),
+                            CreatedAt = new DateTime(2022, 9, 17, 21, 13, 5, 368, DateTimeKind.Local).AddTicks(3502),
                             FacultyId = 1,
                             Name = "Bil Sis. Müh."
                         });
@@ -362,7 +362,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 1,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 9, 13, 16, 26, 43, 929, DateTimeKind.Local).AddTicks(8142),
+                            CreatedAt = new DateTime(2022, 9, 17, 21, 13, 5, 368, DateTimeKind.Local).AddTicks(3691),
                             Name = "Teknoloji"
                         });
                 });
@@ -522,6 +522,23 @@ namespace KouArge.Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("OurFormats");
+                });
+
+            modelBuilder.Entity("KouArge.Core.Models.Redirect", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Redirects");
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.Semester", b =>

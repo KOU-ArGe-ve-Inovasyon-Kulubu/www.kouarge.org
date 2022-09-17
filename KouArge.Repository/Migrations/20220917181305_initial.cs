@@ -59,6 +59,19 @@ namespace KouArge.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Redirects",
+                columns: table => new
+                {
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Count = table.Column<int>(type: "int", nullable: false),
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Redirects", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Semesters",
                 columns: table => new
                 {
@@ -594,12 +607,12 @@ namespace KouArge.Repository.Migrations
             migrationBuilder.InsertData(
                 table: "Faculties",
                 columns: new[] { "Id", "Campus", "CreatedAt", "Name", "UpdatedAt" },
-                values: new object[] { 1, "Kocaeli", new DateTime(2022, 9, 13, 16, 26, 43, 929, DateTimeKind.Local).AddTicks(8142), "Teknoloji", null });
+                values: new object[] { 1, "Kocaeli", new DateTime(2022, 9, 17, 21, 13, 5, 368, DateTimeKind.Local).AddTicks(3691), "Teknoloji", null });
 
             migrationBuilder.InsertData(
                 table: "Departments",
                 columns: new[] { "Id", "CreatedAt", "FacultyId", "Name", "UpdatedAt" },
-                values: new object[] { 1, new DateTime(2022, 9, 13, 16, 26, 43, 929, DateTimeKind.Local).AddTicks(7977), 1, "Bil Sis. Müh.", null });
+                values: new object[] { 1, new DateTime(2022, 9, 17, 21, 13, 5, 368, DateTimeKind.Local).AddTicks(3502), 1, "Bil Sis. Müh.", null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AppUserGeneralAssemblyApply_UsersId",
@@ -767,6 +780,9 @@ namespace KouArge.Repository.Migrations
 
             migrationBuilder.DropTable(
                 name: "GeneralAssemblyTeams");
+
+            migrationBuilder.DropTable(
+                name: "Redirects");
 
             migrationBuilder.DropTable(
                 name: "SocaialMediaTypes");

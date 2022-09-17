@@ -67,7 +67,7 @@ namespace KouArge.Service.Services
             if (await _userManager.FindByEmailAsync(appuserRegisterDto.Email) != null)
                 return CustomResponseDto<AppUserRegisterDto>.Fail(400, $"Email({appuserRegisterDto.Email}) already register.", 2);
 
-            //TODO: Department kontrolu yap.
+            //TODO: Department kontrolu yap. Access Token ekle
 
             var error = new List<string>();
             var user = _mapper.Map<AppUser>(appuserRegisterDto);
