@@ -1,0 +1,49 @@
+﻿@model List<Redirect>
+@{
+	ViewData["Title"] = "Index";
+}
+<h1>Index</h1>
+<a class="btn btn-primary" asp-controller="Redirect"  asp-action="Save" >New</a>
+<table class="table table-stripped">
+	<thead>
+		<tr>
+			<td>Id</td>
+			<td>Name</td>
+			<td>Url</td>
+			<td>Count</td>
+			<td>Created At</td>
+			<td>Updated At</td>
+			<td>Status</td>
+			<td>Update</td>
+			<td>Delete</td>
+		</tr>
+	</thead>
+	<tbody>
+
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>@item.Id</td>
+				<td>@item.Name</td>
+				<td><a target="_blank" href="@item.Url">@item.Url</a></td>
+				<td>@item.Count</td>
+				<td>@item.CreatedAt</td>
+				<td>@item.UpdatedAt</td>
+				<td>
+					@if (item.Status == 1)
+					{
+						<label>Active</label>
+					}
+					else
+					{
+						<label>Pasive</label>
+					}
+				</td>
+				<td><a class="btn btn-warning" asp-action="update" asp-controller="redirect" asp-route-id="@item.Id">Update</a></td>
+				<td><a class="btn btn-danger" asp-action="delete" asp-controller="redirect" asp-route-id="@item.Id">Delete</a></td>
+		
+			</tr>
+		}
+
+	</tbody>
+</table>

@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace KouArge.Repository
 {
-    public class AppIdentityDbContext : IdentityDbContext<AppUser,AppRole,string>
+    public class AppIdentityDbContext : IdentityDbContext<AppUser, AppRole, string>
     {
         public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options)
         {
@@ -68,6 +68,26 @@ namespace KouArge.Repository
                             }
                     }
                 }
+
+                ////******************
+                if (item.Entity is StringBaseEntity stringIdEntity)
+                {
+                    switch (item.State)
+                    {
+                        case EntityState.Added:
+                            {
+                                stringIdEntity.CreatedAt = DateTime.Now;
+                                break;
+                            }
+                        case EntityState.Modified:
+                            {
+                                Entry(stringIdEntity).Property(x => x.CreatedAt).IsModified = false;
+                                stringIdEntity.UpdatedAt = DateTime.Now;
+                                break;
+                            }
+                    }
+                }
+
             }
 
 
@@ -108,6 +128,24 @@ namespace KouArge.Repository
                             {
                                 Entry(appUser).Property(x => x.CreatedAt).IsModified = false;
                                 appUser.UpdatedAt = DateTime.Now;
+                                break;
+                            }
+                    }
+                }
+
+                if (item.Entity is StringBaseEntity stringIdEntity)
+                {
+                    switch (item.State)
+                    {
+                        case EntityState.Added:
+                            {
+                                stringIdEntity.CreatedAt = DateTime.Now;
+                                break;
+                            }
+                        case EntityState.Modified:
+                            {
+                                Entry(stringIdEntity).Property(x => x.CreatedAt).IsModified = false;
+                                stringIdEntity.UpdatedAt = DateTime.Now;
                                 break;
                             }
                     }

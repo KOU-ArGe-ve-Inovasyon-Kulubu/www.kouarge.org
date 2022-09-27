@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace KouArge.Core.Models
 {
-    public class GeneralAssemblyTeam:BaseEntity
+    public class GeneralAssemblyTeam : BaseEntity
     {
         public int GeneralAssemblyId { get; set; }
         public GeneralAssembly GeneralAssembly { get; set; }

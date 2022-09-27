@@ -1,6 +1,6 @@
 ﻿namespace KouArge.Core.Models
 {
-    public class GeneralAssembly:BaseEntity
+    public class GeneralAssembly : BaseEntity
     {
         public string UserId { get; set; }
         public string? PıctureUrl { get; set; }

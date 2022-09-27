@@ -1,6 +1,6 @@
 ﻿namespace KouArge.Core.Models
 {
-    public class EventPicture:BaseEntity
+    public class EventPicture : BaseEntity
     {
         public int Id { get; set; }
         public int EventId { get; set; }

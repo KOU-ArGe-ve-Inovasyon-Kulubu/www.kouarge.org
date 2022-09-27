@@ -25,17 +25,29 @@ namespace www.kouarge.org.ApiServices
             return responseBody.Data;
         }
 
-        public async Task<AppUserRegisterDto> Register(AppUserRegisterDto newUser)
+        public async Task<AppUserDto> Register(AppUserRegisterDto newUser)
         {
             var response = await _httpClient.PostAsJsonAsync("Account/Register", newUser);
-            var responseBody = await response.Content.ReadFromJsonAsync<CustomResponseDto<AppUserRegisterDto>>();
+            var responseBody = await response.Content.ReadFromJsonAsync<CustomResponseDto<AppUserDto>>();
 
             //responseBody.Errors!=null
             if (!response.IsSuccessStatusCode)
             {
-                return new AppUserRegisterDto() { Errors = responseBody.Errors, ErrorStatus = responseBody.ErrorStatus };
+                return new AppUserDto() { Errors = responseBody.Errors, ErrorStatus = responseBody.ErrorStatus };
             }
 
+            return responseBody.Data;
+        }
+
+        public async Task<AppUserDto> RefreshTokenLogin(GetRefreshTokenDto refreshToken)
+        {
+            var response = await _httpClient.PostAsJsonAsync("Account/RefreshTokenLogin", refreshToken);
+            var responseBody = await response.Content.ReadFromJsonAsync<CustomResponseDto<AppUserDto>>();
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return new AppUserDto() { Errors = responseBody.Errors, ErrorStatus = responseBody.ErrorStatus };
+            }
             return responseBody.Data;
         }
     }

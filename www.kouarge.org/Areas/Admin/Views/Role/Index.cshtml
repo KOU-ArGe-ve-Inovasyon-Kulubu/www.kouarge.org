@@ -1,32 +1,31 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Admin Role";
 }
 
 <h2>Admin Role</h2>
 <a class="btn btn-primary" asp-action="AddRole" asp-controller="Role">New</a>
 <table class="table table-stripped">
-	<thead>
-		<tr>
-			<td>Id</td>
-			<td>Name</td>
-		</tr>
-	</thead>
-	<tbody>
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Role Name</td>
+            <td>Users</td>
+            <td>Update</td>
+            <td>Delete</td>
+        </tr>
+    </thead>
+    <tbody>
 
-		@foreach (var item in Model)
-		{
-			<tr>
-				<td>@item.Id</td>
-				<td>@item.Name</td>
-			@*	<td> 
-				<a class="btn btn-warning" asp-action="update" asp-controller="Role" asp-route-id="@item.Id">Update</a>	
-				</td>*@
-			   <td> 
-				<a class="btn btn-danger" asp-action="DeleteRole" asp-controller="Role" asp-route-id="@item.Id">Delete</a>	
-				</td>
-			</tr>
-		}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Name</td>
+                <td><a class="btn btn-primary" asp-action="Users" asp-controller="Role" asp-route-id="@item.Id">Users</a></td>
+                <td><a class="btn btn-warning" asp-action="Update" asp-controller="Role" asp-route-id="@item.Id">Update</a></td>
+                <td> <a class="btn btn-danger" asp-action="Delete" asp-controller="Role" asp-route-id="@item.Id">Delete</a></td>
+            </tr>
+        }
 
-	</tbody>
+    </tbody>
 </table>

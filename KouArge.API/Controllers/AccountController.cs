@@ -20,6 +20,12 @@ namespace KouArge.API.Controllers
             return CreateActionResult(await _service.Login(user));
         }
 
+        [HttpPost("[Action]")]
+        public async Task<IActionResult> RefreshTokenLogin(GetRefreshTokenDto getRefreshToken)
+        {
+            return CreateActionResult(await _service.RefreshTokenLogin(getRefreshToken));
+        }
+
 
         [HttpPost("[Action]")]
         public async Task<IActionResult> Register(AppUserRegisterDto user)

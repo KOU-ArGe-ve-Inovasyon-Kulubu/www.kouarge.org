@@ -1,6 +1,6 @@
 ﻿namespace KouArge.Core.Models
 {
-    public class TeamMember:BaseEntity
+    public class TeamMember : BaseEntity
     {
         public int GeneralAssemblyId { get; set; }
         public int TeamId { get; set; }

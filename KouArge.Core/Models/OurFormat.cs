@@ -1,6 +1,6 @@
 ﻿namespace KouArge.Core.Models
 {
-    public class OurFormat:BaseEntity
+    public class OurFormat : BaseEntity
     {
         public string Name { get; set; }
         public string Picture { get; set; }

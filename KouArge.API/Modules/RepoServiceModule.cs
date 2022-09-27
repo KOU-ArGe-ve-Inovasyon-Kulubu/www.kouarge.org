@@ -14,9 +14,9 @@ using Module = Autofac.Module;
 
 namespace KouArge.API.Modules
 {
-    public class RepoServiceModule:Module
+    public class RepoServiceModule : Module
     {
-        protected override void Load(Autofac.ContainerBuilder builder)
+        protected override void Load(ContainerBuilder builder)
         {
             //builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.RegisterGeneric(typeof(GenericRepository<>)).As(typeof(IGenericRepository<>));
@@ -30,7 +30,7 @@ namespace KouArge.API.Modules
             var repoAssembly = Assembly.GetAssembly(typeof(AppIdentityDbContext));
             var serviceAssembly = Assembly.GetAssembly(typeof(MapProfile));
 
-            builder.RegisterAssemblyTypes(apiAssembly, repoAssembly, serviceAssembly).Where(x=>x.Name.EndsWith("Repository"))
+            builder.RegisterAssemblyTypes(apiAssembly, repoAssembly, serviceAssembly).Where(x => x.Name.EndsWith("Repository"))
                 .AsImplementedInterfaces().InstancePerLifetimeScope();
 
             builder.RegisterAssemblyTypes(apiAssembly, repoAssembly, serviceAssembly).Where(x => x.Name.EndsWith("Service"))

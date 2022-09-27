@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KouArge.Repository.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20220917181305_initial")]
+    [Migration("20220926171122_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -134,6 +134,12 @@ namespace KouArge.Repository.Migrations
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("RefreshToken")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("RefreshTokenExpires")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
@@ -213,7 +219,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 9, 17, 21, 13, 5, 368, DateTimeKind.Local).AddTicks(3502),
+                            CreatedAt = new DateTime(2022, 9, 26, 20, 11, 22, 784, DateTimeKind.Local).AddTicks(3815),
                             FacultyId = 1,
                             Name = "Bil Sis. Müh."
                         });
@@ -364,7 +370,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 1,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 9, 17, 21, 13, 5, 368, DateTimeKind.Local).AddTicks(3691),
+                            CreatedAt = new DateTime(2022, 9, 26, 20, 11, 22, 784, DateTimeKind.Local).AddTicks(3970),
                             Name = "Teknoloji"
                         });
                 });
@@ -442,8 +448,9 @@ namespace KouArge.Repository.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Why")
                         .IsRequired()
@@ -528,11 +535,27 @@ namespace KouArge.Repository.Migrations
 
             modelBuilder.Entity("KouArge.Core.Models.Redirect", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("Count")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Url")
                         .IsRequired()

@@ -1,8 +1,8 @@
 ﻿namespace KouArge.Core.Models
 {
-    public class GeneralAssemblyApply:BaseEntity
+    public class GeneralAssemblyApply : BaseEntity
     {
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public int TeamId { get; set; }
         public string Introducing { get; set; }
         public string Why { get; set; }

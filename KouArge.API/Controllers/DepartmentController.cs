@@ -3,17 +3,19 @@ using KouArge.API.Filters;
 using KouArge.Core.DTOs;
 using KouArge.Core.Models;
 using KouArge.Core.Services;
+using KouArge.Repository;
 using KouArge.Service.Exceptions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Net.Http.Headers;
 
 namespace KouArge.API.Controllers
 {
     //[TypeFilter(typeof(CustomAuthorizationFilter))]
-    [Authorize(AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme )]
+    //[Authorize(AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme )]
     public class DepartmentController : CustomBaseController
     {
         private readonly IService<Department> _service;
@@ -25,12 +27,13 @@ namespace KouArge.API.Controllers
             _mapper = mapper;
             _departmentService = departmentService;
         }
-
+        [AllowAnonymous]
         //api/controller_ismi/action    api/Department/DepartmentWithFaculty
         [HttpGet("[Action]")]
         public async Task<IActionResult> DepartmentWithFaculty()
         {
             return CreateActionResult(await _departmentService.GetDepartmentWithFacultyAsync());
+
         }
 
         [HttpGet]

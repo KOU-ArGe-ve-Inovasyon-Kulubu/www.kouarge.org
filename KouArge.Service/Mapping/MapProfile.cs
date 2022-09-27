@@ -20,7 +20,6 @@ namespace KouArge.Service.Mapping
             CreateMap<AppUserRegisterDto, AppUser>();
 
 
-
             //departmen
             CreateMap<Department, DepartmentDto>().ReverseMap();
             CreateMap<Department, DepartmentWithFacultyDto>();
@@ -31,6 +30,10 @@ namespace KouArge.Service.Mapping
             CreateMap<Faculty, FacultyDto>().ReverseMap();
             CreateMap<Faculty,FacultyWithDepartmentsDto>();
             
+         
+            
+            //redirect
+            CreateMap<Redirect, RedirectDto>().ReverseMap();
 
 
         }

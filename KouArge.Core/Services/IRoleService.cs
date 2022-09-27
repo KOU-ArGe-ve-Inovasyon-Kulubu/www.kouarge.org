@@ -13,6 +13,7 @@ namespace KouArge.Core.Services
         Task<CustomResponseDto<AppRole>> AddRoleAsync(AppRoleDto role);
         Task<CustomResponseDto<NoContentDto>> RemoveAsync(string id);
         Task<CustomResponseDto<IEnumerable<AppRole>>> GetAllRolesAsync();
+        Task<CustomResponseDto<IEnumerable<AppUserDto>>> GetUserByRoleId(string id);
 
     }
 }

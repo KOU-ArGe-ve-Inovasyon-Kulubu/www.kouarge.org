@@ -1,6 +1,6 @@
 ﻿namespace KouArge.Core.Models
 {
-    public class SocialMedia:BaseEntity
+    public class SocialMedia : BaseEntity
     {
         public int Fk { get; set; }
         public string? Link { get; set; }

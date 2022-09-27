@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject IHttpContextAccessor HttpContextAccessor;
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
@@ -31,6 +32,13 @@
 						<li class="nav-item">
 							<a class="nav-link text-dark" href="~/Home/Privacy">Privacy</a>
 						</li>
+
+						@if(!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Test")))
+						{
+							<li>@HttpContextAccessor.HttpContext.Session.GetString("Test")</li>
+						}
+						
+					 
 
 						@if (User.Identity.IsAuthenticated)
 						{

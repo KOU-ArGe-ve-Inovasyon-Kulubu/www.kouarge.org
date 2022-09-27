@@ -1,10 +1,13 @@
 ﻿using Autofac;
+using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
 using FluentValidation.AspNetCore;
 using KouArge.Core.Services;
 using KouArge.Core.UnitOfWorks;
 using KouArge.Repository;
 using KouArge.Repository.UnitOfWork;
+using KouArge.Service.Mapping;
 using KouArge.Service.Services;
 using KouArge.Service.Validations;
 using Microsoft.AspNetCore.Identity;
@@ -22,7 +25,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddControllersWithViews().AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<DepartmentDtoValidator>());
 
-builder.Services.AddScoped<IRedirectService, RedirectService>();
 
 builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory());
 
@@ -35,8 +37,7 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 builder.Services.AddDbContext<AppIdentityDbContext>(x =>
 {
     x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"), option =>
-    {
-    });
+    {});
 });
 //*************
 
@@ -53,8 +54,10 @@ builder.Services.AddControllers(options => {
 //    .AddDefaultTokenProviders();
 
 //*****
-//builder.Services.AddScoped(typeof(NotFoundFilter<>));
+builder.Services.AddScoped(typeof(NotFoundFilter<>));
 builder.Services.AddScoped<TokenService>();
+builder.Services.AddAutoMapper(typeof(MapProfile));
+
 
 //builder.Services.AddHttpClient<DepartmentApiService>(opt =>
 //{
@@ -105,6 +108,13 @@ builder.Services.AddHttpClient("WebApiClient", opt =>
 //        SameSite = SameSiteMode.Strict
 //    };
 //});
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 builder.Services.AddMvc()
       .AddSessionStateTempDataProvider();

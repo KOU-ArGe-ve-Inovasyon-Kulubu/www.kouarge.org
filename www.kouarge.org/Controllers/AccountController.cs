@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using www.kouarge.org.ApiServices;
 using www.kouarge.org.Models;
@@ -49,7 +50,7 @@ namespace www.kouarge.org.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(AppUserLoginDto user)
+        public async Task<IActionResult> Login(AppUserLoginDto user,string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -57,25 +58,26 @@ namespace www.kouarge.org.Controllers
 
                 if (result.Errors == null)
                 {
-                    HttpContext.Session.SetString("X-Access-Token", result.Token.AccessToken);
+                    HttpContext.Session.SetString("Test", "Test");
                     Response.Cookies.Append("X-Access-Token", result.Token.AccessToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Expires = result.Token.Expiration });
-                    return RedirectToAction("Index");
-                }
-                else
-                {
-                    if (result.ErrorStatus == 1)
-                    {
-                        ModelState.AddModelError("Email", "E-posta veya şifre hatalı.");
-                        ModelState.AddModelError("Password", "E-posta veya şifre hatalı.");
-                    }
+                    Response.Cookies.Append("Refresh-Token", result.Token.RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Expires = result.Token.RefreshTokenExpiration });
 
-                    return View(user);
+                    if (!string.IsNullOrEmpty(returnUrl))
+                        return Redirect(returnUrl);
+                    else
+                        return RedirectToAction("Index");
                 }
-            }
-            else
-            {
+
+                if (result.ErrorStatus == 1)
+                {
+                    ModelState.AddModelError("Email", "E-posta veya şifre hatalı.");
+                    ModelState.AddModelError("Password", "E-posta veya şifre hatalı.");
+                }
                 return View(user);
+
             }
+
+            return View(user);
         }
 
 
@@ -95,28 +97,25 @@ namespace www.kouarge.org.Controllers
 
                 if (result.Errors == null)
                 {
+                    Response.Cookies.Append("X-Access-Token", result.Token.AccessToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Expires = result.Token.Expiration });
+                    Response.Cookies.Append("Refresh-Token", result.Token.RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Expires = result.Token.RefreshTokenExpiration });
                     return RedirectToAction("Index");
                 }
-                else
-                {
-                    if (result.ErrorStatus == 1)
-                        ModelState.AddModelError("StudentNo", "Öğrenci numarası zaten kayıtlı.");
 
-                    if (result.ErrorStatus == 2)
-                        ModelState.AddModelError("Email", "E-posta adresi zaten kayıtlı.");
+                if (result.ErrorStatus == 1)
+                    ModelState.AddModelError("StudentNo", "Öğrenci numarası zaten kayıtlı.");
 
-                    var department = await _departmentApiService.GetDepartmentWithFacultyAsync();
-                    ViewBag.Department = new SelectList(department.Data, "Id", "Name", newUser.DepartmentId);
-                    return View(newUser);
-                }
+                if (result.ErrorStatus == 2)
+                    ModelState.AddModelError("Email", "E-posta adresi zaten kayıtlı.");
 
-            }
-            else
-            {
-                var department = await _departmentApiService.GetDepartmentWithFacultyAsync();
-                ViewBag.Department = new SelectList(department.Data, "Id", "Name", newUser.DepartmentId);
+                var departments = await _departmentApiService.GetDepartmentWithFacultyAsync();
+                ViewBag.Department = new SelectList(departments.Data, "Id", "Name", newUser.DepartmentId);
                 return View(newUser);
             }
+
+            var department = await _departmentApiService.GetDepartmentWithFacultyAsync();
+            ViewBag.Department = new SelectList(department.Data, "Id", "Name", newUser.DepartmentId);
+            return View(newUser);
 
         }
 

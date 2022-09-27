@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using AutoMapper;
 using KouArge.Core.Services;
 using KouArge.Core.Tokens;
 using KouArge.Core.UnitOfWorks;

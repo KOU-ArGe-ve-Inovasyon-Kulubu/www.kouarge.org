@@ -30,13 +30,12 @@ namespace www.kouarge.org.Areas.Admin.Controllers
         public async Task<IActionResult> AddRole(AppRoleDto appRole)
         {
             var result = await _roleApiService.AddRoleAsync(appRole);
-            if(result==null)
+            if (result == null)
                 return View();//TODO: Hata dondur
-        return RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
 
-
-        public async Task<IActionResult> DeleteRole(string id)
+        public async Task<IActionResult> Delete(string id)
         {
             var result = await _roleApiService.DeleteRoleAsync(id);
             if (!result)

@@ -17,7 +17,10 @@ namespace KouArge.Core.Models
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
         public int Status { get; set; }
-        
+
+        public string? RefreshToken { get; set; }
+        public DateTime? RefreshTokenExpires { get; set; }
+
         public Department Department { get; set; }
         public GeneralAssembly GeneralAssembly { get; set; }
         public ICollection<EventParticipant> EventParticipantLists { get; set; }

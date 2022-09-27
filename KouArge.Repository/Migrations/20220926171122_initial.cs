@@ -62,9 +62,14 @@ namespace KouArge.Repository.Migrations
                 name: "Redirects",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Count = table.Column<int>(type: "int", nullable: false),
-                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Url = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -239,6 +244,8 @@ namespace KouArge.Repository.Migrations
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
+                    RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    RefreshTokenExpires = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -454,7 +461,7 @@ namespace KouArge.Repository.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TeamId = table.Column<int>(type: "int", nullable: false),
                     Introducing = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Why = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -607,12 +614,12 @@ namespace KouArge.Repository.Migrations
             migrationBuilder.InsertData(
                 table: "Faculties",
                 columns: new[] { "Id", "Campus", "CreatedAt", "Name", "UpdatedAt" },
-                values: new object[] { 1, "Kocaeli", new DateTime(2022, 9, 17, 21, 13, 5, 368, DateTimeKind.Local).AddTicks(3691), "Teknoloji", null });
+                values: new object[] { 1, "Kocaeli", new DateTime(2022, 9, 26, 20, 11, 22, 784, DateTimeKind.Local).AddTicks(3970), "Teknoloji", null });
 
             migrationBuilder.InsertData(
                 table: "Departments",
                 columns: new[] { "Id", "CreatedAt", "FacultyId", "Name", "UpdatedAt" },
-                values: new object[] { 1, new DateTime(2022, 9, 17, 21, 13, 5, 368, DateTimeKind.Local).AddTicks(3502), 1, "Bil Sis. Müh.", null });
+                values: new object[] { 1, new DateTime(2022, 9, 26, 20, 11, 22, 784, DateTimeKind.Local).AddTicks(3815), 1, "Bil Sis. Müh.", null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AppUserGeneralAssemblyApply_UsersId",

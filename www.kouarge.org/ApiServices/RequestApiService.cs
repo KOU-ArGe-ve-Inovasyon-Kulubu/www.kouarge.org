@@ -22,7 +22,9 @@ namespace www.kouarge.org.ApiServices
             var request = _httpClient.GetAsync(path);
 
             if (request.Result.StatusCode == HttpStatusCode.Unauthorized)
+            {
                 throw new UnAuthorizedException("401");
+            }
 
             if (request.Result.StatusCode == HttpStatusCode.Forbidden)
                 throw new ForbiddenException("403");
@@ -30,13 +32,14 @@ namespace www.kouarge.org.ApiServices
             if (request.Result.StatusCode == HttpStatusCode.NotFound)
                 throw new NotFoundException("404");
 
-            if (request.Result.IsSuccessStatusCode)
+            if (request.Result.IsSuccessStatusCode || request.Result.StatusCode == HttpStatusCode.BadRequest)
             {
                 var response = await request.Result.Content.ReadFromJsonAsync<T>();
                 return response;
             }
             else
-                return default(T);
+                throw new ClientSideException("400");
+            //TODO: ClientSideException tekrar bak 
 
             #region tryCatch
 
@@ -66,17 +69,48 @@ namespace www.kouarge.org.ApiServices
         public async Task<T> PostAsync<T, TData>(string path, TData data)
         {
             var response = await _httpClient.PostAsJsonAsync(path, data);
-            var responseBody = await response.Content.ReadFromJsonAsync<T>();
-            return responseBody;
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+                throw new UnAuthorizedException("401");
+
+            if (response.StatusCode == HttpStatusCode.Forbidden)
+                throw new ForbiddenException("403");
+
+            if (response.StatusCode == HttpStatusCode.NotFound)
+                throw new NotFoundException("404");
+
+            if (response.IsSuccessStatusCode || response.StatusCode==HttpStatusCode.BadRequest)
+            {
+                var responseBody = await response.Content.ReadFromJsonAsync<T>();
+                return responseBody;
+            }
+            throw new ClientSideException("400");
+
+
         }
 
         //parameter post
         public async Task<T> PostAsync<T>(string path)
         {
             var response = await _httpClient.PostAsJsonAsync(path, default(T));
-            //var response = await _httpClient.PostAsync(path,null);
-            var responseBody = await response.Content.ReadFromJsonAsync<T>();
-            return responseBody;
+
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+                throw new UnAuthorizedException("401");
+
+            if (response.StatusCode == HttpStatusCode.Forbidden)
+                throw new ForbiddenException("403");
+
+            if (response.StatusCode == HttpStatusCode.NotFound)
+                throw new NotFoundException("404");
+
+
+            if (response.IsSuccessStatusCode || response.StatusCode == HttpStatusCode.BadRequest)
+            {
+                //var response = await _httpClient.PostAsync(path,null);
+                var responseBody = await response.Content.ReadFromJsonAsync<T>();
+                return responseBody;
+            }
+            throw new ClientSideException("400");
+
         }
 
         //public async Task OnlyPostAsync<T>(string path)
@@ -87,12 +121,33 @@ namespace www.kouarge.org.ApiServices
         public async Task<bool> PutAsync<TData>(string path, TData data)
         {
             var response = await _httpClient.PutAsJsonAsync(path, data);
+
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
+                throw new UnAuthorizedException("401");
+
+            if (response.StatusCode == HttpStatusCode.Forbidden)
+                throw new ForbiddenException("403");
+
+            if (response.StatusCode == HttpStatusCode.NotFound)
+                throw new NotFoundException("404");
+
+
             return response.IsSuccessStatusCode;
         }
 
         public async Task<bool> DeleteAsync(string path)
         {
             var response = await _httpClient.DeleteAsync(path);
+
+             if (response.StatusCode == HttpStatusCode.Unauthorized)
+                throw new UnAuthorizedException("401");
+
+            if (response.StatusCode == HttpStatusCode.Forbidden)
+                throw new ForbiddenException("403");
+
+            if (response.StatusCode == HttpStatusCode.NotFound)
+                throw new NotFoundException("404");
+
             return response.IsSuccessStatusCode;
         }
     }

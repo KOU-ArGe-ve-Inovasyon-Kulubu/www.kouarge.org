@@ -43,6 +43,17 @@ namespace KouArge.Service.Services
             return CustomResponseDto<IEnumerable<AppRole>>.Success(200, roles);
         }
 
+        public async Task<CustomResponseDto<IEnumerable<AppUserDto>>> GetUserByRoleId(string id)
+        {
+            var role = await _roleManager.FindByIdAsync(id);
+            if (role != null)
+            {
+                //TODO: new Dto 
+                return CustomResponseDto<IEnumerable<AppUserDto>>.Success(204);
+            }
+            return CustomResponseDto<IEnumerable<AppUserDto>>.Fail(400, $"Role({id} ait kullanıcı mevcut değil.)");
+        }
+
         public async Task<CustomResponseDto<NoContentDto>> RemoveAsync(string id)
         {
             var role = await _roleManager.FindByIdAsync(id);

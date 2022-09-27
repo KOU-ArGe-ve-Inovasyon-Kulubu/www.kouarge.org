@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace KouArge.Core.Models
 {
-    public class Redirect
+    public class Redirect : BaseEntity
     {
-        [Key]
-        public string Id { get; set; }
+        public string Name { get; set; }
         public int Count { get; set; }
         public string Url { get; set; }
+        public int Status { get; set; }
     }
 }

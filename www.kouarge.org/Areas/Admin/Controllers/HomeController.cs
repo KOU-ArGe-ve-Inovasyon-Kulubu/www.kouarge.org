@@ -7,7 +7,6 @@ using www.kouarge.org.ApiServices;
 namespace www.kouarge.org.Areas.Admin.Controllers
 {
     [Area("admin")]
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
     public class HomeController : Controller
     {
         public IActionResult Index()

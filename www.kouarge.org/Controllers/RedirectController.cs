@@ -1,5 +1,6 @@
 ﻿using KouArge.Core.Services;
 using KouArge.Service.Services;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 using www.kouarge.org.ApiServices;
 
@@ -26,9 +27,17 @@ namespace www.kouarge.org.Controllers
         [Route("R/{text}")]
         public async Task<IActionResult> CustomRedirect(string text)
         {
-            var id = text.Substring(0, 16);
-            var url = await _redirectService.AddAsync(id);
+            var remoteIpAddress = HttpContext.Features.Get<IHttpConnectionFeature>()?.RemoteIpAddress;
+
+            var url = await _redirectService.AddCountAsync(text);
+
+            //TODO: pasive duruma sayfa yap. yonlendir.
+            if (url == null)
+                return RedirectToAction("Error", "Department");
+
             return Redirect(url);
+
+        
         }
     }
 }

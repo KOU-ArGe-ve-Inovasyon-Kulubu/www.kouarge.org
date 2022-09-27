@@ -1,6 +1,6 @@
 ﻿namespace KouArge.Core.Models
 {
-    public class Event:BaseEntity
+    public class Event : BaseEntity
     {
         public int FormatId { get; set; }
         public int SemesterId { get; set; }

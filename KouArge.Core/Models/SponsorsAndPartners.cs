@@ -1,6 +1,6 @@
 ﻿namespace KouArge.Core.Models
 {
-    public class SponsorsAndPartners:BaseEntity
+    public class SponsorsAndPartners : BaseEntity
     {
         public string Name { get; set; }
         public string LogoUrl { get; set; }
