@@ -3,7 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "www.kouarge.org", "www.kouarge.org\www.kouarge.org.csproj", "{34C44C67-0935-4980-8B25-F2903240CAA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KouArge.Core", "KouArge.Core\KouArge.Core.csproj", "{50F394A2-AF0C-47D9-9B71-A2DF1C5E5EDF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KouArge.Repository", "KouArge.Repository\KouArge.Repository.csproj", "{BC66869E-903A-421B-8014-B2857FB62BC6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KouArge.Service", "KouArge.Service\KouArge.Service.csproj", "{1D0199A5-FF77-4DB0-9C79-91767B4519DF}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KouArge.API", "KouArge.API\KouArge.API.csproj", "{4748609C-32EC-4794-8260-667A3290C460}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KouArge.Caching", "KouArge.Caching\KouArge.Caching.csproj", "{CFA1A5AB-9C5C-4860-981E-9D00A5737475}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "www.kouarge.org", "www.kouarge.org\www.kouarge.org.csproj", "{5A32C05F-E3E8-47A2-ABDD-B1F2A4E17C5A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Port", "Port", "{3A2B3F49-719B-4358-995B-97176224CA91}"
+	ProjectSection(SolutionItems) = preProject
+		Ports.txt = Ports.txt
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +26,30 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{34C44C67-0935-4980-8B25-F2903240CAA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{34C44C67-0935-4980-8B25-F2903240CAA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{34C44C67-0935-4980-8B25-F2903240CAA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{34C44C67-0935-4980-8B25-F2903240CAA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50F394A2-AF0C-47D9-9B71-A2DF1C5E5EDF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50F394A2-AF0C-47D9-9B71-A2DF1C5E5EDF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50F394A2-AF0C-47D9-9B71-A2DF1C5E5EDF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50F394A2-AF0C-47D9-9B71-A2DF1C5E5EDF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC66869E-903A-421B-8014-B2857FB62BC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC66869E-903A-421B-8014-B2857FB62BC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC66869E-903A-421B-8014-B2857FB62BC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC66869E-903A-421B-8014-B2857FB62BC6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D0199A5-FF77-4DB0-9C79-91767B4519DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D0199A5-FF77-4DB0-9C79-91767B4519DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D0199A5-FF77-4DB0-9C79-91767B4519DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D0199A5-FF77-4DB0-9C79-91767B4519DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4748609C-32EC-4794-8260-667A3290C460}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4748609C-32EC-4794-8260-667A3290C460}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4748609C-32EC-4794-8260-667A3290C460}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4748609C-32EC-4794-8260-667A3290C460}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFA1A5AB-9C5C-4860-981E-9D00A5737475}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFA1A5AB-9C5C-4860-981E-9D00A5737475}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFA1A5AB-9C5C-4860-981E-9D00A5737475}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFA1A5AB-9C5C-4860-981E-9D00A5737475}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A32C05F-E3E8-47A2-ABDD-B1F2A4E17C5A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A32C05F-E3E8-47A2-ABDD-B1F2A4E17C5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A32C05F-E3E8-47A2-ABDD-B1F2A4E17C5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A32C05F-E3E8-47A2-ABDD-B1F2A4E17C5A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
