@@ -1,8 +1,26 @@
+<<<<<<< Updated upstream
 ﻿@model AppUserLoginDto
 <form  method="post">
 	<h2>Giriş yap.</h2>
 	<hr />
 	<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+=======
+﻿@using www.kouarge.org.Models
+<form id="account" method="post">
+    <h2>Giriş yap</h2>
+    <hr />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-floating">
+        <input name="name" class="form-control" autocomplete="username" aria-required="true" />
+        <label  class="form-label">Kullanıcı Adı</label>
+        <span class="text-danger"></span>
+    </div>
+    <div class="form-floating">
+        <input name="password" class="form-control" autocomplete="current-password" aria-required="true" />
+        <label class="form-label">Şifre</label>
+        <span class="text-danger"></span>
+    </div>
+>>>>>>> Stashed changes
 
 	<div class="form-group">
 		<label asp-for="Email"></label>

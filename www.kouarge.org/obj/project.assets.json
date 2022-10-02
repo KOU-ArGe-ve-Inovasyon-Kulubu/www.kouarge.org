@@ -1434,9 +1434,12 @@
           "lib/net6.0/Microsoft.EntityFrameworkCore.dll": {
             "related": ".xml"
           }
+<<<<<<< Updated upstream
         },
         "build": {
           "buildTransitive/net6.0/Microsoft.EntityFrameworkCore.props": {}
+=======
+>>>>>>> Stashed changes
         }
       },
       "Microsoft.EntityFrameworkCore.Abstractions/6.0.8": {
@@ -2066,6 +2069,19 @@
         "runtime": {
           "lib/net6.0/dotnet-aspnet-codegenerator-design.dll": {
             "related": ".xml"
+<<<<<<< Updated upstream
+=======
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/win-arm/lib/net6.0/dotnet-aspnet-codegenerator-design.exe": {
+            "assetType": "runtime",
+            "rid": "win-arm"
+          },
+          "runtimes/win-arm64/lib/net6.0/dotnet-aspnet-codegenerator-design.exe": {
+            "assetType": "runtime",
+            "rid": "win-arm64"
+>>>>>>> Stashed changes
           }
         }
       },
@@ -2201,17 +2217,27 @@
       "Microsoft.Win32.SystemEvents/6.0.0": {
         "type": "package",
         "compile": {
+<<<<<<< Updated upstream
           "lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
+=======
+          "ref/netstandard2.0/_._": {
+>>>>>>> Stashed changes
             "related": ".xml"
           }
         },
         "runtime": {
+<<<<<<< Updated upstream
           "lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
             "related": ".xml"
           }
         },
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
+=======
+          "lib/netstandard2.0/Microsoft.Win32.SystemEvents.dll": {
+            "related": ".xml"
+          }
+>>>>>>> Stashed changes
         },
         "runtimeTargets": {
           "runtimes/win/lib/net6.0/Microsoft.Win32.SystemEvents.dll": {
@@ -2860,17 +2886,27 @@
           "System.Security.Permissions": "6.0.0"
         },
         "compile": {
+<<<<<<< Updated upstream
           "lib/net6.0/System.Configuration.ConfigurationManager.dll": {
+=======
+          "ref/netstandard2.0/System.Configuration.ConfigurationManager.dll": {
+>>>>>>> Stashed changes
             "related": ".xml"
           }
         },
         "runtime": {
+<<<<<<< Updated upstream
           "lib/net6.0/System.Configuration.ConfigurationManager.dll": {
             "related": ".xml"
           }
         },
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
+=======
+          "lib/netstandard2.0/System.Configuration.ConfigurationManager.dll": {
+            "related": ".xml"
+          }
+>>>>>>> Stashed changes
         }
       },
       "System.Console/4.3.0": {
@@ -2952,7 +2988,11 @@
           "Microsoft.Win32.SystemEvents": "6.0.0"
         },
         "compile": {
+<<<<<<< Updated upstream
           "lib/net6.0/System.Drawing.Common.dll": {
+=======
+          "ref/netcoreapp3.0/_._": {
+>>>>>>> Stashed changes
             "related": ".xml"
           }
         },
@@ -3593,17 +3633,27 @@
       "System.Security.AccessControl/6.0.0": {
         "type": "package",
         "compile": {
+<<<<<<< Updated upstream
           "lib/net6.0/System.Security.AccessControl.dll": {
+=======
+          "ref/netstandard2.0/System.Security.AccessControl.dll": {
+>>>>>>> Stashed changes
             "related": ".xml"
           }
         },
         "runtime": {
+<<<<<<< Updated upstream
           "lib/net6.0/System.Security.AccessControl.dll": {
             "related": ".xml"
           }
         },
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
+=======
+          "lib/netstandard2.0/System.Security.AccessControl.dll": {
+            "related": ".xml"
+          }
+>>>>>>> Stashed changes
         },
         "runtimeTargets": {
           "runtimes/win/lib/net6.0/System.Security.AccessControl.dll": {
@@ -3807,17 +3857,27 @@
       "System.Security.Cryptography.ProtectedData/6.0.0": {
         "type": "package",
         "compile": {
+<<<<<<< Updated upstream
           "lib/net6.0/System.Security.Cryptography.ProtectedData.dll": {
+=======
+          "ref/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {
+>>>>>>> Stashed changes
             "related": ".xml"
           }
         },
         "runtime": {
+<<<<<<< Updated upstream
           "lib/net6.0/System.Security.Cryptography.ProtectedData.dll": {
             "related": ".xml"
           }
         },
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
+=======
+          "lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {
+            "related": ".xml"
+          }
+>>>>>>> Stashed changes
         },
         "runtimeTargets": {
           "runtimes/win/lib/net6.0/System.Security.Cryptography.ProtectedData.dll": {
@@ -3893,17 +3953,27 @@
           "System.Windows.Extensions": "6.0.0"
         },
         "compile": {
+<<<<<<< Updated upstream
           "lib/net6.0/System.Security.Permissions.dll": {
+=======
+          "ref/netcoreapp3.0/System.Security.Permissions.dll": {
+>>>>>>> Stashed changes
             "related": ".xml"
           }
         },
         "runtime": {
+<<<<<<< Updated upstream
           "lib/net6.0/System.Security.Permissions.dll": {
             "related": ".xml"
           }
         },
         "build": {
           "buildTransitive/netcoreapp3.1/_._": {}
+=======
+          "lib/netcoreapp3.0/System.Security.Permissions.dll": {
+            "related": ".xml"
+          }
+>>>>>>> Stashed changes
         }
       },
       "System.Security.Principal.Windows/4.7.0": {
@@ -4085,12 +4155,20 @@
           "System.Drawing.Common": "6.0.0"
         },
         "compile": {
+<<<<<<< Updated upstream
           "lib/net6.0/System.Windows.Extensions.dll": {
+=======
+          "ref/netcoreapp3.0/System.Windows.Extensions.dll": {
+>>>>>>> Stashed changes
             "related": ".xml"
           }
         },
         "runtime": {
+<<<<<<< Updated upstream
           "lib/net6.0/System.Windows.Extensions.dll": {
+=======
+          "lib/netcoreapp3.0/System.Windows.Extensions.dll": {
+>>>>>>> Stashed changes
             "related": ".xml"
           }
         },
@@ -11417,23 +11495,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\mustafa\\.nuget\\packages\\": {},
+    "C:\\Users\\PC\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj",
+      "projectUniqueName": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj",
       "projectName": "www.kouarge.org",
-      "projectPath": "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj",
-      "packagesPath": "C:\\Users\\mustafa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\www.kouarge.org\\obj\\",
+      "projectPath": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj",
+      "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\www.kouarge.org\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\mustafa\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -11448,8 +11526,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\KouArge.Service\\KouArge.Service.csproj": {
-              "projectPath": "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\KouArge.Service\\KouArge.Service.csproj"
+            "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\KouArge.Service\\KouArge.Service.csproj": {
+              "projectPath": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\KouArge.Service\\KouArge.Service.csproj"
             }
           }
         }
