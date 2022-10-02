@@ -1,10 +1,6 @@
 {
   "version": 2,
-<<<<<<< Updated upstream
   "dgSpecHash": "BakTbfrosBb+MQawAM2F4Z+vEdddE/sM9LfkyDU7DoWa060LFfPJOJO24G4JhkU5IczfXtFpoIiNDksM7p6HgA==",
-=======
-  "dgSpecHash": "L3p7soB0iW8lIIvpxf49BQiP4xGDMpA2GSlgjTzUuY824DovcFvddtv+DwKIYVX9708f6k22t3vNUy2EEYLggQ==",
->>>>>>> Stashed changes
   "success": true,
   "projectFilePath": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj",
   "expectedPackageFiles": [
@@ -220,5 +216,12 @@
     "C:\\Users\\PC\\.nuget\\packages\\system.xml.readerwriter\\4.3.0\\system.xml.readerwriter.4.3.0.nupkg.sha512",
     "C:\\Users\\PC\\.nuget\\packages\\system.xml.xdocument\\4.3.0\\system.xml.xdocument.4.3.0.nupkg.sha512"
   ],
-  "logs": []
+  "logs": [
+    {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\www.kouarge.org\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    }
+  ]
 }
