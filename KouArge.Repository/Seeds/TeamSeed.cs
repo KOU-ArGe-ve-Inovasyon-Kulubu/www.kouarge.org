@@ -19,7 +19,20 @@ namespace KouArge.Repository.Seeds
                 Name = "Webino",
                 CreatedAt = DateTime.Now,
                 Description = "Webino Takımı",
-                teamMembers = new List<TeamMember>() { new TeamMember() { CreatedAt = DateTime.Now, Id = 1, TeamId = 1, } },  
+                teamMembers = new List<TeamMember>() { new TeamMember() 
+                {
+                    CreatedAt = DateTime.Now,
+                    Id = 1,
+                    TeamId = 1,
+                    StartDate = DateTime.Now,
+                    EndDate= DateTime.Now,
+                    Teams = new List<Team>(),
+                    GeneralAssemblyId = 1,
+                    GeneralAssemblies={new GeneralAssembly() },
+                    Title="title"
+                    
+                } },
+                LogoUrl = "logoUrl",
 
             });
         }

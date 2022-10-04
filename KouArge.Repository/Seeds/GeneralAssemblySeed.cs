@@ -15,8 +15,25 @@ namespace KouArge.Repository.Seeds
         {
             builder.HasData(new GeneralAssembly() 
             {
-                 CreatedAt = DateTime.Now,
-                 Id=1,
+                User = new AppUser(),
+                Id = 1,
+                CreatedAt = DateTime.Now,
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now,
+                PıctureUrl = "pictureUrl",
+                Teams = { new Team()
+                {
+                    Id = 1,
+                    Name = "Webino",
+                    CreatedAt = DateTime.Now,
+                    Description = "Webino Takımı",
+                    teamMembers = new List<TeamMember>() { new TeamMember() { CreatedAt = DateTime.Now, Id = 1, TeamId = 1, } },
+                    LogoUrl = "logoUrl",
+                }},
+                Status=200,
+                //TeamMembers = { new TeamMember() { } },
+                UserId="1",
+                
             });
         }
     }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace KouArge.Repository.Seeds
 {
@@ -17,8 +18,22 @@ namespace KouArge.Repository.Seeds
             {
                 Id = 1,
                 TeamId = 1,
-                CreatedAt=DateTime.Now,
-                
+                GeneralAssemblyId = 1,
+                CreatedAt = DateTime.Now,
+                Title = "titleTeamMember",
+                StartDate = DateTime.Now,
+                EndDate = DateTime.Now,
+                Teams = { new Team()
+                {
+                    Id = 1,
+                    Name = "Webino",
+                    CreatedAt = DateTime.Now,
+                    Description = "Webino Takımı",
+                    teamMembers = new List<TeamMember>() { new TeamMember() { CreatedAt = DateTime.Now, Id = 1, TeamId = 1, } },
+                    LogoUrl = "logoUrl",
+                }},
+                GeneralAssemblies = { new GeneralAssembly() }
+
             });
         }
     }

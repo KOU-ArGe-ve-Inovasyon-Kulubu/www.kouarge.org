@@ -13,12 +13,21 @@ namespace KouArge.Repository.Seeds
     {
         public void Configure(EntityTypeBuilder<GeneralAssemblyApply> builder)
         {
-            builder.HasData(new GeneralAssemblyApply() 
+            builder.HasData(new GeneralAssemblyApply()
             {
-                Id=1,
-                CreatedAt=DateTime.Now,
-                TeamId=1,
+                Id = 1,
+                CreatedAt = DateTime.Now,
+                TeamId = 1,
+                Introducing = "Introducing",
+                ApplyTime = "ApplyTime",
+                SituationDescription = "SituationDescription",
+                Staus = 200,
+                Team = {new Team()},
+                UserId = "1",
+                Users = {new AppUser() },
+                Why="why"
                 
+
             });
         }
     }

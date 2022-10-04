@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using KouArge.Core.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace www.kouarge.org.Identity
 {
@@ -29,8 +30,8 @@ namespace www.kouarge.org.Identity
                     EmailConfirmed = true,
                     UserName = "Admin",
                     PhoneNumber = "5555 55 55555",
-                    FacultyID = "-",
-                    DepartmentID = "-",
+                    //FacultyID = "-",
+                    DepartmentId = 1,
                     StudentNo = "-"
                 };
 
