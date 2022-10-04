@@ -23,16 +23,7 @@ namespace KouArge.Repository.Seeds
                 Title = "titleTeamMember",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now,
-                Teams = { new Team()
-                {
-                    Id = 1,
-                    Name = "Webino",
-                    CreatedAt = DateTime.Now,
-                    Description = "Webino Takımı",
-                    teamMembers = new List<TeamMember>() { new TeamMember() { CreatedAt = DateTime.Now, Id = 1, TeamId = 1, } },
-                    LogoUrl = "logoUrl",
-                }},
-                GeneralAssemblies = { new GeneralAssembly() }
+                
 
             });
         }

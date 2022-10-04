@@ -17,10 +17,8 @@ namespace KouArge.Repository.Seeds
             {
                 Id=1,
                 CreatedAt=DateTime.Now,
-                GeneralAssembly=new GeneralAssembly(),
                 GeneralAssemblyId=1,
                 TeamId=1,
-                Team=new Team()
             });
         }
     }

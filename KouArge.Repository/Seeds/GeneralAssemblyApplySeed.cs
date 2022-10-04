@@ -22,9 +22,7 @@ namespace KouArge.Repository.Seeds
                 ApplyTime = "ApplyTime",
                 SituationDescription = "SituationDescription",
                 Staus = 200,
-                Team = {new Team()},
                 UserId = "1",
-                Users = {new AppUser() },
                 Why="why"
                 
 
