@@ -9,8 +9,7 @@ namespace KouArge.Core.DTOs
 {
     public class GeneralAssemblyApplyDto:BaseDto
     {
-        public ICollection<Team> Team { get; set; }
-
-        public ICollection<AppUser> Users { get; set; }//?? bak
+        public string UserId { get; set; }
+        public int TeamId { get; set; }
     }
 }

@@ -21,7 +21,6 @@ namespace KouArge.Repository.Seeds
                 Description = "Webino Takımı",
                 LogoUrl = "logoUrl",
                 
-
             });
         }
     }

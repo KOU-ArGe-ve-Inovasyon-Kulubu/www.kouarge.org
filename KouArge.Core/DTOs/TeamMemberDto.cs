@@ -9,8 +9,8 @@ namespace KouArge.Core.DTOs
 {
     public class TeamMemberDto:BaseDto
     {
+        public int GeneralAssemblyId { get; set; }
+        public int TeamId { get; set; }
         public string Title { get; set; }
-        public ICollection<Team> Teams { get; set; }
-        public ICollection<GeneralAssemblyDto> GeneralAssemblies { get; set; }
     }
 }
