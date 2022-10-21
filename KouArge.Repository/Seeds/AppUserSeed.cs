@@ -15,7 +15,21 @@ namespace KouArge.Repository.Seeds
     {
         public void Configure(EntityTypeBuilder<AppUser> builder)
         {
-
+            builder.HasData(new AppUser()
+            {
+                Id = "1",
+                Name = "test",
+                DepartmentId = 1,
+                Email = "test@gmail.com",
+                Status = 1,
+                StudentNo = "1",
+                UserName = "1",
+                PasswordHash = "asd",
+                Surname = "test",
+                CreatedAt = DateTime.Now,
+                Year=2
+                
+            });
 
         }
     }
