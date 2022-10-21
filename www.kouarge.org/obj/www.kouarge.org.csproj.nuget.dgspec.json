@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj": {}
+    "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj": {}
   },
   "projects": {
-    "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\KouArge.Core\\KouArge.Core.csproj": {
+    "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\KouArge.Core\\KouArge.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\KouArge.Core\\KouArge.Core.csproj",
+        "projectUniqueName": "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\KouArge.Core\\KouArge.Core.csproj",
         "projectName": "KouArge.Core",
-        "projectPath": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\KouArge.Core\\KouArge.Core.csproj",
-        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\KouArge.Core\\obj\\",
+        "projectPath": "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\KouArge.Core\\KouArge.Core.csproj",
+        "packagesPath": "C:\\Users\\mustafa\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\KouArge.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mustafa\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -69,20 +69,20 @@
         }
       }
     },
-    "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\KouArge.Repository\\KouArge.Repository.csproj": {
+    "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\KouArge.Repository\\KouArge.Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\KouArge.Repository\\KouArge.Repository.csproj",
+        "projectUniqueName": "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\KouArge.Repository\\KouArge.Repository.csproj",
         "projectName": "KouArge.Repository",
-        "projectPath": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\KouArge.Repository\\KouArge.Repository.csproj",
-        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\KouArge.Repository\\obj\\",
+        "projectPath": "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\KouArge.Repository\\KouArge.Repository.csproj",
+        "packagesPath": "C:\\Users\\mustafa\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\KouArge.Repository\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mustafa\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -97,8 +97,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\KouArge.Core\\KouArge.Core.csproj": {
-                "projectPath": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\KouArge.Core\\KouArge.Core.csproj"
+              "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\KouArge.Core\\KouArge.Core.csproj": {
+                "projectPath": "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\KouArge.Core\\KouArge.Core.csproj"
               }
             }
           }
@@ -148,20 +148,20 @@
         }
       }
     },
-    "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\KouArge.Service\\KouArge.Service.csproj": {
+    "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\KouArge.Service\\KouArge.Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\KouArge.Service\\KouArge.Service.csproj",
+        "projectUniqueName": "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\KouArge.Service\\KouArge.Service.csproj",
         "projectName": "KouArge.Service",
-        "projectPath": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\KouArge.Service\\KouArge.Service.csproj",
-        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\KouArge.Service\\obj\\",
+        "projectPath": "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\KouArge.Service\\KouArge.Service.csproj",
+        "packagesPath": "C:\\Users\\mustafa\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\KouArge.Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mustafa\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -176,8 +176,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\KouArge.Repository\\KouArge.Repository.csproj": {
-                "projectPath": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\KouArge.Repository\\KouArge.Repository.csproj"
+              "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\KouArge.Repository\\KouArge.Repository.csproj": {
+                "projectPath": "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\KouArge.Repository\\KouArge.Repository.csproj"
               }
             }
           }
@@ -225,20 +225,20 @@
         }
       }
     },
-    "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj": {
+    "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj",
+        "projectUniqueName": "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj",
         "projectName": "www.kouarge.org",
-        "projectPath": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj",
-        "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\www.kouarge.org\\obj\\",
+        "projectPath": "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\www.kouarge.org\\www.kouarge.org.csproj",
+        "packagesPath": "C:\\Users\\mustafa\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\www.kouarge.org\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\mustafa\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -253,8 +253,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\KouArge.Service\\KouArge.Service.csproj": {
-                "projectPath": "C:\\Users\\PC\\Masaüstü\\www.kouarge.org\\KouArge.Service\\KouArge.Service.csproj"
+              "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\KouArge.Service\\KouArge.Service.csproj": {
+                "projectPath": "C:\\Users\\mustafa\\Desktop\\www.kouarge.org\\KouArge.Service\\KouArge.Service.csproj"
               }
             }
           }

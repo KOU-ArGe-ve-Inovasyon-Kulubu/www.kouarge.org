@@ -36,21 +36,6 @@ namespace KouArge.Service.Mapping
             CreateMap<Redirect, RedirectDto>().ReverseMap();
 
 
-            //generalassembly
-            CreateMap<GeneralAssembly, GeneralAssemblyDto>().ReverseMap();
-
-            //generalassemblyapply
-            CreateMap<GeneralAssemblyApply, GeneralAssemblyApplyDto>().ReverseMap();
-
-            //generalassemblyteam
-            CreateMap<GeneralAssemblyTeam, GeneralAssemblyTeamDto>().ReverseMap();
-
-            //teammember
-            CreateMap<TeamMember, TeamMemberDto>().ReverseMap();
-
-            //team
-            CreateMap<Team, TeamDto>().ReverseMap();
-
         }
     }
 }
