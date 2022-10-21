@@ -28,19 +28,23 @@ namespace www.kouarge.org.MiddleWares
 
                     if (statusCode == 401)
                     {
-                        context.Response.Redirect("/Account/Login");
+                        context.Response.Redirect("/Department/Forbidden");
+
+                        //context.Response.Redirect("/maintenance");
                         return;
                     }
 
                     if (statusCode == 403)
                     {
                         context.Response.Redirect("/Department/Forbidden");
+                         //context.Response.Redirect("/maintenance");
                         return;
                     }
 
                     if (statusCode==404)
                     {
                         context.Response.Redirect("/Department/Error");
+                        //context.Response.Redirect("/maintenance");
                         return;
                     }
                 });

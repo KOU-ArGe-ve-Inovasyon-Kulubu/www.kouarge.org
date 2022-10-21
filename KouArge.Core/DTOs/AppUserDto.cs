@@ -11,6 +11,7 @@ namespace KouArge.Core.DTOs
         public int DepartmentId { get; set; }
         public int Year { get; set; } 
         public int Status { get; set; }
+        public int NotificationId { get; set; }
         public DateTime CreatedAt { get; set; }
 
         public Token Token { get; set; }

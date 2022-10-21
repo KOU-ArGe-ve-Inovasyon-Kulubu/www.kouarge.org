@@ -3,6 +3,7 @@ using KouArge.Core.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
@@ -16,12 +17,14 @@ namespace www.kouarge.org.Controllers
     public class AccountController : Controller
     {
         private readonly DepartmentApiService _departmentApiService;
+        private readonly FacultyApiService _facultyApiService;  
         private readonly AccountApiService _accountApiService;
 
-        public AccountController(DepartmentApiService departmentApiService, AccountApiService accountApiService)
+        public AccountController(DepartmentApiService departmentApiService, AccountApiService accountApiService, FacultyApiService facultyApiService)
         {
             _departmentApiService = departmentApiService;
             _accountApiService = accountApiService;
+            _facultyApiService = facultyApiService;
         }
 
         //private readonly SignInManager<AppUser> _signInManager;
@@ -46,6 +49,8 @@ namespace www.kouarge.org.Controllers
 
         public async Task<IActionResult> Login()
         {
+            //return RedirectToAction("maintenance", "Home");
+
             return View();
         }
 
@@ -83,8 +88,9 @@ namespace www.kouarge.org.Controllers
 
         public async Task<IActionResult> Register()
         {
-            var department = await _departmentApiService.GetDepartmentWithFacultyAsync();
-            ViewBag.Department = new SelectList(department.Data, "Id", "Name");
+            var faculties = await _facultyApiService.GetAllAsync();
+            ViewBag.Data = faculties;
+            ViewBag.Faculty = new SelectList(faculties, "Id", "Name");
             return View();
         }
 
@@ -97,26 +103,47 @@ namespace www.kouarge.org.Controllers
 
                 if (result.Errors == null)
                 {
-                    Response.Cookies.Append("X-Access-Token", result.Token.AccessToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Expires = result.Token.Expiration });
-                    Response.Cookies.Append("Refresh-Token", result.Token.RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Expires = result.Token.RefreshTokenExpiration });
-                    return RedirectToAction("Index");
+                    //Response.Cookies.Append("X-Access-Token", result.Token.AccessToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Expires = result.Token.Expiration });
+                    //Response.Cookies.Append("Refresh-Token", result.Token.RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Expires = result.Token.RefreshTokenExpiration });
+                    
+                    return RedirectToAction("Maintenance","Home", new { data = true });
                 }
 
                 if (result.ErrorStatus == 1)
-                    ModelState.AddModelError("StudentNo", "Öğrenci numarası zaten kayıtlı.");
+                    ModelState.AddModelError("StudentNo","Öğrenci numarası zaten kayıtlı.");
 
                 if (result.ErrorStatus == 2)
                     ModelState.AddModelError("Email", "E-posta adresi zaten kayıtlı.");
 
-                var departments = await _departmentApiService.GetDepartmentWithFacultyAsync();
-                ViewBag.Department = new SelectList(departments.Data, "Id", "Name", newUser.DepartmentId);
+                if (result.ErrorStatus == 3)
+                    ModelState.AddModelError("PhoneNumber", "Telefon numarası zaten kayıtlı.");
+
+                var faculty = await _facultyApiService.GetAllAsync();
+                var department = await _facultyApiService.GetDepartmentByFacultyIdAsync(newUser.FacultyId);
+                ViewBag.Department = new SelectList(department.Departments, "Id", "Name", newUser.FacultyId);
+                ViewBag.Data = faculty;
+                ViewBag.Faculty = new SelectList(faculty, "Id", "Name", newUser.DepartmentId);
                 return View(newUser);
             }
 
-            var department = await _departmentApiService.GetDepartmentWithFacultyAsync();
-            ViewBag.Department = new SelectList(department.Data, "Id", "Name", newUser.DepartmentId);
+            var faculties = await _facultyApiService.GetAllAsync();
+            var departments = await _facultyApiService.GetDepartmentByFacultyIdAsync(newUser.FacultyId);
+            ViewBag.Data = faculties;
+            ViewBag.Faculty = new SelectList(faculties, "Id", "Name", newUser.DepartmentId);
+            ViewBag.Department = new SelectList(departments.Departments, "Id", "Name", newUser.FacultyId);
             return View(newUser);
 
+        }
+
+        public async Task<JsonResult> GetDepartment(int id)
+        {
+            var data = await _facultyApiService.GetDepartmentByFacultyIdAsync(id);
+            return Json(data.Departments.OrderBy(x => x.Name));
+        }
+        [Route("[Action]")]
+        public async Task<IActionResult> KVKK()
+        {
+            return View();
         }
 
         //public async Task<IActionResult> Login()

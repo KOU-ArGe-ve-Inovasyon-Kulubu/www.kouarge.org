@@ -2,7 +2,7 @@
 
 namespace KouArge.Core.DTOs
 {
-    public class DepartmentDto:BaseDto
+    public class DepartmentDto:StringBaseDto
     {
         public string Name { get; set; }
         public int FacultyId { get; set; }

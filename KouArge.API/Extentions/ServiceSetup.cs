@@ -17,7 +17,8 @@ namespace KouArge.API.Modules
             services.AddControllers(options => options.Filters.Add(new ValidateFilterAttribute()))
             .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<DepartmentDtoValidator>());
 
-            //services.AddControllers(options => options.Filters.Add(new CustomAuthorizationFilter()));
+            //services.AddControllers(options => options.Filters.Add(new UnAuthorizedHandlerFilter()));
+
 
             services.AddControllers(options =>
             {

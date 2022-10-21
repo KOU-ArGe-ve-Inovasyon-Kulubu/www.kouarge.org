@@ -6,7 +6,7 @@ namespace KouArge.API.Controllers
 {
 
     [ApiController]
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     public class CustomBaseController : ControllerBase
     {
         [NonAction]

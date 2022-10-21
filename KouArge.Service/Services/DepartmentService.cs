@@ -4,6 +4,7 @@ using KouArge.Core.Models;
 using KouArge.Core.Repositories;
 using KouArge.Core.Services;
 using KouArge.Core.UnitOfWorks;
+using KouArge.Service.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,11 +23,24 @@ namespace KouArge.Service.Services
             _mapper = mapper;
         }
 
+        public async Task<Department> GetByIdAsync(string id)
+        {
+            var entity = await _departmentRepository.GetByIdAsync(id);
+            if (entity == null)
+                throw new NotFoundException($"{typeof(Department).Name}({id}) not found.");
+
+            return entity;
+        }
+
         public async Task<CustomResponseDto<IEnumerable<DepartmentWithFacultyDto>>> GetDepartmentWithFacultyAsync()
         {
             var department = await _departmentRepository.GetDepartmentWithFaculty();
             var departmentDto = _mapper.Map<IEnumerable<DepartmentWithFacultyDto>>(department.ToList());
             return CustomResponseDto<IEnumerable<DepartmentWithFacultyDto>>.Success(200, departmentDto);
         }
+
+
+     
+
     }
 }

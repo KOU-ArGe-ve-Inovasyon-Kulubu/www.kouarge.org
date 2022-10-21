@@ -46,3 +46,34 @@
 //        }
 //    }
 //}
+
+using KouArge.Core.DTOs;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Abstractions;
+using Microsoft.AspNetCore.Mvc.Filters;
+using System.Net;
+
+public class UnAuthorizedHandlerFilter : IActionFilter
+{
+    public void OnActionExecuted(ActionExecutedContext context)
+    {
+        if (context.Result != null && context.Result.GetType() == typeof(UnauthorizedObjectResult))
+        {
+            var httpContext = context.HttpContext;
+
+            var routeData = httpContext.GetRouteData();
+            var actionContext = new ActionContext(httpContext, routeData, new ActionDescriptor());
+
+            var data = CustomResponseDto<NoContentDto>.Fail(401, "Giriş yapın.", 3);
+
+            var result = new ObjectResult(data) { StatusCode = (int)HttpStatusCode.Unauthorized };
+            context.Result = result;
+        }
+    }
+
+    public void OnActionExecuting(ActionExecutingContext context)
+    {
+
+
+    }
+}

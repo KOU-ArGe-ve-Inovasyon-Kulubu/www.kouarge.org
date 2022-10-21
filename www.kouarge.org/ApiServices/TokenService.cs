@@ -7,10 +7,7 @@ using System.Net.Http;
 
 namespace www.kouarge.org.ApiServices
 {
-    public static class Control
-    {
-        public static int c = 0;
-    }
+  
     public class TokenService : DelegatingHandler
     {
         private IHttpContextAccessor _context;

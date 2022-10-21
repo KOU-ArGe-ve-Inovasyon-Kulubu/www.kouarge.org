@@ -45,6 +45,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseAuthenticationExtention();
 app.UseHttpsRedirection();
 app.UseCustomException();

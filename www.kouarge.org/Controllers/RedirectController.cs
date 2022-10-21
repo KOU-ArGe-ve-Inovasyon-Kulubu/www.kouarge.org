@@ -36,8 +36,22 @@ namespace www.kouarge.org.Controllers
                 return RedirectToAction("Error", "Department");
 
             return Redirect(url);
-
         
+        }
+
+        [Route("[Action]")]
+        public async Task<IActionResult> TeknikTakimBrosur(string text)
+        {
+            var remoteIpAddress = HttpContext.Features.Get<IHttpConnectionFeature>()?.RemoteIpAddress;
+            text = "tekniktakimbrosur";
+            var url = await _redirectService.AddCountAsync(text);
+
+            //TODO: pasive duruma sayfa yap. yonlendir.
+            if (url == null)
+                return RedirectToAction("Error", "Department");
+
+            return Redirect(url);
+
         }
     }
 }

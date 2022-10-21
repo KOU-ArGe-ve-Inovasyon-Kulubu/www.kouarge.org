@@ -40,6 +40,22 @@ namespace KouArge.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Notifications",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Sms = table.Column<int>(type: "int", nullable: false),
+                    Email = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Notifications", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "OurFormats",
                 columns: table => new
                 {
@@ -156,8 +172,7 @@ namespace KouArge.Repository.Migrations
                 name: "Departments",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     FacultyId = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -239,11 +254,12 @@ namespace KouArge.Repository.Migrations
                     Name = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Surname = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     StudentNo = table.Column<string>(type: "nvarchar(9)", maxLength: 9, nullable: false),
-                    DepartmentId = table.Column<int>(type: "int", nullable: false),
+                    DepartmentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Year = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: false),
+                    NotificationId = table.Column<int>(type: "int", nullable: false),
                     RefreshToken = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     RefreshTokenExpires = table.Column<DateTime>(type: "datetime2", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -268,6 +284,12 @@ namespace KouArge.Repository.Migrations
                         name: "FK_AspNetUsers_Departments_DepartmentId",
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_AspNetUsers_Notifications_NotificationId",
+                        column: x => x.NotificationId,
+                        principalTable: "Notifications",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -612,14 +634,15 @@ namespace KouArge.Repository.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "Faculties",
-                columns: new[] { "Id", "Campus", "CreatedAt", "Name", "UpdatedAt" },
-                values: new object[] { 1, "Kocaeli", new DateTime(2022, 9, 26, 20, 11, 22, 784, DateTimeKind.Local).AddTicks(3970), "Teknoloji", null });
-
-            migrationBuilder.InsertData(
-                table: "Departments",
-                columns: new[] { "Id", "CreatedAt", "FacultyId", "Name", "UpdatedAt" },
-                values: new object[] { 1, new DateTime(2022, 9, 26, 20, 11, 22, 784, DateTimeKind.Local).AddTicks(3815), 1, "Bil Sis. Müh.", null });
+                table: "Notifications",
+                columns: new[] { "Id", "CreatedAt", "Email", "Sms", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2022, 10, 10, 16, 53, 24, 309, DateTimeKind.Local).AddTicks(7904), 1, 1, null },
+                    { 2, new DateTime(2022, 10, 10, 16, 53, 24, 309, DateTimeKind.Local).AddTicks(7911), 1, 0, null },
+                    { 3, new DateTime(2022, 10, 10, 16, 53, 24, 309, DateTimeKind.Local).AddTicks(7912), 0, 1, null },
+                    { 4, new DateTime(2022, 10, 10, 16, 53, 24, 309, DateTimeKind.Local).AddTicks(7913), 0, 0, null }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AppUserGeneralAssemblyApply_UsersId",
@@ -662,6 +685,11 @@ namespace KouArge.Repository.Migrations
                 name: "IX_AspNetUsers_DepartmentId",
                 table: "AspNetUsers",
                 column: "DepartmentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_NotificationId",
+                table: "AspNetUsers",
+                column: "NotificationId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUsers_StudentNo",
@@ -829,6 +857,9 @@ namespace KouArge.Repository.Migrations
 
             migrationBuilder.DropTable(
                 name: "Departments");
+
+            migrationBuilder.DropTable(
+                name: "Notifications");
 
             migrationBuilder.DropTable(
                 name: "OurFormats");

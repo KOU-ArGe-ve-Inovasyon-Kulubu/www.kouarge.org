@@ -19,5 +19,11 @@ namespace KouArge.Repository.Repositories
         {
             return await _context.Departments.Include(x => x.Faculty).ToListAsync();
         }
+
+        public  async Task<Department> GetByIdAsync(string id)
+        {
+            return await _dbSet.FindAsync(id);
+        }
+    
     }
 }

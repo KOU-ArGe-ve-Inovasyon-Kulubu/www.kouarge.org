@@ -13,6 +13,20 @@ namespace www.kouarge.org.ApiServices
             _request = requestApiService;
         }
 
+
+
+        public async Task<List<FacultyWithDepartmentsDto>> GetDepartmentWithFacultyAsync()
+        {
+            var response = await _request.GetAsync<CustomResponseDto<List<FacultyWithDepartmentsDto>>>("faculty/GetAllFacultysWithDepartments");
+            return response.Data;
+        }
+
+        public async Task<FacultyWithDepartmentsDto> GetDepartmentByFacultyIdAsync(int id)
+        {
+            var response = await _request.GetAsync<CustomResponseDto<FacultyWithDepartmentsDto>>($"faculty/GetSingleFacultyByIdWithDepartment/{id}");
+            return response.Data;
+        }
+
         public async Task<List<FacultyDto>> GetAllAsync()
         {
             var response = await _request.GetAsync<CustomResponseDto<List<FacultyDto>>>("faculty");

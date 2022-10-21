@@ -1,6 +1,6 @@
 ﻿namespace KouArge.Core.Models
 {
-    public class Department : BaseEntity
+    public class Department : StringBaseEntity
     {
         public string Name { get; set; }
         public int FacultyId { get; set; }

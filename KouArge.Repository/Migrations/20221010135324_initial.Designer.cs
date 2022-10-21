@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KouArge.Repository.Migrations
 {
     [DbContext(typeof(AppIdentityDbContext))]
-    [Migration("20220926171122_initial")]
+    [Migration("20221010135324_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -96,8 +96,9 @@ namespace KouArge.Repository.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("DepartmentId")
-                        .HasColumnType("int");
+                    b.Property<string>("DepartmentId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -124,6 +125,9 @@ namespace KouArge.Repository.Migrations
                     b.Property<string>("NormalizedUserName")
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
+
+                    b.Property<int>("NotificationId")
+                        .HasColumnType("int");
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
@@ -181,6 +185,8 @@ namespace KouArge.Repository.Migrations
                         .HasDatabaseName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
+                    b.HasIndex("NotificationId");
+
                     b.HasIndex("StudentNo")
                         .IsUnique();
 
@@ -189,11 +195,8 @@ namespace KouArge.Repository.Migrations
 
             modelBuilder.Entity("KouArge.Core.Models.Department", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -214,15 +217,6 @@ namespace KouArge.Repository.Migrations
                     b.HasIndex("FacultyId");
 
                     b.ToTable("Departments");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2022, 9, 26, 20, 11, 22, 784, DateTimeKind.Local).AddTicks(3815),
-                            FacultyId = 1,
-                            Name = "Bil Sis. Müh."
-                        });
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.Event", b =>
@@ -364,15 +358,6 @@ namespace KouArge.Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Faculties");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 9, 26, 20, 11, 22, 784, DateTimeKind.Local).AddTicks(3970),
-                            Name = "Teknoloji"
-                        });
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.GeneralAssembly", b =>
@@ -490,6 +475,61 @@ namespace KouArge.Repository.Migrations
                     b.HasIndex("TeamId");
 
                     b.ToTable("GeneralAssemblyTeams");
+                });
+
+            modelBuilder.Entity("KouArge.Core.Models.Notification", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Email")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Sms")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notifications");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2022, 10, 10, 16, 53, 24, 309, DateTimeKind.Local).AddTicks(7904),
+                            Email = 1,
+                            Sms = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2022, 10, 10, 16, 53, 24, 309, DateTimeKind.Local).AddTicks(7911),
+                            Email = 1,
+                            Sms = 0
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2022, 10, 10, 16, 53, 24, 309, DateTimeKind.Local).AddTicks(7912),
+                            Email = 0,
+                            Sms = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2022, 10, 10, 16, 53, 24, 309, DateTimeKind.Local).AddTicks(7913),
+                            Email = 0,
+                            Sms = 0
+                        });
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.OurFormat", b =>
@@ -932,7 +972,15 @@ namespace KouArge.Repository.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("KouArge.Core.Models.Notification", "Notification")
+                        .WithMany("AppUsers")
+                        .HasForeignKey("NotificationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Department");
+
+                    b.Navigation("Notification");
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.Department", b =>
@@ -1161,6 +1209,11 @@ namespace KouArge.Repository.Migrations
             modelBuilder.Entity("KouArge.Core.Models.GeneralAssemblyApply", b =>
                 {
                     b.Navigation("Team");
+                });
+
+            modelBuilder.Entity("KouArge.Core.Models.Notification", b =>
+                {
+                    b.Navigation("AppUsers");
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.OurFormat", b =>

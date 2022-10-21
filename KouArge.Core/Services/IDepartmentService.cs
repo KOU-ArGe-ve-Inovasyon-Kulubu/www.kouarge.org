@@ -8,8 +8,10 @@ using System.Threading.Tasks;
 
 namespace KouArge.Core.Services
 {
-    public interface IDepartmentService:IService<Department>
+    public interface IDepartmentService : IService<Department>
     {
         public Task<CustomResponseDto<IEnumerable<DepartmentWithFacultyDto>>> GetDepartmentWithFacultyAsync();
+        public Task<Department> GetByIdAsync(string id);
     }
+
 }

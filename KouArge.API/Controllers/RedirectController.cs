@@ -3,11 +3,17 @@ using KouArge.Core.DTOs;
 using KouArge.Core.Models;
 using KouArge.Core.Services;
 using KouArge.Service.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace KouArge.API.Controllers
 {
+
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+
     [Route("api/[controller]")]
     [ApiController]
     public class RedirectController : CustomBaseController
@@ -41,12 +47,12 @@ namespace KouArge.API.Controllers
         }
 
 
-        [HttpPost("[Action]/{id}")]
-        public async Task<IActionResult> GetById(int id)
-        {
-            return CreateActionResult(await _redirectService.GetByIdAsync(id));
+        //[HttpPost("[Action]/{id}")]
+        //public async Task<IActionResult> GetById(int id)
+        //{
+        //    return CreateActionResult(await _redirectService.GetByIdAsync(id));
 
-        }
+        //}
 
         [HttpPut]
         public async Task<IActionResult> Update(RedirectDto redirectDto)

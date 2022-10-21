@@ -9,6 +9,7 @@ namespace KouArge.Core.Repositories
 {
     public interface IFacultyRepository:IGenericRepository<Faculty>
     {
+        
         public Task<List<Faculty>> GetAllFacultysWithDepartmentsAsync();
         public Task<Faculty> GetSingleFacultyByIdWithDepartmentAsync(int id);
     }

@@ -29,6 +29,8 @@ namespace www.kouarge.org.Controllers
                 return RedirectToAction("Error", "Department");
 
             return View(x.Data);
+
+            //return RedirectToAction("maintenance", "Home");
         }
 
         public async Task<IActionResult> Save()
@@ -36,6 +38,8 @@ namespace www.kouarge.org.Controllers
             var faculty = await _faultyApiService.GetAllAsync();
             ViewBag.Faculty = new SelectList(faculty, "Id", "Name");
             return View();
+            //return RedirectToAction("maintenance", "Home");
+
         }
 
         [HttpPost]
@@ -62,6 +66,8 @@ namespace www.kouarge.org.Controllers
             var faculty = await _faultyApiService.GetAllAsync();
             ViewBag.Faculty = new SelectList(faculty, "Id", "Name", department.FacultyId);
             return View(department);
+            //return RedirectToAction("maintenance", "Home");
+
         }
 
         [HttpPost]

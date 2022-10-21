@@ -10,6 +10,7 @@ namespace KouArge.Core.Repositories
     public interface IDepartmentRepository:IGenericRepository<Department>
     {
         public Task<IEnumerable<Department>> GetDepartmentWithFaculty();
+        public  Task<Department> GetByIdAsync(string id);
 
     }
 }

@@ -25,6 +25,7 @@ namespace KouArge.Repository
         public DbSet<Team> Teams { get; set; }
         public DbSet<TeamMember> TeamMembers { get; set; }
         public DbSet<GeneralAssemblyTeam> GeneralAssemblyTeams { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         //***************
         public DbSet<Redirect> Redirects { get; set; }

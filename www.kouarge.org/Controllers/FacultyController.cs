@@ -19,11 +19,14 @@ namespace www.kouarge.org.Controllers
         {
             var faculty = await _facultyApiService.GetAllAsync();
             return View(faculty);
+            //return RedirectToAction("maintenance", "Home");
         }
 
         public async Task<IActionResult> Save()
         {
             return View();
+            //return RedirectToAction("maintenance", "Home");
+
         }
 
         [HttpPost]
@@ -47,6 +50,9 @@ namespace www.kouarge.org.Controllers
                 return View("Error");
 
             return View(faculty);
+            //return RedirectToAction("maintenance", "Home");
+
+
         }
 
         [HttpPost]

@@ -17,7 +17,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "www.kouarge.org", "www.koua
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Port", "Port", "{3A2B3F49-719B-4358-995B-97176224CA91}"
 	ProjectSection(SolutionItems) = preProject
+		..\faculty.txt = ..\faculty.txt
 		Ports.txt = Ports.txt
+		..\department.txt = ..\department.txt
 	EndProjectSection
 EndProject
 Global

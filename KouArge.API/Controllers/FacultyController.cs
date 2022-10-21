@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KouArge.API.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "SuperAdmin")]
     public class FacultyController : CustomBaseController
     {
         private readonly IFacultyService _facultyService;
@@ -20,24 +20,24 @@ namespace KouArge.API.Controllers
             _mapper = mapper;
         }
 
-
+         
         [HttpGet("[Action]")]
         public async Task<IActionResult> GetAllFacultysWithDepartments()
         {
             return CreateActionResult(await _facultyService.GetAllFacultysWithDepartmentsAsync());
         }
-
-        [HttpPost("[Action]/{facultyId}")]
+         
+        [HttpGet("[Action]/{facultyId}")]
         public async Task<IActionResult> GetSingleFacultyByIdWithDepartment(int facultyId)
         {
             return CreateActionResult(await _facultyService.GetSingleFacultyByIdWithDepartmentAsync(facultyId));
         }
-
+         
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var faculty = await _facultyService.GetAllAsync();
-            var facultyDto = _mapper.Map<List<FacultyDto>>(faculty.ToList());
+            var facultyDto = _mapper.Map<List<FacultyDto>>(faculty.OrderBy(x=>x.Name).ToList());
             return CreateActionResult(CustomResponseDto<List<FacultyDto>>.Success(200, facultyDto));
         }
 

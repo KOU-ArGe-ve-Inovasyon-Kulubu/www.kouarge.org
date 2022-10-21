@@ -98,10 +98,21 @@ namespace KouArge.Service.Services
             if (await _userManager.FindByEmailAsync(appuserRegisterDto.Email) != null)
                 return CustomResponseDto<AppUserDto>.Fail(400, $"Email({appuserRegisterDto.Email}) already register.", 2);
 
+            if (await _userManager.Users.FirstOrDefaultAsync(x => x.PhoneNumber == appuserRegisterDto.PhoneNumber) != null)
+                return CustomResponseDto<AppUserDto>.Fail(400, $"PhoneNumber({appuserRegisterDto.PhoneNumber}) already register.", 3);
+
             //TODO: Department kontrolu yap. Access Token ekle
 
             var error = new List<string>();
+            appuserRegisterDto.Status = 1;
+
             var user = _mapper.Map<AppUser>(appuserRegisterDto);
+
+            if (appuserRegisterDto.NotificationId)
+                user.NotificationId = 1;
+            else
+                user.NotificationId = 4;
+
             user.UserName = appuserRegisterDto.StudentNo;
             IdentityResult result = await _userManager.CreateAsync(user, appuserRegisterDto.Password);
 
