@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KouArge.API.Controllers
 {
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "SuperAdmin")]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "SuperAdmin")]
     public class FacultyController : CustomBaseController
     {
         private readonly IFacultyService _facultyService;
@@ -41,7 +41,7 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<List<FacultyDto>>.Success(200, facultyDto));
         }
 
-        [HttpPost("{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var faculty = await _facultyService.GetByIdAsync(id);

@@ -25,7 +25,7 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<List<GeneralAssemblyApplyDto>>.Success(200, generalAssemblyApplyDto));
         }
 
-        [HttpPost("{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var generalAssemblyApply = await _generalAssemblyApplyService.GetByIdAsync(id);

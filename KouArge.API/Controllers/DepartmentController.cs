@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using KouArge.API.Filters;
 using KouArge.Core.DTOs;
+using KouArge.Core.DTOs.UpdateDto;
 using KouArge.Core.Models;
 using KouArge.Core.Services;
 using KouArge.Repository;
@@ -16,7 +17,7 @@ namespace KouArge.API.Controllers
 {
     //[TypeFilter(typeof(CustomAuthorizationFilter))]
     //[Authorize(AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme )]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
     public class DepartmentController : CustomBaseController
     {
         private readonly IMapper _mapper;
@@ -43,7 +44,7 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<List<DepartmentDto>>.Success(200, departmensDto));
         }
 
-        [HttpPost("{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(string id)
         {
             var departmen = await _departmentService.GetByIdAsync(id);

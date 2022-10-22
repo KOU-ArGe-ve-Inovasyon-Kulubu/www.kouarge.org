@@ -12,9 +12,9 @@ using System.Data;
 namespace KouArge.API.Controllers
 {
 
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
 
-    [Route("api/[controller]")]
+    //[Route("api/[controller]")]
     [ApiController]
     public class RedirectController : CustomBaseController
     {
@@ -32,7 +32,7 @@ namespace KouArge.API.Controllers
             return CreateActionResult(await _redirectService.AddAsync(redirectDto));
         }
 
-        [HttpPost("R/{text}")]
+        [HttpGet("{text}")]
         public async Task<IActionResult> AddCount(string text)
         {
             //TODO: Tekrar bak. hata durumu

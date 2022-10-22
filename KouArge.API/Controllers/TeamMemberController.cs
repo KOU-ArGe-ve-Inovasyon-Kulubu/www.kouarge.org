@@ -25,7 +25,7 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<List<TeamMemberDto>>.Success(200, teamMemberDto));
         }
 
-        [HttpPost("{id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
             var teamMember = await _teamMemberService.GetByIdAsync(id);

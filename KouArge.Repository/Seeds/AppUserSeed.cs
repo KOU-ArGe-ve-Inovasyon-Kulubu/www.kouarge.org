@@ -19,7 +19,7 @@ namespace KouArge.Repository.Seeds
             {
                 Id = "1",
                 Name = "test",
-                DepartmentId = 1,
+                DepartmentId = "1",
                 Email = "test@gmail.com",
                 Status = 1,
                 StudentNo = "1",

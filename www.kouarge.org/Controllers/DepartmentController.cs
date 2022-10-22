@@ -56,9 +56,9 @@ namespace www.kouarge.org.Controllers
             return View(departmentDto);
         }
 
-        public async Task<IActionResult> Update(int id)
+        public async Task<IActionResult> Update(IdDto<string> data)
         {
-            var department = await _departmentApiService.GetByIdAsync(id);
+            var department = await _departmentApiService.GetByIdAsync(data);
 
             if (department == null)
                 return View("Error");

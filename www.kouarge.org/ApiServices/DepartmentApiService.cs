@@ -29,9 +29,9 @@ namespace www.kouarge.org.ApiServices
             return response.Data;
         }
 
-        public async Task<DepartmentDto> GetByIdAsync(int id)
+        public async Task<DepartmentDto> GetByIdAsync(IdDto<string> data)
         {
-            var response = await _request.PostAsync<CustomResponseDto<DepartmentDto>>($"department/{id}");
+            var response = await _request.PostAsync<CustomResponseDto<DepartmentDto>, IdDto<string>>("department", data);
             return response.Data;
         }
 
