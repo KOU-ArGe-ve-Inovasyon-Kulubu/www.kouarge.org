@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace KouArge.Service.Mapping
 {
-    public class MapProfile:Profile
+    public class MapProfile : Profile
     {
         public MapProfile()
         {
@@ -28,10 +28,10 @@ namespace KouArge.Service.Mapping
 
             //faculty
             CreateMap<Faculty, FacultyDto>().ReverseMap();
-            CreateMap<Faculty,FacultyWithDepartmentsDto>();
-            
-         
-            
+            CreateMap<Faculty, FacultyWithDepartmentsDto>();
+
+
+
             //redirect
             CreateMap<Redirect, RedirectDto>().ReverseMap();
 
@@ -44,6 +44,7 @@ namespace KouArge.Service.Mapping
 
             //generalassemblyteam
             CreateMap<GeneralAssemblyTeam, GeneralAssemblyTeamDto>().ReverseMap();
+            CreateMap<GeneralAssemblyTeam, GeneralAssemblyTeamWithGeneralAssemblyDto>();
 
             //teammember
             CreateMap<TeamMember, TeamMemberDto>().ReverseMap();

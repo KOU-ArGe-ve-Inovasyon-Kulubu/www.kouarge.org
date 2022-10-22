@@ -8,19 +8,19 @@ namespace KouArge.API.Controllers
 {
     public class GeneralAssemblyApplyController : CustomBaseController
     {
-        private readonly IGeneralAssemblyApplyService _generalAssemblyApply;
+        private readonly IGeneralAssemblyApplyService _generalAssemblyApplyService;
         private readonly IMapper _mapper;
 
-        public GeneralAssemblyApplyController(IGeneralAssemblyApplyService generalAssemblyApply, IMapper mapper)
+        public GeneralAssemblyApplyController(IGeneralAssemblyApplyService generalAssemblyApplyService, IMapper mapper)
         {
-            _generalAssemblyApply = generalAssemblyApply;
+            _generalAssemblyApplyService = generalAssemblyApplyService;
             _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var generalAssemblyApply = await _generalAssemblyApply.GetAllAsync();
+            var generalAssemblyApply = await _generalAssemblyApplyService.GetAllAsync();
             var generalAssemblyApplyDto = _mapper.Map<List<GeneralAssemblyApplyDto>>(generalAssemblyApply.ToList());
             return CreateActionResult(CustomResponseDto<List<GeneralAssemblyApplyDto>>.Success(200, generalAssemblyApplyDto));
         }
@@ -28,7 +28,7 @@ namespace KouArge.API.Controllers
         [HttpPost("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var generalAssemblyApply = await _generalAssemblyApply.GetByIdAsync(id);
+            var generalAssemblyApply = await _generalAssemblyApplyService.GetByIdAsync(id);
             var generalAssemblyApplyDto = _mapper.Map<GeneralAssemblyApplyDto>(generalAssemblyApply);
             return CreateActionResult(CustomResponseDto<GeneralAssemblyApplyDto>.Success(200, generalAssemblyApplyDto));
         }
@@ -36,7 +36,7 @@ namespace KouArge.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(GeneralAssemblyApplyDto newGeneralAssemblyApplyDto)
         {
-            var generalAssemblyApply = await _generalAssemblyApply.AddAsync(_mapper.Map<GeneralAssemblyApply>(newGeneralAssemblyApplyDto));
+            var generalAssemblyApply = await _generalAssemblyApplyService.AddAsync(_mapper.Map<GeneralAssemblyApply>(newGeneralAssemblyApplyDto));
             var generalAssemblyApplyDto = _mapper.Map<GeneralAssemblyApplyDto>(generalAssemblyApply);
             return CreateActionResult(CustomResponseDto<GeneralAssemblyApplyDto>.Success(201, generalAssemblyApplyDto));
         }
@@ -44,15 +44,15 @@ namespace KouArge.API.Controllers
         [HttpPut]
         public async Task<IActionResult> Update(GeneralAssemblyApplyDto newGeneralAssemblyApplyDto)
         {
-            await _generalAssemblyApply.UpdateAsync(_mapper.Map<GeneralAssemblyApply>(newGeneralAssemblyApplyDto));
+            await _generalAssemblyApplyService.UpdateAsync(_mapper.Map<GeneralAssemblyApply>(newGeneralAssemblyApplyDto));
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var generalAssemblyApply = await _generalAssemblyApply.GetByIdAsync(id);
-            await _generalAssemblyApply.RemoveAsync(generalAssemblyApply);
+            var generalAssemblyApply = await _generalAssemblyApplyService.GetByIdAsync(id);
+            await _generalAssemblyApplyService.RemoveAsync(generalAssemblyApply);
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
     }
