@@ -84,8 +84,8 @@ namespace KouArge.Service.Services
                 return CustomResponseDto<AppUserDto>.Success(200, data);
             }
             else
-                //throw new UnAuthorizedException("401");
-                return CustomResponseDto<AppUserDto>.Fail(401, "UnAuthorizedException.", 1);
+                throw new UnAuthorizedException("401");
+            //return CustomResponseDto<AppUserDto>.Fail(401, "UnAuthorizedException.", 1);
 
 
         }

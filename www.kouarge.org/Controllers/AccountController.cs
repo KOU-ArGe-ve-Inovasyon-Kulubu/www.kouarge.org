@@ -1,5 +1,6 @@
 ﻿using KouArge.Core.DTOs;
 using KouArge.Core.Models;
+using KouArge.Core.Services.ApiService;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using www.kouarge.org.ApiServices;
-using www.kouarge.org.Models;
 
 namespace www.kouarge.org.Controllers
 {
@@ -16,11 +16,11 @@ namespace www.kouarge.org.Controllers
 
     public class AccountController : Controller
     {
-        private readonly DepartmentApiService _departmentApiService;
-        private readonly FacultyApiService _facultyApiService;  
-        private readonly AccountApiService _accountApiService;
+        private readonly IDepartmentApiService _departmentApiService;
+        private readonly IFacultyApiService _facultyApiService;  
+        private readonly IAccountApiService _accountApiService;
 
-        public AccountController(DepartmentApiService departmentApiService, AccountApiService accountApiService, FacultyApiService facultyApiService)
+        public AccountController(IDepartmentApiService departmentApiService, IAccountApiService accountApiService, IFacultyApiService facultyApiService)
         {
             _departmentApiService = departmentApiService;
             _accountApiService = accountApiService;

@@ -8,7 +8,7 @@ namespace KouArge.Core.DTOs
         public string Surname { get; set; }
         public string StudentNo { get; set; }
         public string Email { get; set; }
-        public int DepartmentId { get; set; }
+        public string DepartmentId { get; set; }
         public int Year { get; set; } 
         public int Status { get; set; }
         public int NotificationId { get; set; }

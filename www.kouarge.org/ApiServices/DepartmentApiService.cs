@@ -1,4 +1,5 @@
 ﻿using KouArge.Core.DTOs;
+using KouArge.Core.Services.ApiService;
 using KouArge.Service.Exceptions;
 using Microsoft.AspNetCore.Authorization;
 using System.Net;
@@ -7,11 +8,11 @@ using System.Net.Http.Headers;
 
 namespace www.kouarge.org.ApiServices
 {
-    public class DepartmentApiService
+    public class DepartmentApiService : IDepartmentApiService
     {
-        RequestApiService _request;
+        private readonly IRequestApiService _request;
 
-        public DepartmentApiService(RequestApiService request)
+        public DepartmentApiService(IRequestApiService request)
         {
             _request = request;
         }

@@ -1,13 +1,14 @@
 ﻿using KouArge.Core.DTOs;
 using KouArge.Core.Models;
+using KouArge.Core.Services.ApiService;
 
 namespace www.kouarge.org.ApiServices
 {
-    public class RedirectApiService
+    public class RedirectApiService: IRedirectApiService
     {
-        private readonly RequestApiService _request;
+        private readonly IRequestApiService _request;
 
-        public RedirectApiService(RequestApiService requestApiService)
+        public RedirectApiService(IRequestApiService requestApiService)
         {
             _request = requestApiService;
         }

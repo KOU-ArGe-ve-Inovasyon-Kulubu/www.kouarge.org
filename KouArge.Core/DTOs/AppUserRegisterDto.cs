@@ -31,7 +31,7 @@ namespace KouArge.Core.DTOs
         public int FacultyId { get; set; }
 
         [Display(Name = "Bölüm:")]
-        public int DepartmentId { get; set; }
+        public string DepartmentId { get; set; }
 
         [Display(Name = "Sınıf:")]
         public int Year { get; set; }

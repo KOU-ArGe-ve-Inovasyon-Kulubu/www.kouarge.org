@@ -10,6 +10,8 @@
 
         //public ICollection<AppUser> Users { get; set; }
         public AppUser User { get; set; }
+
+        public ICollection<SocialMedia> SocialMedias { get; set; }
         public ICollection<Team> Teams { get; set; }
         public ICollection<TeamMember> TeamMembers { get; set; }
 

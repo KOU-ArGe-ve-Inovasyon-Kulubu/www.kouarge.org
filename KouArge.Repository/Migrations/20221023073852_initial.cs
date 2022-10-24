@@ -224,29 +224,6 @@ namespace KouArge.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "SocialMedias",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Fk = table.Column<int>(type: "int", nullable: false),
-                    Link = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    TypeId = table.Column<int>(type: "int", nullable: false),
-                    SponsorsAndPartnersId = table.Column<int>(type: "int", nullable: true),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SocialMedias", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SocialMedias_SponsorsAndPartners_SponsorsAndPartnersId",
-                        column: x => x.SponsorsAndPartnersId,
-                        principalTable: "SponsorsAndPartners",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
@@ -312,29 +289,6 @@ namespace KouArge.Repository.Migrations
                         name: "FK_EventPictures_Events_EventId",
                         column: x => x.EventId,
                         principalTable: "Events",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "SocaialMediaTypes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Icon = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    SocialMediaId = table.Column<int>(type: "int", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_SocaialMediaTypes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_SocaialMediaTypes_SocialMedias_SocialMediaId",
-                        column: x => x.SocialMediaId,
-                        principalTable: "SocialMedias",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -529,6 +483,29 @@ namespace KouArge.Repository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "SocialMedias",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    generalAssemblyId = table.Column<int>(type: "int", nullable: false),
+                    Link = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TypeId = table.Column<int>(type: "int", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SocialMedias", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SocialMedias_GeneralAssemblies_generalAssemblyId",
+                        column: x => x.generalAssemblyId,
+                        principalTable: "GeneralAssemblies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AppUserGeneralAssemblyApply",
                 columns: table => new
                 {
@@ -579,6 +556,29 @@ namespace KouArge.Repository.Migrations
                         column: x => x.GeneralAssemblyApplyId,
                         principalTable: "GeneralAssemblyApplies",
                         principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "SocaialMediaTypes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    SocialMediaId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Icon = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_SocaialMediaTypes", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_SocaialMediaTypes_SocialMedias_SocialMediaId",
+                        column: x => x.SocialMediaId,
+                        principalTable: "SocialMedias",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -634,15 +634,98 @@ namespace KouArge.Repository.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Faculties",
+                columns: new[] { "Id", "Campus", "CreatedAt", "Name", "UpdatedAt" },
+                values: new object[,]
+                {
+                    { 1, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(403), "Ali Rıza Veziroğlu Meslek Yüksekokulu", null },
+                    { 2, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(405), "Asım Kocabıyık Meslek Yüksekokulu", null },
+                    { 3, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(406), "Değirmendere Ali ÖZBAY Meslek Yüksekokulu", null },
+                    { 4, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(407), "Teknoloji", null },
+                    { 5, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(408), "Denizcilik Fakültesi", null },
+                    { 6, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(409), "Diş Hekimliği Fakültesi", null },
+                    { 7, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(410), "Diş Hekimliği Fakültesi", null },
+                    { 8, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(411), "Eğitim Fakültesi", null },
+                    { 9, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(412), "Fen - Edebiyat Fakültesi", null },
+                    { 10, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(413), "Ford Otosan İhsaniye Otomotiv Meslek Yüksekokulu", null },
+                    { 11, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(414), "Gazanfer Bilge Meslek Yüksekokulu", null },
+                    { 12, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(415), "Gıda ve Tarım Meslek Yüksekokulu", null },
+                    { 13, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(416), "Gölcük Meslek Yüksekokulu", null },
+                    { 14, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(416), "Güzel Sanatlar Fakültesi", null },
+                    { 15, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(418), "Havacılık ve Uzay Bilimleri Fakültesi", null },
+                    { 16, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(418), "Hereke Asım Kocabıyık Meslek Yüksekokulu", null },
+                    { 17, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(419), "Hereke Meslek Yüksekokulu", null },
+                    { 18, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(420), "Hereke Ömer İsmet Uzunyol Meslek Yüksekokulu", null },
+                    { 19, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(421), "Hukuk Fakültesi", null },
+                    { 20, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(422), "İktisadi ve İdari Bilimler Fakültesi", null },
+                    { 21, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(473), "İlahiyat Fakültesi", null },
+                    { 22, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(474), "İletişim Fakültesi", null },
+                    { 23, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(475), "İzmit Meslek Yüksekokulu", null },
+                    { 24, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(476), "Kandıra Meslek Yüksekokulu", null },
+                    { 25, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(477), "Karamürsel Meslek Yüksekokulu", null },
+                    { 26, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(478), "Kartepe Atçılık Meslek Yüksekokulu", null },
+                    { 27, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(479), "Kartepe Turizm Meslek Yüksekokulu", null },
+                    { 28, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(480), "Kocaeli Meslek Yüksekokulu", null },
+                    { 29, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(481), "Kocaeli Sağlık Hizmetleri Meslek Yüksekokulu", null },
+                    { 30, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(482), "Koseköy Meslek Yüksekokulu", null },
+                    { 31, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(483), "Mimarlık ve Tasarım Fakültesi", null },
+                    { 32, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(483), "Mühendislik Fakültesi", null },
+                    { 33, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(484), "Sağlık Bilimleri Fakültesi", null },
+                    { 34, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(485), "Spor Bilimleri Fakültesi", null },
+                    { 35, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(486), "Teknoloji Fakültesi", null },
+                    { 36, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(487), "Tıp Fakültesi", null },
+                    { 37, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(488), "Turizm Fakültesi", null },
+                    { 38, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(489), "Turizm İşletmecliliği ve Otelcilik Yüksekokulu", null },
+                    { 39, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(490), "Uzunçiftlik Nuh Çimento Meslek Yüksekokulu", null },
+                    { 40, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(491), "Yahya Kaptan Meslek Yüksekokulu", null },
+                    { 41, "Kocaeli", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(492), "Ziraat Fakültesi", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "GeneralAssemblyApplies",
+                columns: new[] { "Id", "ApplyTime", "CreatedAt", "EventParticipantId", "Introducing", "SituationDescription", "Staus", "TeamId", "UpdatedAt", "UserId", "Why" },
+                values: new object[] { 1, "ApplyTime", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(600), null, "Introducing", "SituationDescription", 200, 1, null, "1", "why" });
+
+            migrationBuilder.InsertData(
                 table: "Notifications",
                 columns: new[] { "Id", "CreatedAt", "Email", "Sms", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2022, 10, 10, 16, 53, 24, 309, DateTimeKind.Local).AddTicks(7904), 1, 1, null },
-                    { 2, new DateTime(2022, 10, 10, 16, 53, 24, 309, DateTimeKind.Local).AddTicks(7911), 1, 0, null },
-                    { 3, new DateTime(2022, 10, 10, 16, 53, 24, 309, DateTimeKind.Local).AddTicks(7912), 0, 1, null },
-                    { 4, new DateTime(2022, 10, 10, 16, 53, 24, 309, DateTimeKind.Local).AddTicks(7913), 0, 0, null }
+                    { 1, new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(881), 1, 1, null },
+                    { 2, new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(882), 1, 0, null },
+                    { 3, new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(883), 0, 1, null },
+                    { 4, new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(884), 0, 0, null }
                 });
+
+            migrationBuilder.InsertData(
+                table: "TeamMembers",
+                columns: new[] { "Id", "CreatedAt", "EndDate", "GeneralAssemblyId", "StartDate", "TeamId", "Title", "UpdatedAt" },
+                values: new object[] { 1, new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(985), new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(987), 1, new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(986), 1, "titleTeamMember", null });
+
+            migrationBuilder.InsertData(
+                table: "Teams",
+                columns: new[] { "Id", "CreatedAt", "Description", "GeneralAssemblyApplyId", "GeneralAssemblyId", "LogoUrl", "Name", "UpdatedAt" },
+                values: new object[] { 1, new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(1206), "Webino Takımı", null, null, "logoUrl", "Webino", null });
+
+            migrationBuilder.InsertData(
+                table: "Departments",
+                columns: new[] { "Id", "CreatedAt", "FacultyId", "Name", "UpdatedAt" },
+                values: new object[] { "1", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(303), 1, "Bil Sis. Müh.", null });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "CreatedAt", "DepartmentId", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "Name", "NormalizedEmail", "NormalizedUserName", "NotificationId", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "RefreshToken", "RefreshTokenExpires", "SecurityStamp", "Status", "StudentNo", "Surname", "TwoFactorEnabled", "UpdatedAt", "UserName", "Year" },
+                values: new object[] { "1", 0, "b48bae85-e5c8-4c60-a2f1-513fd8c34a81", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(114), "1", "test@gmail.com", false, false, null, "test", null, null, 1, "asd", null, false, null, null, "c169e54f-9713-421b-9dc4-91d27d9fa6f5", 1, "1", "test", false, null, "1", 2 });
+
+            migrationBuilder.InsertData(
+                table: "GeneralAssemblies",
+                columns: new[] { "Id", "CreatedAt", "EndDate", "PıctureUrl", "StartDate", "Status", "UpdatedAt", "UserId" },
+                values: new object[] { 1, new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(689), new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(690), "pictureUrl", new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(690), 0, null, "1" });
+
+            migrationBuilder.InsertData(
+                table: "GeneralAssemblyTeams",
+                columns: new[] { "Id", "CreatedAt", "GeneralAssemblyId", "TeamId", "UpdatedAt" },
+                values: new object[] { 1, new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(782), 1, 1, null });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AppUserGeneralAssemblyApply_UsersId",
@@ -767,9 +850,9 @@ namespace KouArge.Repository.Migrations
                 column: "SocialMediaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_SocialMedias_SponsorsAndPartnersId",
+                name: "IX_SocialMedias_generalAssemblyId",
                 table: "SocialMedias",
-                column: "SponsorsAndPartnersId");
+                column: "generalAssemblyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Teams_GeneralAssemblyApplyId",
@@ -823,6 +906,9 @@ namespace KouArge.Repository.Migrations
                 name: "SocaialMediaTypes");
 
             migrationBuilder.DropTable(
+                name: "SponsorsAndPartners");
+
+            migrationBuilder.DropTable(
                 name: "TeamTeamMember");
 
             migrationBuilder.DropTable(
@@ -836,9 +922,6 @@ namespace KouArge.Repository.Migrations
 
             migrationBuilder.DropTable(
                 name: "Teams");
-
-            migrationBuilder.DropTable(
-                name: "SponsorsAndPartners");
 
             migrationBuilder.DropTable(
                 name: "GeneralAssemblies");

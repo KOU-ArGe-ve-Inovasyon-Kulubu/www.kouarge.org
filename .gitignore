@@ -1046,3 +1046,5 @@ FodyWeavers.xsd
 *.sln.iml
 
 # End of https://mrkandreev.name/snippets/gitignore-generator/#Csharp,ASPNETCore,VisualStudio
+www.kouarge.org/appsettings.json
+KouArge.API/appsettings.json

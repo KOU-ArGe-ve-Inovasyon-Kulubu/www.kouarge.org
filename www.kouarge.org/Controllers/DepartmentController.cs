@@ -1,5 +1,6 @@
 ﻿using KouArge.Core.DTOs;
 using KouArge.Core.Models;
+using KouArge.Core.Services.ApiService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using www.kouarge.org.ApiServices;
@@ -11,19 +12,16 @@ namespace www.kouarge.org.Controllers
     //[TypeFilter(typeof(UnAuthorizedFilter))]
     public class DepartmentController : Controller
     {
-        private readonly DepartmentApiService _departmentApiService;
-        private readonly FacultyApiService _faultyApiService;
-        private readonly IHttpContextAccessor _httpContextAccessor;
-        public DepartmentController(DepartmentApiService departmentApiService, FacultyApiService faultyApiService, IHttpContextAccessor httpContextAccessor)
+        private readonly IDepartmentApiService _departmentApiService;
+        private readonly IFacultyApiService _faultyApiService;
+        public DepartmentController(IDepartmentApiService departmentApiService, IFacultyApiService faultyApiService)
         {
             _departmentApiService = departmentApiService;
             _faultyApiService = faultyApiService;
-            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<IActionResult> Index()
         {
-            //string token = _httpContextAccessor.HttpContext.Request.Cookies["X-Access-Token"];
             var x = await _departmentApiService.GetDepartmentWithFacultyAsync();
             if (x.Data == null)
                 return RedirectToAction("Error", "Department");

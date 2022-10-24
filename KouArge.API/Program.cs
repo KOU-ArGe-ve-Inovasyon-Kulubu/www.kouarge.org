@@ -46,7 +46,7 @@ if (app.Environment.IsDevelopment())
 }
 
 
-app.UseAuthenticationExtention();
+//app.UseAuthenticationExtention();
 app.UseHttpsRedirection();
 app.UseCustomException();
 app.UseAuthentication();

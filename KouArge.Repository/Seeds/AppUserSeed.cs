@@ -27,6 +27,7 @@ namespace KouArge.Repository.Seeds
                 PasswordHash = "asd",
                 Surname = "test",
                 CreatedAt = DateTime.Now,
+                NotificationId=1,
                 Year=2
                 
             });

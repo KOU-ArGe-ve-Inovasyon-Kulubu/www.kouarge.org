@@ -189,6 +189,30 @@ namespace KouArge.Repository.Migrations
                         .IsUnique();
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "b48bae85-e5c8-4c60-a2f1-513fd8c34a81",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(114),
+                            DepartmentId = "1",
+                            Email = "test@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            Name = "test",
+                            NotificationId = 1,
+                            PasswordHash = "asd",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "c169e54f-9713-421b-9dc4-91d27d9fa6f5",
+                            Status = 1,
+                            StudentNo = "1",
+                            Surname = "test",
+                            TwoFactorEnabled = false,
+                            UserName = "1",
+                            Year = 2
+                        });
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.Department", b =>
@@ -215,6 +239,15 @@ namespace KouArge.Repository.Migrations
                     b.HasIndex("FacultyId");
 
                     b.ToTable("Departments");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(303),
+                            FacultyId = 1,
+                            Name = "Bil Sis. Müh."
+                        });
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.Event", b =>
@@ -356,6 +389,295 @@ namespace KouArge.Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Faculties");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(403),
+                            Name = "Ali Rıza Veziroğlu Meslek Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(405),
+                            Name = "Asım Kocabıyık Meslek Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(406),
+                            Name = "Değirmendere Ali ÖZBAY Meslek Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(407),
+                            Name = "Teknoloji"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(408),
+                            Name = "Denizcilik Fakültesi"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(409),
+                            Name = "Diş Hekimliği Fakültesi"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(410),
+                            Name = "Diş Hekimliği Fakültesi"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(411),
+                            Name = "Eğitim Fakültesi"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(412),
+                            Name = "Fen - Edebiyat Fakültesi"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(413),
+                            Name = "Ford Otosan İhsaniye Otomotiv Meslek Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(414),
+                            Name = "Gazanfer Bilge Meslek Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(415),
+                            Name = "Gıda ve Tarım Meslek Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(416),
+                            Name = "Gölcük Meslek Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(416),
+                            Name = "Güzel Sanatlar Fakültesi"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(418),
+                            Name = "Havacılık ve Uzay Bilimleri Fakültesi"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(418),
+                            Name = "Hereke Asım Kocabıyık Meslek Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(419),
+                            Name = "Hereke Meslek Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(420),
+                            Name = "Hereke Ömer İsmet Uzunyol Meslek Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(421),
+                            Name = "Hukuk Fakültesi"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(422),
+                            Name = "İktisadi ve İdari Bilimler Fakültesi"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(473),
+                            Name = "İlahiyat Fakültesi"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(474),
+                            Name = "İletişim Fakültesi"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(475),
+                            Name = "İzmit Meslek Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(476),
+                            Name = "Kandıra Meslek Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(477),
+                            Name = "Karamürsel Meslek Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(478),
+                            Name = "Kartepe Atçılık Meslek Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(479),
+                            Name = "Kartepe Turizm Meslek Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(480),
+                            Name = "Kocaeli Meslek Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(481),
+                            Name = "Kocaeli Sağlık Hizmetleri Meslek Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 30,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(482),
+                            Name = "Koseköy Meslek Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 31,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(483),
+                            Name = "Mimarlık ve Tasarım Fakültesi"
+                        },
+                        new
+                        {
+                            Id = 32,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(483),
+                            Name = "Mühendislik Fakültesi"
+                        },
+                        new
+                        {
+                            Id = 33,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(484),
+                            Name = "Sağlık Bilimleri Fakültesi"
+                        },
+                        new
+                        {
+                            Id = 34,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(485),
+                            Name = "Spor Bilimleri Fakültesi"
+                        },
+                        new
+                        {
+                            Id = 35,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(486),
+                            Name = "Teknoloji Fakültesi"
+                        },
+                        new
+                        {
+                            Id = 36,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(487),
+                            Name = "Tıp Fakültesi"
+                        },
+                        new
+                        {
+                            Id = 37,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(488),
+                            Name = "Turizm Fakültesi"
+                        },
+                        new
+                        {
+                            Id = 38,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(489),
+                            Name = "Turizm İşletmecliliği ve Otelcilik Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 39,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(490),
+                            Name = "Uzunçiftlik Nuh Çimento Meslek Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 40,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(491),
+                            Name = "Yahya Kaptan Meslek Yüksekokulu"
+                        },
+                        new
+                        {
+                            Id = 41,
+                            Campus = "Kocaeli",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(492),
+                            Name = "Ziraat Fakültesi"
+                        });
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.GeneralAssembly", b =>
@@ -394,6 +716,18 @@ namespace KouArge.Repository.Migrations
                         .IsUnique();
 
                     b.ToTable("GeneralAssemblies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(689),
+                            EndDate = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(690),
+                            PıctureUrl = "pictureUrl",
+                            StartDate = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(690),
+                            Status = 0,
+                            UserId = "1"
+                        });
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.GeneralAssemblyApply", b =>
@@ -444,6 +778,20 @@ namespace KouArge.Repository.Migrations
                     b.HasIndex("EventParticipantId");
 
                     b.ToTable("GeneralAssemblyApplies");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ApplyTime = "ApplyTime",
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(600),
+                            Introducing = "Introducing",
+                            SituationDescription = "SituationDescription",
+                            Staus = 200,
+                            TeamId = 1,
+                            UserId = "1",
+                            Why = "why"
+                        });
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.GeneralAssemblyTeam", b =>
@@ -473,6 +821,15 @@ namespace KouArge.Repository.Migrations
                     b.HasIndex("TeamId");
 
                     b.ToTable("GeneralAssemblyTeams");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(782),
+                            GeneralAssemblyId = 1,
+                            TeamId = 1
+                        });
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.Notification", b =>
@@ -503,28 +860,28 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 10, 10, 16, 53, 24, 309, DateTimeKind.Local).AddTicks(7904),
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(881),
                             Email = 1,
                             Sms = 1
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2022, 10, 10, 16, 53, 24, 309, DateTimeKind.Local).AddTicks(7911),
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(882),
                             Email = 1,
                             Sms = 0
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2022, 10, 10, 16, 53, 24, 309, DateTimeKind.Local).AddTicks(7912),
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(883),
                             Email = 0,
                             Sms = 1
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2022, 10, 10, 16, 53, 24, 309, DateTimeKind.Local).AddTicks(7913),
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(884),
                             Email = 0,
                             Sms = 0
                         });
@@ -644,14 +1001,8 @@ namespace KouArge.Repository.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("Fk")
-                        .HasColumnType("int");
-
                     b.Property<string>("Link")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("SponsorsAndPartnersId")
-                        .HasColumnType("int");
 
                     b.Property<int>("TypeId")
                         .HasColumnType("int");
@@ -659,9 +1010,12 @@ namespace KouArge.Repository.Migrations
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("generalAssemblyId")
+                        .HasColumnType("int");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("SponsorsAndPartnersId");
+                    b.HasIndex("generalAssemblyId");
 
                     b.ToTable("SocialMedias");
                 });
@@ -774,6 +1128,16 @@ namespace KouArge.Repository.Migrations
                     b.HasIndex("GeneralAssemblyId");
 
                     b.ToTable("Teams");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(1206),
+                            Description = "Webino Takımı",
+                            LogoUrl = "logoUrl",
+                            Name = "Webino"
+                        });
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.TeamMember", b =>
@@ -809,6 +1173,18 @@ namespace KouArge.Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("TeamMembers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(985),
+                            EndDate = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(987),
+                            GeneralAssemblyId = 1,
+                            StartDate = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(986),
+                            TeamId = 1,
+                            Title = "titleTeamMember"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1076,9 +1452,13 @@ namespace KouArge.Repository.Migrations
 
             modelBuilder.Entity("KouArge.Core.Models.SocialMedia", b =>
                 {
-                    b.HasOne("KouArge.Core.Models.SponsorsAndPartners", null)
+                    b.HasOne("KouArge.Core.Models.GeneralAssembly", "GeneralAssembly")
                         .WithMany("SocialMedias")
-                        .HasForeignKey("SponsorsAndPartnersId");
+                        .HasForeignKey("generalAssemblyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("GeneralAssembly");
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.SocialMediaType", b =>
@@ -1201,6 +1581,8 @@ namespace KouArge.Repository.Migrations
 
             modelBuilder.Entity("KouArge.Core.Models.GeneralAssembly", b =>
                 {
+                    b.Navigation("SocialMedias");
+
                     b.Navigation("Teams");
                 });
 
@@ -1228,11 +1610,6 @@ namespace KouArge.Repository.Migrations
             modelBuilder.Entity("KouArge.Core.Models.SocialMedia", b =>
                 {
                     b.Navigation("SocaialMediaType");
-                });
-
-            modelBuilder.Entity("KouArge.Core.Models.SponsorsAndPartners", b =>
-                {
-                    b.Navigation("SocialMedias");
                 });
 #pragma warning restore 612, 618
         }

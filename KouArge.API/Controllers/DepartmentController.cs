@@ -17,7 +17,7 @@ namespace KouArge.API.Controllers
 {
     //[TypeFilter(typeof(CustomAuthorizationFilter))]
     //[Authorize(AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme )]
-    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
+     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class DepartmentController : CustomBaseController
     {
         private readonly IMapper _mapper;

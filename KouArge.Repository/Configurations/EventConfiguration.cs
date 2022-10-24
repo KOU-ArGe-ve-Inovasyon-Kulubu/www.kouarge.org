@@ -14,7 +14,7 @@ namespace KouArge.Repository.Configurations
         public void Configure(EntityTypeBuilder<Event> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Name).IsRequired();
+            builder.Property(x => x.Title).IsRequired();
             builder.Property(x => x.Description).IsRequired();
             builder.Property(x=>x.Speaker).IsRequired().HasMaxLength(100);
             builder.Property(x=>x.EventDate).IsRequired();

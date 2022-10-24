@@ -1,14 +1,15 @@
 ﻿using KouArge.Core.DTOs;
+using KouArge.Core.Services.ApiService;
 using KouArge.Service.Exceptions;
 using System.Net;
 
 namespace www.kouarge.org.ApiServices
 {
-    public class FacultyApiService
+    public class FacultyApiService: IFacultyApiService
     {
-        private readonly RequestApiService _request;
+        private readonly IRequestApiService _request;
 
-        public FacultyApiService(RequestApiService requestApiService)
+        public FacultyApiService(IRequestApiService requestApiService)
         {
             _request = requestApiService;
         }
@@ -41,7 +42,9 @@ namespace www.kouarge.org.ApiServices
 
         public async Task<FacultyDto> GetByIdAsync(int id)
         {
-            var response = await _request.PostAsync<CustomResponseDto<FacultyDto>> ($"faculty/{id}");
+            //var response = await _request.PostAsync<CustomResponseDto<FacultyDto>> ($"faculty/{id}");
+            var response = await _request.GetAsync<CustomResponseDto<FacultyDto>>($"faculty/{id}");
+
             return response.Data;
         }
 

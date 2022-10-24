@@ -4,6 +4,7 @@ using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using FluentValidation.AspNetCore;
 using KouArge.Core.Services;
+using KouArge.Core.Services.ApiService;
 using KouArge.Core.UnitOfWorks;
 using KouArge.Repository;
 using KouArge.Repository.UnitOfWork;
@@ -64,12 +65,15 @@ builder.Services.AddAutoMapper(typeof(MapProfile));
 //    opt.BaseAddress = new Uri(builder.Configuration["BaseUrl"]);
 //}).AddHttpMessageHandler<TokenService>();
 
+builder.Services.AddHttpContextAccessor();
+
 
 builder.Services.AddScoped(sp =>
 {
     var clientFac = sp.GetRequiredService<IHttpClientFactory>();
     return clientFac.CreateClient("WebApiClient");
 });
+
 
 builder.Services.AddHttpClient("WebApiClient", opt =>
 {

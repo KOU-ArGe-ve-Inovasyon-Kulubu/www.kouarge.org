@@ -1,7 +1,5 @@
 ﻿using Autofac;
-using AutoMapper;
 using KouArge.Core.Services;
-using KouArge.Core.Tokens;
 using KouArge.Core.UnitOfWorks;
 using KouArge.Repository.UnitOfWork;
 using KouArge.Service.Services;
@@ -19,8 +17,15 @@ namespace www.kouarge.org.Modules
             builder.RegisterType<RedirectService>().As<IRedirectService>();
             //***
 
+            //builder.RegisterType<TokenHandler>().As<ITokenHandler>();
+
+
             var webAssembly = Assembly.GetExecutingAssembly();
-            builder.RegisterAssemblyTypes(webAssembly).Where(x => x.Name.EndsWith("ApiService"));
+            //builder.RegisterAssemblyTypes(webAssembly).Where(x => x.Name.EndsWith("ApiService"));
+
+
+            builder.RegisterAssemblyTypes(webAssembly).Where(x => x.Name.EndsWith("ApiService"))
+            .AsImplementedInterfaces().InstancePerLifetimeScope();
         }
     }
 }

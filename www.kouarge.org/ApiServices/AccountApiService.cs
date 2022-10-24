@@ -1,11 +1,13 @@
 ﻿using KouArge.Core.DTOs;
+using KouArge.Core.Services.ApiService;
 using KouArge.Service.Exceptions;
 
 namespace www.kouarge.org.ApiServices
 {
-    public class AccountApiService
+    public class AccountApiService: IAccountApiService
     {
         private readonly HttpClient _httpClient;
+
         public AccountApiService(HttpClient httpClient)
         {
             _httpClient = httpClient;
@@ -48,6 +50,7 @@ namespace www.kouarge.org.ApiServices
             {
                 return new AppUserDto() { Errors = responseBody.Errors, ErrorStatus = responseBody.ErrorStatus };
             }
+          
             return responseBody.Data;
         }
     }

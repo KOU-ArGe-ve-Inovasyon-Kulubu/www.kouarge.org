@@ -66,6 +66,15 @@ namespace KouArge.Service.Services.Tokens
             //using RandomNumberGenerator rnd = RandomNumberGenerator.Create();
             //rnd.GetBytes(number);
             //return Convert.ToBase64String(number);
+
+            //var randomNumber = new byte[32];
+            //using (var generator = new RNGCryptoServiceProvider())
+            //{
+            //    generator.GetBytes(randomNumber);
+            //    string token = Convert.ToBase64String(randomNumber);
+            //    return token;
+            //}
+
         }
     }
 }

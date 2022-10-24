@@ -1,14 +1,14 @@
 ﻿using KouArge.Core.DTOs;
+using KouArge.Core.Services.ApiService;
 using KouArge.Service.Exceptions;
 using Newtonsoft.Json;
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace www.kouarge.org.ApiServices
 {
-    public class RequestApiService
+    public class RequestApiService: IRequestApiService
     {
         private readonly HttpClient _httpClient;
         public RequestApiService(HttpClient httpClient)

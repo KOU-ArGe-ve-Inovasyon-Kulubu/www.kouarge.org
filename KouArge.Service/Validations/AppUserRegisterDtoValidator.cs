@@ -33,7 +33,7 @@ namespace KouArge.Service.Validations
 
             RuleFor(x => x.KVKK).Equal(true).WithMessage("Lütfen fakültenizi seçiniz.");
 
-            RuleFor(x => x.DepartmentId).InclusiveBetween(1, int.MaxValue).WithMessage("Lütfen bölümünüzü seçiniz.")
+            RuleFor(x => x.DepartmentId).NotEmpty().WithMessage("Lütfen bölümünüzü seçiniz.")
                 .NotNull().WithMessage("Lütfen bölümünüzü seçiniz.");
 
             RuleFor(x => x.Year).InclusiveBetween(0, 7).WithMessage("Lütfen sınıfınızı seçiniz.")

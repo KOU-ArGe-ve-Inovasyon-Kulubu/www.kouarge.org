@@ -2,10 +2,10 @@
 {
     public class Event : BaseEntity
     {
-        public int FormatId { get; set; }
+        public int FormatId { get; set; }//???
         public int SemesterId { get; set; }
         public int OurFormatId { get; set; }
-        public string Name { get; set; }
+        public string Title { get; set; }
         public string Description { get; set; }
         public string Speaker { get; set; }
         public DateTime EventDate { get; set; }
