@@ -1,8 +1,40 @@
-﻿
+﻿@model EventPictureDto
 @{
     ViewData["Title"] = "Index";
 }
 
 <h2>Admin Index</h2>
+
+
+<form asp-action="SendData" method="post" enctype="multipart/form-data">
+    <h2>Giriş yap</h2>
+    <hr />
+ 
+	<div class="form-group">
+		<label asp-for="EventId"></label>
+		<input asp-for="EventId" class="form-control" autocomplete="on" aria-required="true" />
+		<span asp-validation-for="EventId" class="text-danger"></span>
+	</div>
+
+		<div class="form-control">
+		<label asp-for="ImgUrl"></label>
+		<input asp-for="ImgUrl" class="form-control"/>
+		<span asp-validation-for="ImgUrl" class="text-danger"></span>
+	</div>
+
+
+		<div class="form-control">
+		<input name="files"  type="file" accept="image/png,image/jpeg,image/jpg" class="form-control"/>
+		<input name="files" multiple="multiple" type="file" accept="image/png,image/jpeg,image/jpg" class="form-control"/>
+
+	</div>
+
+	<br />
+
+	<div>
+		<button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Test</button>
+	</div>
+</form>
+
 
 Admin

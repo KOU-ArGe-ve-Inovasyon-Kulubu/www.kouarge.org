@@ -35,7 +35,7 @@ namespace KouArge.API.Filters
                 return;
             }
 
-            context.Result = new NotFoundObjectResult(CustomResponseDto<NoContentDto>.Fail(404, $"{typeof(T).Name}({id}) not found"));
+            context.Result = new NotFoundObjectResult(CustomResponseDto<NoContentDto>.Fail(404, new ErrorViewModel() { ErrorCode = "NotFound", ErrorMessage = $"{typeof(T).Name}({id}) not found" }));
 
         }
     }

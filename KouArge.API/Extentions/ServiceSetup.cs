@@ -6,6 +6,7 @@ using KouArge.Service.Mapping;
 using KouArge.Service.Validations;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.OpenApi.Models;
+using System.Text.Json.Serialization;
 
 namespace KouArge.API.Modules
 {
@@ -14,16 +15,25 @@ namespace KouArge.API.Modules
         public static IServiceCollection RegisterService(this IServiceCollection services)
         {
 
-            services.AddControllers(options => options.Filters.Add(new ValidateFilterAttribute()))
-            .AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<DepartmentDtoValidator>());
+            services.AddControllers(options =>
+            {
+                options.Filters.Add(new ValidateFilterAttribute());
+                options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+            }).AddFluentValidation(x => x.RegisterValidatorsFromAssemblyContaining<DepartmentDtoValidator>());
+
+            services.AddControllers().AddJsonOptions(options =>
+            {
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+                options.JsonSerializerOptions.WriteIndented = true;
+            });
 
             //services.AddControllers(options => options.Filters.Add(new UnAuthorizedHandlerFilter()));
 
 
-            services.AddControllers(options =>
-            {
-                options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
-            });
+            //services.AddControllers(options =>
+            //{
+            //    options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
+            //});
 
             services.AddAutoMapper(typeof(MapProfile));
 
@@ -62,6 +72,8 @@ namespace KouArge.API.Modules
                     BearerFormat = "JWT",
                     Scheme = "bearer"
                 });
+                //opt.OperationFilter<FileUploadFilter>();
+
                 opt.AddSecurityRequirement(new OpenApiSecurityRequirement
                  {{
                         new OpenApiSecurityScheme

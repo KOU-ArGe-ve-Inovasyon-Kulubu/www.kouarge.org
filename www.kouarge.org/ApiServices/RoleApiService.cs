@@ -1,11 +1,10 @@
 ﻿using KouArge.Core.DTOs;
 using KouArge.Core.Models;
 using KouArge.Core.Services.ApiService;
-using System.Text.Json;
 
 namespace www.kouarge.org.ApiServices
 {
-    public class RoleApiService: IRoleApiService
+    public class RoleApiService : IRoleApiService
     {
         private readonly IRequestApiService _request;
 

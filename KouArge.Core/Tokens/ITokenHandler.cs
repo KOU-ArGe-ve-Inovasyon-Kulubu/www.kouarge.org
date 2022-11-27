@@ -1,15 +1,12 @@
 ﻿using KouArge.Core.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Security.Claims;
 
 namespace KouArge.Core.Tokens
 {
     public interface ITokenHandler
     {
-        Token CreateAccessToken(int minute,List<string> roles,string userId);
+        Token CreateAccessToken(int minute, List<string> roles, string userId);
         string CreateRefreshToken();
+        List<Claim> DecodeToken(string token);
     }
 }

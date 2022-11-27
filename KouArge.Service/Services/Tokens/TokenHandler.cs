@@ -5,7 +5,6 @@ using Microsoft.IdentityModel.Tokens;
 using System.Collections.Concurrent;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace KouArge.Service.Services.Tokens
@@ -13,6 +12,7 @@ namespace KouArge.Service.Services.Tokens
     public class TokenHandler : ITokenHandler
     {
         readonly IConfiguration _configruation;
+        private SymmetricSecurityKey _securityKey;
 
         public TokenHandler(IConfiguration configruation)
         {
@@ -24,13 +24,13 @@ namespace KouArge.Service.Services.Tokens
             Token token = new();
 
             //Security key in simetrik değerinin alıyoruz
-            SymmetricSecurityKey securityKey = new(Encoding.UTF8.GetBytes(_configruation["Token:SecurityKey"]));
+            _securityKey = new(Encoding.UTF8.GetBytes(_configruation["Token:SecurityKey"]));
 
             //Sifrelemenmis kimligi oluşturuyoruz.
-            SigningCredentials signingCredentials = new(securityKey, SecurityAlgorithms.HmacSha256);
+            SigningCredentials signingCredentials = new(_securityKey, SecurityAlgorithms.HmacSha256);
 
             //oluşturulacak token ayarlarını veriyoruz
-            token.Expiration = DateTime.UtcNow.AddSeconds(minute);
+            token.Expiration = DateTime.UtcNow.AddMinutes(minute);
 
             //claims
             var claims = new List<Claim>();
@@ -38,7 +38,7 @@ namespace KouArge.Service.Services.Tokens
                 foreach (var item in roles)
                     claims.Add(new Claim(ClaimTypes.Role, item));
 
-            claims.Add(new Claim("userId", userId));
+            claims.Add(new Claim("UserId", userId));
 
             JwtSecurityToken securityToken = new(
                 audience: _configruation["Token:Audience"],
@@ -75,6 +75,23 @@ namespace KouArge.Service.Services.Tokens
             //    return token;
             //}
 
+        }
+
+        public List<Claim> DecodeToken(string token)
+        {
+            _securityKey = new(Encoding.UTF8.GetBytes(_configruation["Token:SecurityKey"]));
+            var handler = new JwtSecurityTokenHandler().ValidateToken(token, new TokenValidationParameters()
+            {
+                IssuerSigningKey = _securityKey,
+                ValidIssuer = _configruation["Token:Issuer"],
+                ValidateIssuer = true,
+                ValidAudience = _configruation["Token:Audience"],
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ClockSkew = TimeSpan.Zero,
+            }, out SecurityToken sToken);
+
+            return handler.Claims.ToList();
         }
     }
 }

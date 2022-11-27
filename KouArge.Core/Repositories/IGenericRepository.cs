@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
 namespace KouArge.Core.Repositories
 {
@@ -17,7 +12,12 @@ namespace KouArge.Core.Repositories
         Task AddRangeAsync(IEnumerable<T> entities);
         void Update(T entity);
         void Remove(T entity);
-        void RemoveRange(IEnumerable<T> entities);  
+        IQueryable<T> GetAllInclude(params Expression<Func<T, object>>[] includes);
+        IQueryable<T> GetAllPredicate(Expression<Func<T, bool>> predicate);
+        Task<T> GetByIdPredicateAsync(Expression<Func<T, bool>> predicate);
+        IQueryable<T> GetAllIncludeFindBy(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes);
+        void RemoveRange(IEnumerable<T> entities);
+        void SoftRemove(T entity);
 
     }
 }

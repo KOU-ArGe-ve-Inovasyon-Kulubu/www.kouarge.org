@@ -1,10 +1,5 @@
 ﻿using KouArge.Core.DTOs;
 using KouArge.Core.Services.ApiService;
-using KouArge.Service.Exceptions;
-using Microsoft.AspNetCore.Authorization;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 
 namespace www.kouarge.org.ApiServices
 {
@@ -42,7 +37,7 @@ namespace www.kouarge.org.ApiServices
             return response;
         }
 
-        public async Task<bool> DeleteAsync(int id)
+        public async Task<bool> DeleteAsync(string id)
         {
             var response = await _request.DeleteAsync($"department/{id}");
             return response;

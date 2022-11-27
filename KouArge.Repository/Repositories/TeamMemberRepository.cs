@@ -1,11 +1,6 @@
 ﻿using KouArge.Core.Models;
 using KouArge.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KouArge.Repository.Repositories
 {
@@ -15,5 +10,14 @@ namespace KouArge.Repository.Repositories
         {
         }
 
+        public async Task<TeamMember> GetByUserId(string userId, int teamMemberId)
+        {
+            return await _context.TeamMembers.FirstOrDefaultAsync(x => x.Id == teamMemberId && x.AppUserId == userId);
+        }
+
+        public async Task<TeamMember> GetByGeneralAssemblyApplyId(string userId, int generalAssemblyApplyId)
+        {
+            return await _context.TeamMembers.FirstOrDefaultAsync(x => x.GeneralAssemblyApplyId == generalAssemblyApplyId && x.AppUserId == userId);
+        }
     }
 }

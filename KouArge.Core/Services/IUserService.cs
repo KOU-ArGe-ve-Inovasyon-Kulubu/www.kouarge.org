@@ -1,20 +1,17 @@
 ﻿using KouArge.Core.DTOs;
-using KouArge.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using KouArge.Core.DTOs.UpdateDto;
 
 namespace KouArge.Core.Services
 {
     public interface IUserService
     {
-        public Task<CustomResponseDto<AppUserDto>> Login(AppUserLoginDto appuser);
-        public Task<CustomResponseDto<AppUserDto>> Register(AppUserRegisterDto appuser);
-
-        public Task<CustomResponseDto<AppUserDto>> RefreshTokenLogin(GetRefreshTokenDto refreshToken);
-        public Task UpdateRefreshToken(Token refreshToken, AppUser user,int addRefreshTokenLifeTime);
+        Task<CustomResponseDto<NoContentDto>> UpdateUser(AppUserUpdateDto user);
+        Task<CustomResponseDto<AppUserDto>> GetUserDataAsync(string token);//TODO : datalar
+        Task<CustomResponseDto<IEnumerable<EventDto>>> GetUserEventAttended(string token);//TODO: yeni Dto yap.
+        Task<CustomResponseDto<IEnumerable<AppUserWithApplyDto>>> GetUserGeneralAssamblyApply(string token);
+        Task<CustomResponseDto<IEnumerable<AppUserWithTeamDto>>> GetUserTeam(string token);
+        Task<CustomResponseDto<IEnumerable<SocialMediaDto>>> GetUserSocialMedias(string token);
+        Task<CustomResponseDto<IEnumerable<AppUserWithCertificas>>> GetUserCertificas(string token);
 
     }
 }

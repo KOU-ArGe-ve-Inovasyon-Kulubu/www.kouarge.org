@@ -1,10 +1,5 @@
 ﻿using FluentValidation;
 using KouArge.Core.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KouArge.Service.Validations
 {
@@ -19,7 +14,7 @@ namespace KouArge.Service.Validations
             RuleFor(x => x.Password).NotNull().WithMessage("Lütfen şifrenizi giriniz.").MinimumLength(8).WithMessage("Şifreniz en az 8 karakter olmalıdır.")
           .Matches("[A-Z]").WithMessage("Lütfen şifrenizi giriniz.")
           .Matches("[a-z]").WithMessage("Lütfen şifrenizi giriniz.")
-          .Matches("[0-9]").WithMessage("Lütfen şifrenizi giriniz..")
+          .Matches("[0-9]").WithMessage("Lütfen şifrenizi giriniz.")
           .Matches("[^a-zA-Z0-9]").WithMessage("Lütfen şifrenizi giriniz.");
         }
     }

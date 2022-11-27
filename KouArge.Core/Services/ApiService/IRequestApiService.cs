@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KouArge.Core.Services.ApiService
+﻿namespace KouArge.Core.Services.ApiService
 {
     public interface IRequestApiService
     {

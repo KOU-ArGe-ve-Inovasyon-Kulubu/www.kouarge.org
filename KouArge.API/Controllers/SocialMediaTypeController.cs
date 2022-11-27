@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using KouArge.Core.DTOs;
+using KouArge.Core.DTOs.UpdateDto;
 using KouArge.Core.Models;
 using KouArge.Core.Services;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KouArge.API.Controllers
@@ -37,6 +39,9 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<SocialMediaTypeDto>.Success(200, socialMediaTypeDto));
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,TeamMember,TeamManager,Admin,SuperAdmin")]
+
+
         [HttpPost]
         public async Task<IActionResult> Save(SocialMediaTypeDto socialMediaTypeDto)
         {
@@ -45,12 +50,18 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<SocialMediaTypeDto>.Success(201, socialMediaTypeDtos));
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,TeamManager,Admin,SuperAdmin")]
+
+
         [HttpPut]
-        public async Task<IActionResult> UpdateAsync(SocialMediaTypeDto socialMediaTypeDto)
+        public async Task<IActionResult> UpdateAsync(SocialMediaTypeUpdateDto socialMediaTypeDto)
         {
             await _socialMediaTypeService.UpdateAsync(_mapper.Map<SocialMediaType>(socialMediaTypeDto));
-            return CreateActionResult(CustomResponseDto<SocialMediaType>.Success(204));
+            return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,TeamManager,Admin,SuperAdmin")]
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
@@ -58,7 +69,19 @@ namespace KouArge.API.Controllers
             var socialMediaType = await _socialMediaTypeService.GetByIdAsync(id);
             //hata dondur
             await _socialMediaTypeService.RemoveAsync(socialMediaType);
-            return CreateActionResult(CustomResponseDto<SocialMediaType>.Success(204));
+            return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,TeamManager,Admin,SuperAdmin")]
+
+        [HttpPost("[Action]")]
+        public async Task<IActionResult> SoftDeleteAsync(int id)
+        {
+            var socialMediaType = await _socialMediaTypeService.GetByIdAsync(id);
+            //hata dondur
+            socialMediaType.IsActive = false;
+            await _socialMediaTypeService.SoftRemove(socialMediaType);
+            return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
     }
 }

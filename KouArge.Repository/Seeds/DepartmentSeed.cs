@@ -1,11 +1,6 @@
 ﻿using KouArge.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KouArge.Repository.Seeds
 {
@@ -19,6 +14,7 @@ namespace KouArge.Repository.Seeds
                 Name = "Bil Sis. Müh.",
                 FacultyId = 1,
                 CreatedAt = DateTime.Now,
+                IsActive = true,
             });
         }
     }

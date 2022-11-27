@@ -1,10 +1,6 @@
 ﻿using KouArge.Core.Models;
 using KouArge.Core.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace KouArge.Repository.Repositories
 {
@@ -13,5 +9,13 @@ namespace KouArge.Repository.Repositories
         public EventParticipantRepository(AppIdentityDbContext context) : base(context)
         {
         }
+
+        public async Task<bool> DuplicateData(int eventId, string userId)
+        {
+            return await _context.EventParticipants.AnyAsync(x => x.EventId == eventId && x.AppUserId == userId);
+
+            //return await _context.EventParticipants.SingleOrDefaultAsync(x => x.EventId == eventId && x.AppUserId == userId);
+        }
+
     }
 }

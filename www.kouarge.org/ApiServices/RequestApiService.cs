@@ -1,14 +1,10 @@
-﻿using KouArge.Core.DTOs;
-using KouArge.Core.Services.ApiService;
+﻿using KouArge.Core.Services.ApiService;
 using KouArge.Service.Exceptions;
-using Newtonsoft.Json;
 using System.Net;
-using System.Net.Http;
-using System.Text;
 
 namespace www.kouarge.org.ApiServices
 {
-    public class RequestApiService: IRequestApiService
+    public class RequestApiService : IRequestApiService
     {
         private readonly HttpClient _httpClient;
         public RequestApiService(HttpClient httpClient)
@@ -78,7 +74,7 @@ namespace www.kouarge.org.ApiServices
             if (response.StatusCode == HttpStatusCode.NotFound)
                 throw new NotFoundException("404");
 
-            if (response.IsSuccessStatusCode || response.StatusCode==HttpStatusCode.BadRequest)
+            if (response.IsSuccessStatusCode || response.StatusCode == HttpStatusCode.BadRequest)
             {
                 var responseBody = await response.Content.ReadFromJsonAsync<T>();
                 return responseBody;
@@ -139,7 +135,7 @@ namespace www.kouarge.org.ApiServices
         {
             var response = await _httpClient.DeleteAsync(path);
 
-             if (response.StatusCode == HttpStatusCode.Unauthorized)
+            if (response.StatusCode == HttpStatusCode.Unauthorized)
                 throw new UnAuthorizedException("401");
 
             if (response.StatusCode == HttpStatusCode.Forbidden)

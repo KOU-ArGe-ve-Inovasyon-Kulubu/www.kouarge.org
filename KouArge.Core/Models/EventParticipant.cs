@@ -3,12 +3,12 @@
     public class EventParticipant : BaseEntity
     {
         public int EventId { get; set; }
-        public int UserId { get; set; }
-
+        public string AppUserId { get; set; }
         public Event Event { get; set; }
 
         //public IEnumerable<Event> Events { get; set; }
-        public ICollection<GeneralAssemblyApply> GeneralAssemblyApplies { get; set; }
+
+        public AppUser AppUser { get; set; }
 
     }
 }

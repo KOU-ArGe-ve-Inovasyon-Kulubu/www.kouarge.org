@@ -5,11 +5,7 @@ using KouArge.Core.Repositories;
 using KouArge.Core.Services;
 using KouArge.Core.UnitOfWorks;
 using KouArge.Service.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace KouArge.Service.Services
 {
@@ -34,13 +30,10 @@ namespace KouArge.Service.Services
 
         public async Task<CustomResponseDto<IEnumerable<DepartmentWithFacultyDto>>> GetDepartmentWithFacultyAsync()
         {
-            var department = await _departmentRepository.GetDepartmentWithFaculty();
-            var departmentDto = _mapper.Map<IEnumerable<DepartmentWithFacultyDto>>(department.ToList());
+            var department = await _departmentRepository.GetDepartmentWithFaculty().ToListAsync();
+            var departmentDto = _mapper.Map<IEnumerable<DepartmentWithFacultyDto>>(department);
             return CustomResponseDto<IEnumerable<DepartmentWithFacultyDto>>.Success(200, departmentDto);
         }
-
-
-     
 
     }
 }

@@ -1,22 +1,10 @@
 ﻿using Autofac;
-using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
-using AutoMapper;
 using FluentValidation.AspNetCore;
-using KouArge.Core.Services;
-using KouArge.Core.Services.ApiService;
-using KouArge.Core.UnitOfWorks;
-using KouArge.Repository;
-using KouArge.Repository.UnitOfWork;
 using KouArge.Service.Mapping;
-using KouArge.Service.Services;
 using KouArge.Service.Validations;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 using www.kouarge.org.ApiServices;
-using www.kouarge.org.Filters;
+//using www.kouarge.org.Filters;
 using www.kouarge.org.MiddleWares;
 using www.kouarge.org.Modules;
 
@@ -35,14 +23,15 @@ builder.Host.ConfigureContainer<ContainerBuilder>(containerBuilder =>
 });
 
 //*************
-builder.Services.AddDbContext<AppIdentityDbContext>(x =>
-{
-    x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"), option =>
-    {});
-});
+//builder.Services.AddDbContext<AppIdentityDbContext>(x =>
+//{
+//    x.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"), option =>
+//    {});
+//});
 //*************
 
-builder.Services.AddControllers(options => {
+builder.Services.AddControllers(options =>
+{
     //options.Filters.Add<NotFoundFilter<>>();
     options.SuppressImplicitRequiredAttributeForNonNullableReferenceTypes = true;
 });
@@ -55,7 +44,7 @@ builder.Services.AddControllers(options => {
 //    .AddDefaultTokenProviders();
 
 //*****
-builder.Services.AddScoped(typeof(NotFoundFilter<>));
+//builder.Services.AddScoped(typeof(NotFoundFilter<>));
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddAutoMapper(typeof(MapProfile));
 
@@ -135,7 +124,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
- 
+
 app.UseHttpsRedirection();
 app.UseSession();
 app.UseCustomException();

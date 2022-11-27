@@ -1,8 +1,8 @@
-﻿using Autofac;
+﻿using AspNetCoreRateLimit;
+using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using KouArge.API.Extentions;
 using KouArge.API.MiddleWares;
-using KouArge.API.MiddleWares.UseAuthorizeExceptionHandler;
 using KouArge.API.Modules;
 using KouArge.Repository;
 using KouArge.Service.Mapping;
@@ -34,6 +34,21 @@ builder.Services.AddDbContext<AppIdentityDbContext>(x =>
     });
 });
 
+
+//rateLimit
+builder.Services.AddOptions();
+builder.Services.AddMemoryCache();
+builder.Services.Configure<IpRateLimitOptions>(builder.Configuration.GetSection("IpRateLimiting"));
+builder.Services.Configure<IpRateLimitPolicies>(builder.Configuration.GetSection("IpRateLimitPolicies"));
+
+builder.Services.AddInMemoryRateLimiting();
+builder.Services.AddSingleton<IRateLimitConfiguration, RateLimitConfiguration>();
+
+//ratelimit
+
+
+//builder.Services.AddTransient<UserManager<AppUser>>();
+
 builder.Services.AddAutoMapper(typeof(MapProfile));
 builder.RegisterJWT();
 
@@ -47,11 +62,12 @@ if (app.Environment.IsDevelopment())
 
 
 //app.UseAuthenticationExtention();
+app.UseIpRateLimiting();
 app.UseHttpsRedirection();
 app.UseCustomException();
 app.UseAuthentication();
 app.UseAuthorization();
-
+app.UseStaticFiles();
 app.MapControllers();
 
 app.Run();

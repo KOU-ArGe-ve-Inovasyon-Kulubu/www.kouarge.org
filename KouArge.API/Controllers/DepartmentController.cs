@@ -1,23 +1,18 @@
 ﻿using AutoMapper;
-using KouArge.API.Filters;
 using KouArge.Core.DTOs;
 using KouArge.Core.DTOs.UpdateDto;
 using KouArge.Core.Models;
 using KouArge.Core.Services;
-using KouArge.Repository;
-using KouArge.Service.Exceptions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Net.Http.Headers;
 
 namespace KouArge.API.Controllers
 {
     //[TypeFilter(typeof(CustomAuthorizationFilter))]
     //[Authorize(AuthenticationSchemes =JwtBearerDefaults.AuthenticationScheme )]
-     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+
     public class DepartmentController : CustomBaseController
     {
         private readonly IMapper _mapper;
@@ -27,15 +22,17 @@ namespace KouArge.API.Controllers
             _mapper = mapper;
             _departmentService = departmentService;
         }
-         
+
         //api/controller_ismi/action    api/Department/DepartmentWithFaculty
+        [AllowAnonymous]
         [HttpGet("[Action]")]
         public async Task<IActionResult> DepartmentWithFaculty()
         {
             return CreateActionResult(await _departmentService.GetDepartmentWithFacultyAsync());
 
         }
-         
+
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
@@ -43,7 +40,7 @@ namespace KouArge.API.Controllers
             var departmensDto = _mapper.Map<List<DepartmentDto>>(department.ToList());
             return CreateActionResult(CustomResponseDto<List<DepartmentDto>>.Success(200, departmensDto));
         }
-
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(string id)
         {
@@ -53,6 +50,8 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<DepartmentDto>.Success(200, departmenDto));
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin,SuperAdmin")]
+
         [HttpPost]
         public async Task<IActionResult> Save(DepartmentDto departmenDto)
         {
@@ -61,20 +60,34 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<DepartmentDto>.Success(201, departmentDto));
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin,SuperAdmin")]
+
         [HttpPut]
         public async Task<IActionResult> UpdateAsync(DepartmentUpdateDto departmentDto)
         {
             await _departmentService.UpdateAsync(_mapper.Map<Department>(departmentDto));
-            return CreateActionResult(CustomResponseDto<Department>.Success(204));
+            return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin,SuperAdmin")]
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteAsync(int id)
+        public async Task<IActionResult> DeleteAsync(string id)
         {
             var department = await _departmentService.GetByIdAsync(id);
             //hata dondur
             await _departmentService.RemoveAsync(department);
-            return CreateActionResult(CustomResponseDto<Department>.Success(204));
+            return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin,SuperAdmin")]
+        [HttpPost("[Action]")]
+        public async Task<IActionResult> SoftDeleteAsync(string id)
+        {
+            var department = await _departmentService.GetByIdAsync(id);
+            //hata dondur
+            department.IsActive = false;
+            await _departmentService.SoftRemove(department);
+            return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
     }
 }

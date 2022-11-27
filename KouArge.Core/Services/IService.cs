@@ -1,10 +1,4 @@
-﻿using KouArge.Core.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
 namespace KouArge.Core.Services
 {
@@ -12,6 +6,11 @@ namespace KouArge.Core.Services
     {
         Task<T> GetByIdAsync(int id);
         Task<IEnumerable<T>> GetAllAsync();
+        Task<IEnumerable<T>> GetAllInclude(params Expression<Func<T, object>>[] includes);
+        Task<IEnumerable<T>> GetAllIncludeFindBy(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes);
+        Task<IEnumerable<T>> GetAllPredicate(Expression<Func<T, bool>> predicate);
+
+        Task<T> GetByIdPredicateAsync(Expression<Func<T, bool>> predicate);
         IQueryable<T> Where(Expression<Func<T, bool>> expression);
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
         Task<T> AddAsync(T entity);
@@ -19,5 +18,6 @@ namespace KouArge.Core.Services
         Task UpdateAsync(T entity);
         Task RemoveAsync(T entity);
         Task RemoveRangeAsync(IEnumerable<T> entities);
+        Task SoftRemove(T entity);
     }
 }

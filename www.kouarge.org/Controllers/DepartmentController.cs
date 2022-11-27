@@ -1,10 +1,8 @@
 ﻿using KouArge.Core.DTOs;
-using KouArge.Core.Models;
 using KouArge.Core.Services.ApiService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using www.kouarge.org.ApiServices;
-using www.kouarge.org.Filters;
+//using www.kouarge.org.Filters;
 
 namespace www.kouarge.org.Controllers
 {
@@ -87,7 +85,7 @@ namespace www.kouarge.org.Controllers
 
         }
 
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete(string id)
         {
             var success = await _departmentApiService.DeleteAsync(id);
 

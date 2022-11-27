@@ -1,9 +1,4 @@
 ﻿using KouArge.Core.UnitOfWorks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KouArge.Repository.UnitOfWork
 {
@@ -23,7 +18,7 @@ namespace KouArge.Repository.UnitOfWork
 
         public async Task CommitAsync()
         {
-           await _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
         }
     }
 }

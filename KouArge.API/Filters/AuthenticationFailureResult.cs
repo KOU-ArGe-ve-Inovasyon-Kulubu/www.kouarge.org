@@ -64,7 +64,7 @@ public class UnAuthorizedHandlerFilter : IActionFilter
             var routeData = httpContext.GetRouteData();
             var actionContext = new ActionContext(httpContext, routeData, new ActionDescriptor());
 
-            var data = CustomResponseDto<NoContentDto>.Fail(401, "Giriş yapın.", 3);
+            var data = CustomResponseDto<NoContentDto>.Fail(401, new ErrorViewModel() { ErrorMessage = "Giriş yapın." });
 
             var result = new ObjectResult(data) { StatusCode = (int)HttpStatusCode.Unauthorized };
             context.Result = result;

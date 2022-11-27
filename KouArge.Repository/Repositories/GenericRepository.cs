@@ -1,11 +1,6 @@
 ﻿using KouArge.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KouArge.Repository.Repositories
 {
@@ -28,7 +23,7 @@ namespace KouArge.Repository.Repositories
 
         public async Task AddRangeAsync(IEnumerable<T> entities)
         {
-          await _dbSet.AddRangeAsync(entities);
+            await _dbSet.AddRangeAsync(entities);
         }
 
         public async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
@@ -41,9 +36,32 @@ namespace KouArge.Repository.Repositories
             return _dbSet.AsNoTracking().AsQueryable();
         }
 
-        public   async Task<T> GetByIdAsync(int id)
+        public IQueryable<T> GetAllInclude(params Expression<Func<T, object>>[] includes)
+        {
+            //https://gist.github.com/oneillci/3205384
+            var query = _dbSet.AsQueryable().AsNoTracking();
+            return includes.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
+        }
+
+        public IQueryable<T> GetAllPredicate(Expression<Func<T, bool>> predicate)
+        {
+            return _dbSet.Where(predicate).AsQueryable().AsNoTracking();
+        }
+
+        public IQueryable<T> GetAllIncludeFindBy(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
+        {
+            var query = _dbSet.Where(predicate);
+            return includes.Aggregate(query, (current, includeProperty) => current.Include(includeProperty));
+        }
+
+        public async Task<T> GetByIdAsync(int id)
         {
             return await _dbSet.FindAsync(id);
+        }
+
+        public async Task<T> GetByIdPredicateAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await _dbSet.Where(predicate).SingleOrDefaultAsync();
         }
 
         public void Remove(T entity)
@@ -51,9 +69,14 @@ namespace KouArge.Repository.Repositories
             _dbSet.Remove(entity);
         }
 
+        public void SoftRemove(T entity)
+        {
+            _dbSet.Update(entity);
+        }
+
         public void RemoveRange(IEnumerable<T> entities)
         {
-            _dbSet.RemoveRange(entities);   
+            _dbSet.RemoveRange(entities);
         }
 
         public void Update(T entity)

@@ -1,12 +1,10 @@
 ﻿using KouArge.Core.DTOs;
 using KouArge.Core.Services.ApiService;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using www.kouarge.org.ApiServices;
 
 namespace www.kouarge.org.Controllers
 {
-    
+
     public class FacultyController : Controller
     {
         private readonly IFacultyApiService _facultyApiService;
@@ -66,7 +64,7 @@ namespace www.kouarge.org.Controllers
 
                 if (success)
                     return RedirectToAction(nameof(Index));
-               
+
                 //hata sayfasına yonlendir
             }
 

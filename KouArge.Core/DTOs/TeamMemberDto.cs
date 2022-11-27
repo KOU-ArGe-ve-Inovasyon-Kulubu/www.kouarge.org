@@ -1,16 +1,14 @@
-﻿using KouArge.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KouArge.Core.DTOs
+﻿namespace KouArge.Core.DTOs
 {
-    public class TeamMemberDto:BaseDto
+    public class TeamMemberDto : BaseDto
     {
-        public int GeneralAssemblyId { get; set; }
+        public string AppUserId { get; set; }
+        public int TitleId { get; set; }
+        public int GeneralAssemblyApplyId { get; set; }
         public int TeamId { get; set; }
-        public string Title { get; set; }
+        public string ImgUrl { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+
     }
 }

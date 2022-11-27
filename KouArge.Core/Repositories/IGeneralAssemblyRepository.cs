@@ -1,13 +1,6 @@
-﻿using KouArge.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KouArge.Core.Repositories
+﻿namespace KouArge.Core.Repositories
 {
-    public interface IGeneralAssemblyRepository : IGenericRepository<GeneralAssembly>
-    {
-    }
+    //public interface IGeneralAssemblyRepository : IGenericRepository<GeneralAssembly>
+    //{
+    //}
 }

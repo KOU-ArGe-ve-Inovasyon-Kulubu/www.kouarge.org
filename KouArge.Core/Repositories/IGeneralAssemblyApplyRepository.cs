@@ -1,13 +1,10 @@
 ﻿using KouArge.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KouArge.Core.Repositories
 {
     public interface IGeneralAssemblyApplyRepository : IGenericRepository<GeneralAssemblyApply>
     {
+        Task<bool> DuplicateData(int teamId, string userId, int titleId);
+        Task<GeneralAssemblyApply> GetByUserId(string userId, int Id);
     }
 }

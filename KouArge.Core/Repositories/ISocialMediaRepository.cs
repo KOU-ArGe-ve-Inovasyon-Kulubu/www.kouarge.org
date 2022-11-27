@@ -1,13 +1,11 @@
 ﻿using KouArge.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KouArge.Core.Repositories
 {
     public interface ISocialMediaRepository : IGenericRepository<SocialMedia>
     {
+        IQueryable<SocialMedia> GetAllWithDetails();
+        Task<bool> DuplicateData(int socialMediaTypeId, string userId, int teamMemberId);
+        Task<SocialMedia> GetByIdWithDetailsAsync(int id);
     }
 }

@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KouArge.Core.DTOs
+﻿namespace KouArge.Core.DTOs
 {
     public class TeamDto : BaseDto
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public string LogoUrl { get; set; }
+        public string ImgUrl { get; set; }
     }
 }

@@ -1,14 +1,7 @@
 ﻿using KouArge.Core.DTOs;
-using KouArge.Core.Models;
 using KouArge.Core.Services.ApiService;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using System.ComponentModel.DataAnnotations;
-using www.kouarge.org.ApiServices;
 
 namespace www.kouarge.org.Controllers
 {
@@ -17,7 +10,7 @@ namespace www.kouarge.org.Controllers
     public class AccountController : Controller
     {
         private readonly IDepartmentApiService _departmentApiService;
-        private readonly IFacultyApiService _facultyApiService;  
+        private readonly IFacultyApiService _facultyApiService;
         private readonly IAccountApiService _accountApiService;
 
         public AccountController(IDepartmentApiService departmentApiService, IAccountApiService accountApiService, IFacultyApiService facultyApiService)
@@ -55,7 +48,7 @@ namespace www.kouarge.org.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(AppUserLoginDto user,string returnUrl)
+        public async Task<IActionResult> Login(AppUserLoginDto user, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -73,10 +66,13 @@ namespace www.kouarge.org.Controllers
                         return RedirectToAction("Index");
                 }
 
-                if (result.ErrorStatus == 1)
+                if (result.Errors != null)
                 {
-                    ModelState.AddModelError("Email", "E-posta veya şifre hatalı.");
-                    ModelState.AddModelError("Password", "E-posta veya şifre hatalı.");
+                    foreach (var item in result.Errors)
+                    {
+                        ModelState.AddModelError(item.ErrorCode, item.ErrorMessage);
+                    }
+
                 }
                 return View(user);
 
@@ -105,18 +101,31 @@ namespace www.kouarge.org.Controllers
                 {
                     //Response.Cookies.Append("X-Access-Token", result.Token.AccessToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Expires = result.Token.Expiration });
                     //Response.Cookies.Append("Refresh-Token", result.Token.RefreshToken, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict, Expires = result.Token.RefreshTokenExpiration });
-                    
-                    return RedirectToAction("Maintenance","Home", new { data = true });
+
+                    return RedirectToAction("Maintenance", "Home", new { data = true });
                 }
 
-                if (result.ErrorStatus == 1)
-                    ModelState.AddModelError("StudentNo","Öğrenci numarası zaten kayıtlı.");
+                //if (result.ErrorStatus == 1)
+                //    ModelState.AddModelError("StudentNumber","Öğrenci numarası zaten kayıtlı.");
 
-                if (result.ErrorStatus == 2)
-                    ModelState.AddModelError("Email", "E-posta adresi zaten kayıtlı.");
+                //if (result.ErrorStatus == 2)
+                //    ModelState.AddModelError("Email", "E-posta adresi zaten kayıtlı.");
 
-                if (result.ErrorStatus == 3)
-                    ModelState.AddModelError("PhoneNumber", "Telefon numarası zaten kayıtlı.");
+                //if (result.ErrorStatus == 3)
+                //    ModelState.AddModelError("PhoneNumber", "Telefon numarası zaten kayıtlı.");
+
+                if (result.Errors != null)
+                {
+                    foreach (var item in result.Errors)
+                    {
+                        ModelState.AddModelError(item.ErrorCode, item.ErrorMessage);
+                    }
+
+                }
+
+
+
+                //TODO: beklenmeyen bir hata oluştu.
 
                 var faculty = await _facultyApiService.GetAllAsync();
                 var department = await _facultyApiService.GetDepartmentByFacultyIdAsync(newUser.FacultyId);

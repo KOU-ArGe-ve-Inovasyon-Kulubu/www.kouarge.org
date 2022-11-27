@@ -1,11 +1,9 @@
 ﻿using KouArge.Core.DTOs;
 using KouArge.Core.Services.ApiService;
-using KouArge.Service.Exceptions;
-using System.Net;
 
 namespace www.kouarge.org.ApiServices
 {
-    public class FacultyApiService: IFacultyApiService
+    public class FacultyApiService : IFacultyApiService
     {
         private readonly IRequestApiService _request;
 

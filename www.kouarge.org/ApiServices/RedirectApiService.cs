@@ -4,7 +4,7 @@ using KouArge.Core.Services.ApiService;
 
 namespace www.kouarge.org.ApiServices
 {
-    public class RedirectApiService: IRedirectApiService
+    public class RedirectApiService : IRedirectApiService
     {
         private readonly IRequestApiService _request;
 
@@ -12,10 +12,7 @@ namespace www.kouarge.org.ApiServices
         {
             _request = requestApiService;
         }
-        public async Task Add(int id)
-        {
-            //await _request.OnlyPostAsync<CustomResponseDto<Redirect>>($"Redirect/{id}");
-        }
+
 
         public async Task<CustomResponseDto<List<Redirect>>> GetAllAsync()
         {
@@ -43,6 +40,12 @@ namespace www.kouarge.org.ApiServices
         public async Task<bool> DeleteAsync(int id)
         {
             var data = await _request.DeleteAsync($"redirect/{id}");
+            return data;
+        }
+
+        public async Task<CustomResponseDto<string>> AddCountAsync(string name)
+        {
+            var data = await _request.GetAsync<CustomResponseDto<string>>($"redirect/{name}");
             return data;
         }
     }

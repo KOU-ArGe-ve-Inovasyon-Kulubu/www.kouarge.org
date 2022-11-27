@@ -1,10 +1,5 @@
 ﻿using FluentValidation;
 using KouArge.Core.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KouArge.Service.Validations
 {
@@ -12,11 +7,11 @@ namespace KouArge.Service.Validations
     {
         public DepartmentDtoValidator()
         {
-            RuleFor(x => x.Name).NotNull().WithMessage("{PropertyName} is required.").NotEmpty().WithMessage("{PropertyName} is required.");
-
-            RuleFor(x => x.FacultyId).NotEmpty().WithMessage("{PropertyName} is required.")
-                .NotNull().WithMessage("{PropertyName} is required.")
-                .InclusiveBetween(1, int.MaxValue).WithMessage("{PropertyName} is greater than 0");
+            RuleFor(x => x.Id).NotNull().WithMessage("{PropertyName} alanı gerekldir.").NotEmpty().WithMessage("{PropertyName} alanı gerekldir.");
+            RuleFor(x => x.Name).NotNull().WithMessage("{PropertyName} alanı gerekldir.").NotEmpty().WithMessage("{PropertyName} alanı gerekldir.");
+            RuleFor(x => x.FacultyId).NotEmpty().WithMessage("{PropertyName} alanı gerekldir.")
+                .NotNull().WithMessage("{PropertyName} alanı gerekldir.")
+                .InclusiveBetween(1, int.MaxValue).WithMessage("{PropertyName} 0 dan büyük olmalıdır.");
         }
     }
 }

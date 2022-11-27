@@ -1,11 +1,6 @@
 ﻿using KouArge.Core.Models;
 using KouArge.Core.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KouArge.Repository.Repositories
 {
@@ -15,15 +10,15 @@ namespace KouArge.Repository.Repositories
         {
         }
 
-        public async Task<IEnumerable<Department>> GetDepartmentWithFaculty()
+        public IQueryable<Department> GetDepartmentWithFaculty()
         {
-            return await _context.Departments.Include(x => x.Faculty).ToListAsync();
+            return _context.Departments.Include(x => x.Faculty).AsQueryable().AsNoTracking();
         }
 
-        public  async Task<Department> GetByIdAsync(string id)
+        public async Task<Department> GetByIdAsync(string id)
         {
             return await _dbSet.FindAsync(id);
         }
-    
+
     }
 }

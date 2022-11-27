@@ -1,8 +1,5 @@
-﻿using KouArge.Core.DTOs;
-using KouArge.Service.Exceptions;
+﻿using KouArge.Service.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using System.Text.Json;
 
 namespace www.kouarge.org.MiddleWares
 {
@@ -26,6 +23,15 @@ namespace www.kouarge.org.MiddleWares
                     };
 
 
+                    if (statusCode == 400)
+                    {
+                        context.Response.Redirect("/Department/Forbidden");
+
+                        //context.Response.Redirect("/maintenance");
+                        return;
+                    }
+
+
                     if (statusCode == 401)
                     {
                         context.Response.Redirect("/Department/Forbidden");
@@ -37,11 +43,11 @@ namespace www.kouarge.org.MiddleWares
                     if (statusCode == 403)
                     {
                         context.Response.Redirect("/Department/Forbidden");
-                         //context.Response.Redirect("/maintenance");
+                        //context.Response.Redirect("/maintenance");
                         return;
                     }
 
-                    if (statusCode==404)
+                    if (statusCode == 404)
                     {
                         context.Response.Redirect("/Department/Error");
                         //context.Response.Redirect("/maintenance");

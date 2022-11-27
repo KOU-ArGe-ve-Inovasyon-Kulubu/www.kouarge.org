@@ -4,11 +4,32 @@ namespace www.kouarge.org.Controllers
 {
     public class HomeController : Controller
     {
-        public IActionResult Index()
+        private readonly HttpClient _httpClient;
+
+        public HomeController(HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            // var a = await _httpClient.GetAsync("https://localhost:7038/FileUpload?imagePath=c.jpg");
+
+            //var c = await a.Content.ReadAsByteArrayAsync();
+
+            //var d = await GetImageAsBase64Url("a");
+
+            return View();
+        }
+
+        public async static Task<string> GetImageAsBase64Url(string url)
         {
 
-            //return RedirectToAction("Register", "Account");
-            return View();
+            using (var client = new HttpClient())
+            {
+                var bytes = await client.GetByteArrayAsync("https://localhost:7038/FileUpload?imagePath=c.jpg");
+                return "image/jpeg;base64," + Convert.ToBase64String(bytes);
+            }
         }
 
         //[Route("{text}")]

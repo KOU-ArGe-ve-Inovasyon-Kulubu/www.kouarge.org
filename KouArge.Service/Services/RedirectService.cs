@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using KouArge.Core.DTOs;
+using KouArge.Core.DTOs.UpdateDto;
 using KouArge.Core.Models;
 using KouArge.Core.Services;
 using KouArge.Core.UnitOfWorks;
@@ -28,9 +29,9 @@ namespace KouArge.Service.Services
             var data = await _dbSet.Where(x => x.Name == redirectDto.Name).SingleOrDefaultAsync();
 
             if (data != null)
-                return CustomResponseDto<Redirect>.Fail(400, $"{typeof(Redirect).Name}({redirectDto.Name}) already exist.", 1);
+                return CustomResponseDto<Redirect>.Fail(400, new ErrorViewModel() { ErrorCode = "Exist", ErrorMessage = $"{typeof(Redirect).Name}({redirectDto.Name}) already exist." });
 
-            redirectDto.Status = 1;
+            redirectDto.IsActive = true;
             var redirect = _mapper.Map<Redirect>(redirectDto);
 
             await _dbSet.AddAsync(redirect);
@@ -45,7 +46,7 @@ namespace KouArge.Service.Services
             if (qr == null)
                 throw new NotFoundException($"{typeof(Redirect).Name}({Name}) not found.");
 
-            if (qr.Status == 0)
+            if (!qr.IsActive)
                 return null;
 
             qr.Count += 1;
@@ -71,7 +72,7 @@ namespace KouArge.Service.Services
             return CustomResponseDto<RedirectDto>.Success(200, redirectDto);
         }
 
-        public async Task<CustomResponseDto<Redirect>> UpdateAsync(RedirectDto redirectDto)
+        public async Task<CustomResponseDto<Redirect>> UpdateAsync(RedirectUpdateDto redirectDto)
         {
             var data = await _dbSet.Where(x => x.Id == redirectDto.Id).AsNoTracking().SingleOrDefaultAsync();
             if (data == null)
@@ -96,6 +97,20 @@ namespace KouArge.Service.Services
 
             return CustomResponseDto<NoContentDto>.Success(204);
         }
+
+        public async Task<CustomResponseDto<NoContentDto>> SoftDelete(int id)
+        {
+            var data = await _dbSet.Where(x => x.Id == id).SingleOrDefaultAsync();
+            if (data == null)
+                throw new NotFoundException($"{typeof(Redirect).Name}({id}) not found.");
+
+            data.IsActive = false;
+            _dbSet.Update(data);
+            await _unitOfWork.CommitAsync();
+
+            return CustomResponseDto<NoContentDto>.Success(204);
+        }
+
     }
 }
 

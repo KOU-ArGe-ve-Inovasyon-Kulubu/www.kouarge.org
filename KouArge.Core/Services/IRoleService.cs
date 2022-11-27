@@ -1,10 +1,5 @@
 ﻿using KouArge.Core.DTOs;
 using KouArge.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KouArge.Core.Services
 {
@@ -12,8 +7,10 @@ namespace KouArge.Core.Services
     {
         Task<CustomResponseDto<AppRole>> AddRoleAsync(AppRoleDto role);
         Task<CustomResponseDto<NoContentDto>> RemoveAsync(string id);
+        //Task<CustomResponseDto<NoContentDto>> UpdateAsync(string id);
         Task<CustomResponseDto<IEnumerable<AppRole>>> GetAllRolesAsync();
         Task<CustomResponseDto<IEnumerable<AppUserDto>>> GetUserByRoleId(string id);
+        Task<CustomResponseDto<NoContentDto>> AddRoleUserAsync(AppRoleUserDto data);
 
     }
 }

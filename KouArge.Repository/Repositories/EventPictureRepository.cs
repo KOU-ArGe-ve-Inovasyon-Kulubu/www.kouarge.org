@@ -1,10 +1,5 @@
 ﻿using KouArge.Core.Models;
 using KouArge.Core.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KouArge.Repository.Repositories
 {
@@ -13,5 +8,11 @@ namespace KouArge.Repository.Repositories
         public EventPictureRepository(AppIdentityDbContext context) : base(context)
         {
         }
+
+        public IQueryable<EventPicture> GetByEventId(int eventId)
+        {
+            return _context.EventPictures.Where(x => x.EventId == eventId).AsQueryable();
+        }
+
     }
 }

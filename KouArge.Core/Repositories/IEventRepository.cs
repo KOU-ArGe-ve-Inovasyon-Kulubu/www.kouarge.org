@@ -1,13 +1,11 @@
 ﻿using KouArge.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KouArge.Core.Repositories
 {
-    public interface IEventRepository:IGenericRepository<Event>
+    public interface IEventRepository : IGenericRepository<Event>
     {
+        IQueryable<Event> GetAllWithDetails();
+        Task<Event> GetByIdWithDetailsAsync(int id);
+
     }
 }

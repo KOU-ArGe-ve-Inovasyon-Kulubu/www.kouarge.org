@@ -1,15 +1,11 @@
-﻿using KouArge.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KouArge.Core.DTOs
+﻿namespace KouArge.Core.DTOs
 {
-    public class SocialMediaDto:BaseDto
+    public class SocialMediaDto : BaseDto
     {
-        public string? Link { get; set; }
-        public int TypeId { get; set; }
+        public int TeamMemberId { get; set; }
+        public string? Url { get; set; }
+        public int SocaialMediaTypeId { get; set; }
+        public SocialMediaTypeDto SocaialMediaType { get; set; }
+        public TeamMemberDto TeamMember { get; set; }
     }
 }

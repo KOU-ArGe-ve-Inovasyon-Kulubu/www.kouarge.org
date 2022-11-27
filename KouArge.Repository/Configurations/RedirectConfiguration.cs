@@ -1,12 +1,6 @@
 ﻿using KouArge.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KouArge.Repository.Configurations
 {
@@ -20,7 +14,7 @@ namespace KouArge.Repository.Configurations
             builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.Url).IsRequired();
             builder.Property(x => x.Count).IsRequired();
-            builder.Property(x => x.Status).IsRequired();
+            builder.Property(x => x.IsActive).IsRequired();
             builder.Property(x => x.CreatedAt).IsRequired();
         }
     }

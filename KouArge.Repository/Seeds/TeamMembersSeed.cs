@@ -1,12 +1,6 @@
 ﻿using KouArge.Core.Models;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Diagnostics;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace KouArge.Repository.Seeds
 {
@@ -18,13 +12,14 @@ namespace KouArge.Repository.Seeds
             {
                 Id = 1,
                 TeamId = 1,
-                GeneralAssemblyId = 1,
+                AppUserId = "1",
+                ImgUrl = "ImageUrl",
+                TitleId = 1,
                 CreatedAt = DateTime.Now,
-                Title = "titleTeamMember",
                 StartDate = DateTime.Now,
                 EndDate = DateTime.Now,
-                
-
+                GeneralAssemblyApplyId = 2,
+                IsActive = true,
             });
         }
     }

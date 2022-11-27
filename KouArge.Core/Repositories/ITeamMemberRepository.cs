@@ -1,14 +1,10 @@
 ﻿using KouArge.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KouArge.Core.Repositories
 {
     public interface ITeamMemberRepository : IGenericRepository<TeamMember>
     {
-
+        Task<TeamMember> GetByUserId(string userId, int teamMemberId);
+        Task<TeamMember> GetByGeneralAssemblyApplyId(string userId, int generalAssemblyApplyId);
     }
 }

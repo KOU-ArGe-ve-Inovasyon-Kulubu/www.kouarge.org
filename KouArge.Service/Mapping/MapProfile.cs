@@ -2,11 +2,6 @@
 using KouArge.Core.DTOs;
 using KouArge.Core.DTOs.UpdateDto;
 using KouArge.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KouArge.Service.Mapping
 {
@@ -19,6 +14,11 @@ namespace KouArge.Service.Mapping
             //appuser
             CreateMap<AppUser, AppUserDto>().ReverseMap();
             CreateMap<AppUserRegisterDto, AppUser>();
+            CreateMap<AppUserUpdateDto, AppUser>();
+            CreateMap<AppUser, AppUserBasicDto>();
+            CreateMap<TeamMember, AppUserWithTeamDto>();
+            CreateMap<GeneralAssemblyApply, AppUserWithApplyDto>();
+            CreateMap<Certificate, AppUserWithCertificas>();
 
 
             //departmen
@@ -30,31 +30,37 @@ namespace KouArge.Service.Mapping
             //faculty
             CreateMap<Faculty, FacultyDto>().ReverseMap();
             CreateMap<Faculty, FacultyWithDepartmentsDto>();
+            CreateMap<FacultyUpdateDto, Faculty>();
 
 
             //redirect
             CreateMap<Redirect, RedirectDto>().ReverseMap();
-
+            CreateMap<RedirectUpdateDto, Redirect>();
 
             //generalassembly
-            CreateMap<GeneralAssembly, GeneralAssemblyDto>().ReverseMap();
+            //CreateMap<GeneralAssembly, GeneralAssemblyDto>().ReverseMap();
 
             //generalassemblyapply
             CreateMap<GeneralAssemblyApply, GeneralAssemblyApplyDto>().ReverseMap();
+            CreateMap<GeneralAssemblyApplyUpdateDto, GeneralAssemblyApply>();
 
             //generalassemblyteam
-            CreateMap<GeneralAssemblyTeam, GeneralAssemblyTeamDto>().ReverseMap();
-            CreateMap<GeneralAssemblyTeam, GeneralAssemblyTeamWithGeneralAssemblyDto>();
+            //CreateMap<GeneralAssemblyTeam, GeneralAssemblyTeamDto>().ReverseMap();
+            //CreateMap<GeneralAssemblyTeam, GeneralAssemblyTeamWithGeneralAssemblyDto>();
 
             //teammember
             CreateMap<TeamMember, TeamMemberDto>().ReverseMap();
+            CreateMap<TeamMemberUpdateDto, TeamMember>();
 
             //team
             CreateMap<Team, TeamDto>().ReverseMap();
+            CreateMap<TeamUpdateDto, Team>();
 
 
             //socialMedia
             CreateMap<SocialMedia, SocialMediaDto>().ReverseMap();
+            CreateMap<SocialMedia, SocialMediaPostDto>().ReverseMap();
+
             CreateMap<SocialMediaUpdateDto, SocialMedia>();
 
             //socialMediaType
@@ -68,6 +74,7 @@ namespace KouArge.Service.Mapping
             //event
             CreateMap<Event, EventDto>().ReverseMap();
             CreateMap<EventUpdateDto, Event>();
+            CreateMap<Event, EventWithSpeakersDto>().ReverseMap();
 
             //event participant
             CreateMap<EventParticipant, EventParticipantDto>().ReverseMap();
@@ -88,6 +95,21 @@ namespace KouArge.Service.Mapping
             CreateMap<OurFormat, OurFormatDto>().ReverseMap();
             CreateMap<OurFormatUpdateDto, OurFormat>();
 
+
+            //CustomEvent
+            CreateMap<Event, EventWithPictureDto>();
+
+            //Speaker
+            CreateMap<Speaker, SpeakerDto>().ReverseMap();
+
+
+            //title
+            CreateMap<Title, TitleDto>().ReverseMap();
+
+            //certificate
+            CreateMap<Certificate, CertificateDto>().ReverseMap();
+            CreateMap<CertificateTokenDto, Certificate>();
+            CreateMap<CertificateUpdateDto, Certificate>();
         }
     }
 }

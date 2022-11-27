@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KouArge.Core.DTOs.UpdateDto
+﻿namespace KouArge.Core.DTOs.UpdateDto
 {
-    public class EventParticipantUpdateDto
+    public class EventParticipantUpdateDto : UpdateDto
     {
-        public int Id { get; set; }
         public int EventId { get; set; }
-        public int UserId { get; set; }
+        public string AppUserId { get; set; }
     }
 }

@@ -11,7 +11,7 @@
 //{
 //    public class UnAuthorizedFilter : IAsyncAuthorizationFilter
 //    {
-       
+
 //            public AuthorizationPolicy Policy { get; }
 
 //            public UnAuthorizedFilter()
@@ -40,7 +40,7 @@
 //                {
 //                    // Return custom 401 result
 
-              
+
 //                    context.Result = new JsonResult(new
 //                    {
 //                        Message = "Token Validation Has Failed. Request Access Denied"
@@ -52,4 +52,4 @@
 //            }
 //        }
 //    }
- 
+

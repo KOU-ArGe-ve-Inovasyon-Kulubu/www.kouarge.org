@@ -1,9 +1,5 @@
 ﻿using KouArge.Core.DTOs;
-using KouArge.Core.Models;
-using KouArge.Core.Services;
-using KouArge.Service.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using www.kouarge.org.ApiServices;
 
 namespace www.kouarge.org.Areas.Admin.Controllers
@@ -36,7 +32,7 @@ namespace www.kouarge.org.Areas.Admin.Controllers
             {
                 //TODO: Id kontrolü yap
                 var data = await _redirectApiService.AddAsync(redirectDto);
-                if(data.ErrorStatus==1)
+                if (data.ErrorStatus == 1)
                 {
                     ModelState.AddModelError("Name", $"Name({redirectDto.Name}) zaten mevcut.");
                     return View(redirectDto);

@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
-using KouArge.Core.DTOs.UpdateDto;
 using KouArge.Core.DTOs;
+using KouArge.Core.DTOs.UpdateDto;
 using KouArge.Core.Models;
 using KouArge.Core.Services;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KouArge.API.Controllers
@@ -20,6 +21,7 @@ namespace KouArge.API.Controllers
         }
 
 
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
@@ -27,6 +29,8 @@ namespace KouArge.API.Controllers
             var semestersDto = _mapper.Map<List<SemesterDto>>(semesters.ToList());
             return CreateActionResult(CustomResponseDto<List<SemesterDto>>.Success(200, semestersDto));
         }
+
+        [AllowAnonymous]
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(int id)
@@ -37,6 +41,8 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<SemesterDto>.Success(200, semesterDto));
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,Admin,SuperAdmin")]
+
         [HttpPost]
         public async Task<IActionResult> Save(SemesterDto semesterDto)
         {
@@ -45,12 +51,16 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<SemesterDto>.Success(201, semesterDtos));
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,Admin,SuperAdmin")]
+
         [HttpPut]
         public async Task<IActionResult> UpdateAsync(SemesterUpdateDto semesterDto)
         {
             await _semesterService.UpdateAsync(_mapper.Map<Semester>(semesterDto));
-            return CreateActionResult(CustomResponseDto<Semester>.Success(204));
+            return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,Admin,SuperAdmin")]
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
@@ -58,7 +68,20 @@ namespace KouArge.API.Controllers
             var semester = await _semesterService.GetByIdAsync(id);
             //hata dondur
             await _semesterService.RemoveAsync(semester);
-            return CreateActionResult(CustomResponseDto<Semester>.Success(204));
+            return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
+        }
+
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,Admin,SuperAdmin")]
+
+        [HttpPost("[Action]")]
+        public async Task<IActionResult> SoftDeleteAsync(int id)
+        {
+            var semester = await _semesterService.GetByIdAsync(id);
+            //hata dondur
+            semester.IsActive = false;
+            await _semesterService.SoftRemove(semester);
+            return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
     }
 }

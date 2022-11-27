@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KouArge.Core.DTOs.UpdateDto
+﻿namespace KouArge.Core.DTOs.UpdateDto
 {
-    public class SocialMediaUpdateDto
+    public class SocialMediaUpdateDto : UpdateDto
     {
-        public int Id { get; set; }
-        public int Fk { get; set; }
-        public string? Link { get; set; }
-        public int TypeId { get; set; }
+        public int TeamMemberId { get; set; }
+        public string? Url { get; set; }
+        public int SocaialMediaTypeId { get; set; }
+
+        public string Token { get; set; }
     }
 }

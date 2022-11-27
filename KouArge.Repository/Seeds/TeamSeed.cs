@@ -1,11 +1,6 @@
 ﻿using KouArge.Core.Models;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace KouArge.Repository.Seeds
 {
@@ -19,9 +14,19 @@ namespace KouArge.Repository.Seeds
                 Name = "Webino",
                 CreatedAt = DateTime.Now,
                 Description = "Webino Takımı",
-                LogoUrl = "logoUrl",
-                
-            });
+                ImgUrl = "logoUrl",
+                IsActive = true,
+            },
+            new Team()
+            {
+                Id = 2,
+                Name = "Mobil",
+                CreatedAt = DateTime.Now,
+                Description = "Mobil Takımı",
+                ImgUrl = "logoUrl2",
+                IsActive = true,
+            }
+            );
         }
     }
 }

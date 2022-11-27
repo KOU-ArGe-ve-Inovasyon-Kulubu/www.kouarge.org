@@ -1,12 +1,5 @@
 ﻿using KouArge.Core.DTOs;
-using KouArge.Core.Models;
-using KouArge.Core.Services;
 using KouArge.Core.Services.ApiService;
-using KouArge.Service.Exceptions;
-using KouArge.Service.Services;
-using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Net.Http;
 
 namespace www.kouarge.org.ApiServices
 {
@@ -45,7 +38,7 @@ namespace www.kouarge.org.ApiServices
 
                 var refreshToken = _context.HttpContext.Request.Cookies["Refresh-Token"];
 
-                if(refreshToken!=null)
+                if (refreshToken != null)
                 {
                     using (var scope = _provider.CreateScope())
                     {
@@ -60,10 +53,14 @@ namespace www.kouarge.org.ApiServices
                             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", accesToken.Result.Token.AccessToken);
 
                             response = await base.SendAsync(request, cancellationToken);
+
+                            //await _context.HttpContext.SignInAsync();
+
                         }
                     }
-                  
+
                 }
+                //await _context.HttpContext.SignOutAsync();
             }
 
             return response;

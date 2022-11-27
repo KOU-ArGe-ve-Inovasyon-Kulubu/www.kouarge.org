@@ -22,36 +22,6 @@ namespace KouArge.Repository.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("AppUserGeneralAssemblyApply", b =>
-                {
-                    b.Property<int>("GeneralAssemblyApplysId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("UsersId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("GeneralAssemblyApplysId", "UsersId");
-
-                    b.HasIndex("UsersId");
-
-                    b.ToTable("AppUserGeneralAssemblyApply");
-                });
-
-            modelBuilder.Entity("GeneralAssemblyTeamMember", b =>
-                {
-                    b.Property<int>("GeneralAssembliesId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeamMembersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("GeneralAssembliesId", "TeamMembersId");
-
-                    b.HasIndex("TeamMembersId");
-
-                    b.ToTable("GeneralAssemblyTeamMember");
-                });
-
             modelBuilder.Entity("KouArge.Core.Models.AppRole", b =>
                 {
                     b.Property<string>("Id")
@@ -105,6 +75,9 @@ namespace KouArge.Repository.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -131,7 +104,7 @@ namespace KouArge.Repository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("PhoneNumberConfirmed")
                         .HasColumnType("bit");
@@ -145,10 +118,7 @@ namespace KouArge.Repository.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<string>("StudentNo")
+                    b.Property<string>("StudentNumber")
                         .IsRequired()
                         .HasMaxLength(9)
                         .HasColumnType("nvarchar(9)");
@@ -185,7 +155,11 @@ namespace KouArge.Repository.Migrations
 
                     b.HasIndex("NotificationId");
 
-                    b.HasIndex("StudentNo")
+                    b.HasIndex("PhoneNumber")
+                        .IsUnique()
+                        .HasFilter("[PhoneNumber] IS NOT NULL");
+
+                    b.HasIndex("StudentNumber")
                         .IsUnique();
 
                     b.ToTable("AspNetUsers", (string)null);
@@ -195,23 +169,105 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b48bae85-e5c8-4c60-a2f1-513fd8c34a81",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(114),
+                            ConcurrencyStamp = "b03b8cd7-9f5d-4a09-8c87-88c09d074ea0",
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 299, DateTimeKind.Local).AddTicks(8429),
                             DepartmentId = "1",
                             Email = "test@gmail.com",
                             EmailConfirmed = false,
+                            IsActive = true,
                             LockoutEnabled = false,
                             Name = "test",
+                            NormalizedEmail = "TEST@GMAIL.COM",
+                            NormalizedUserName = "1",
                             NotificationId = 1,
-                            PasswordHash = "asd",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGPJRk1vOxjaYUkOxAuU5gvYRB5l/OUutAlJBkhUDltYcL9MjIiOmznus+SinfMsuA==",
+                            PhoneNumber = "5303003030",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "c169e54f-9713-421b-9dc4-91d27d9fa6f5",
-                            Status = 1,
-                            StudentNo = "1",
+                            SecurityStamp = "87de1be7-c7c2-4c31-ab33-50bc3381233d",
+                            StudentNumber = "191307000",
                             Surname = "test",
                             TwoFactorEnabled = false,
                             UserName = "1",
                             Year = 2
+                        },
+                        new
+                        {
+                            Id = "2",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "4d86f5bb-ff8c-4d5d-8ec2-e6406968150d",
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 300, DateTimeKind.Local).AddTicks(9521),
+                            DepartmentId = "1",
+                            Email = "test2@gmail.com",
+                            EmailConfirmed = false,
+                            IsActive = true,
+                            LockoutEnabled = false,
+                            Name = "test2",
+                            NormalizedEmail = "TEST2@GMAIL.COM",
+                            NormalizedUserName = "2",
+                            NotificationId = 1,
+                            PhoneNumber = "5303003031",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "f4a78588-2a4d-4d75-b5e5-efa692bc5c03",
+                            StudentNumber = "191307001",
+                            Surname = "test2",
+                            TwoFactorEnabled = false,
+                            UserName = "2",
+                            Year = 2
+                        });
+                });
+
+            modelBuilder.Entity("KouArge.Core.Models.Certificate", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(450)")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("Template")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("Certificates");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            AppUserId = "1",
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(450),
+                            EventId = 1,
+                            IsActive = true,
+                            Template = 1
+                        },
+                        new
+                        {
+                            Id = "2",
+                            AppUserId = "1",
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(451),
+                            EventId = 2,
+                            IsActive = true,
+                            Template = 1
                         });
                 });
 
@@ -225,6 +281,9 @@ namespace KouArge.Repository.Migrations
 
                     b.Property<int>("FacultyId")
                         .HasColumnType("int");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -244,8 +303,9 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = "1",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(303),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(543),
                             FacultyId = 1,
+                            IsActive = true,
                             Name = "Bil Sis. Müh."
                         });
                 });
@@ -268,39 +328,103 @@ namespace KouArge.Repository.Migrations
                     b.Property<DateTime>("EventDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("FormatId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("ImgBackUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<int>("OurFormatId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ReadCount")
                         .HasColumnType("int");
 
                     b.Property<int>("SemesterId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Speaker")
+                    b.Property<string>("Title")
                         .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Url")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("OurFormatId")
-                        .IsUnique();
+                    b.HasIndex("OurFormatId");
 
                     b.HasIndex("SemesterId");
 
                     b.ToTable("Events");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(895),
+                            Description = "Descript1",
+                            EventDate = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(893),
+                            ImgBackUrl = "Url1",
+                            IsActive = true,
+                            OurFormatId = 2,
+                            ReadCount = 0,
+                            SemesterId = 1,
+                            Title = "Title1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(899),
+                            Description = "Descript2",
+                            EventDate = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(898),
+                            ImgBackUrl = "Url2",
+                            IsActive = true,
+                            OurFormatId = 1,
+                            ReadCount = 0,
+                            SemesterId = 1,
+                            Title = "Title2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(901),
+                            Description = "Descript3",
+                            EventDate = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(900),
+                            ImgBackUrl = "Url3",
+                            IsActive = true,
+                            OurFormatId = 2,
+                            ReadCount = 0,
+                            SemesterId = 1,
+                            Title = "Title3"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(928),
+                            Description = "Descript4",
+                            EventDate = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(902),
+                            ImgBackUrl = "Url4",
+                            IsActive = true,
+                            OurFormatId = 1,
+                            ReadCount = 0,
+                            SemesterId = 1,
+                            Title = "Title4"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(931),
+                            Description = "Descript5",
+                            EventDate = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(929),
+                            ImgBackUrl = "Url5",
+                            IsActive = true,
+                            OurFormatId = 2,
+                            ReadCount = 0,
+                            SemesterId = 1,
+                            Title = "Title5"
+                        });
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.EventParticipant", b =>
@@ -312,6 +436,7 @@ namespace KouArge.Repository.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("AppUserId")
+                        .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("CreatedAt")
@@ -320,11 +445,11 @@ namespace KouArge.Repository.Migrations
                     b.Property<int>("EventId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -333,6 +458,32 @@ namespace KouArge.Repository.Migrations
                     b.HasIndex("EventId");
 
                     b.ToTable("EventParticipants");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 2,
+                            AppUserId = "1",
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(643),
+                            EventId = 1,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AppUserId = "2",
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(648),
+                            EventId = 1,
+                            IsActive = true
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AppUserId = "1",
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(649),
+                            EventId = 2,
+                            IsActive = true
+                        });
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.EventPicture", b =>
@@ -349,17 +500,63 @@ namespace KouArge.Repository.Migrations
                     b.Property<int>("EventId")
                         .HasColumnType("int");
 
+                    b.Property<string>("ImgUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("Url")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("EventId");
 
                     b.ToTable("EventPictures");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(774),
+                            EventId = 1,
+                            ImgUrl = "Url1",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(778),
+                            EventId = 2,
+                            ImgUrl = "Url2",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(780),
+                            EventId = 3,
+                            ImgUrl = "Url3",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(781),
+                            EventId = 4,
+                            ImgUrl = "Url4",
+                            IsActive = true
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(782),
+                            EventId = 5,
+                            ImgUrl = "Url5",
+                            IsActive = true
+                        });
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.Faculty", b =>
@@ -378,6 +575,9 @@ namespace KouArge.Repository.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -395,338 +595,329 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 1,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(403),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1028),
+                            IsActive = true,
                             Name = "Ali Rıza Veziroğlu Meslek Yüksekokulu"
                         },
                         new
                         {
                             Id = 2,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(405),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1029),
+                            IsActive = true,
                             Name = "Asım Kocabıyık Meslek Yüksekokulu"
                         },
                         new
                         {
                             Id = 3,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(406),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1030),
+                            IsActive = true,
                             Name = "Değirmendere Ali ÖZBAY Meslek Yüksekokulu"
                         },
                         new
                         {
                             Id = 4,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(407),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1031),
+                            IsActive = true,
                             Name = "Teknoloji"
                         },
                         new
                         {
                             Id = 5,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(408),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1032),
+                            IsActive = true,
                             Name = "Denizcilik Fakültesi"
                         },
                         new
                         {
                             Id = 6,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(409),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1033),
+                            IsActive = true,
                             Name = "Diş Hekimliği Fakültesi"
                         },
                         new
                         {
                             Id = 7,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(410),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1034),
+                            IsActive = true,
                             Name = "Diş Hekimliği Fakültesi"
                         },
                         new
                         {
                             Id = 8,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(411),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1035),
+                            IsActive = true,
                             Name = "Eğitim Fakültesi"
                         },
                         new
                         {
                             Id = 9,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(412),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1036),
+                            IsActive = true,
                             Name = "Fen - Edebiyat Fakültesi"
                         },
                         new
                         {
                             Id = 10,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(413),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1037),
+                            IsActive = true,
                             Name = "Ford Otosan İhsaniye Otomotiv Meslek Yüksekokulu"
                         },
                         new
                         {
                             Id = 11,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(414),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1038),
+                            IsActive = true,
                             Name = "Gazanfer Bilge Meslek Yüksekokulu"
                         },
                         new
                         {
                             Id = 12,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(415),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1039),
+                            IsActive = true,
                             Name = "Gıda ve Tarım Meslek Yüksekokulu"
                         },
                         new
                         {
                             Id = 13,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(416),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1039),
+                            IsActive = true,
                             Name = "Gölcük Meslek Yüksekokulu"
                         },
                         new
                         {
                             Id = 14,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(416),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1040),
+                            IsActive = true,
                             Name = "Güzel Sanatlar Fakültesi"
                         },
                         new
                         {
                             Id = 15,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(418),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1041),
+                            IsActive = true,
                             Name = "Havacılık ve Uzay Bilimleri Fakültesi"
                         },
                         new
                         {
                             Id = 16,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(418),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1042),
+                            IsActive = true,
                             Name = "Hereke Asım Kocabıyık Meslek Yüksekokulu"
                         },
                         new
                         {
                             Id = 17,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(419),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1043),
+                            IsActive = true,
                             Name = "Hereke Meslek Yüksekokulu"
                         },
                         new
                         {
                             Id = 18,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(420),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1044),
+                            IsActive = true,
                             Name = "Hereke Ömer İsmet Uzunyol Meslek Yüksekokulu"
                         },
                         new
                         {
                             Id = 19,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(421),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1045),
+                            IsActive = true,
                             Name = "Hukuk Fakültesi"
                         },
                         new
                         {
                             Id = 20,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(422),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1046),
+                            IsActive = true,
                             Name = "İktisadi ve İdari Bilimler Fakültesi"
                         },
                         new
                         {
                             Id = 21,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(473),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1047),
+                            IsActive = true,
                             Name = "İlahiyat Fakültesi"
                         },
                         new
                         {
                             Id = 22,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(474),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1048),
+                            IsActive = true,
                             Name = "İletişim Fakültesi"
                         },
                         new
                         {
                             Id = 23,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(475),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1049),
+                            IsActive = true,
                             Name = "İzmit Meslek Yüksekokulu"
                         },
                         new
                         {
                             Id = 24,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(476),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1050),
+                            IsActive = true,
                             Name = "Kandıra Meslek Yüksekokulu"
                         },
                         new
                         {
                             Id = 25,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(477),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1051),
+                            IsActive = true,
                             Name = "Karamürsel Meslek Yüksekokulu"
                         },
                         new
                         {
                             Id = 26,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(478),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1051),
+                            IsActive = true,
                             Name = "Kartepe Atçılık Meslek Yüksekokulu"
                         },
                         new
                         {
                             Id = 27,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(479),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1052),
+                            IsActive = true,
                             Name = "Kartepe Turizm Meslek Yüksekokulu"
                         },
                         new
                         {
                             Id = 28,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(480),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1053),
+                            IsActive = true,
                             Name = "Kocaeli Meslek Yüksekokulu"
                         },
                         new
                         {
                             Id = 29,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(481),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1054),
+                            IsActive = true,
                             Name = "Kocaeli Sağlık Hizmetleri Meslek Yüksekokulu"
                         },
                         new
                         {
                             Id = 30,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(482),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1055),
+                            IsActive = true,
                             Name = "Koseköy Meslek Yüksekokulu"
                         },
                         new
                         {
                             Id = 31,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(483),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1056),
+                            IsActive = true,
                             Name = "Mimarlık ve Tasarım Fakültesi"
                         },
                         new
                         {
                             Id = 32,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(483),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1057),
+                            IsActive = true,
                             Name = "Mühendislik Fakültesi"
                         },
                         new
                         {
                             Id = 33,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(484),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1058),
+                            IsActive = true,
                             Name = "Sağlık Bilimleri Fakültesi"
                         },
                         new
                         {
                             Id = 34,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(485),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1059),
+                            IsActive = true,
                             Name = "Spor Bilimleri Fakültesi"
                         },
                         new
                         {
                             Id = 35,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(486),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1060),
+                            IsActive = true,
                             Name = "Teknoloji Fakültesi"
                         },
                         new
                         {
                             Id = 36,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(487),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1061),
+                            IsActive = true,
                             Name = "Tıp Fakültesi"
                         },
                         new
                         {
                             Id = 37,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(488),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1062),
+                            IsActive = true,
                             Name = "Turizm Fakültesi"
                         },
                         new
                         {
                             Id = 38,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(489),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1063),
+                            IsActive = true,
                             Name = "Turizm İşletmecliliği ve Otelcilik Yüksekokulu"
                         },
                         new
                         {
                             Id = 39,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(490),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1063),
+                            IsActive = true,
                             Name = "Uzunçiftlik Nuh Çimento Meslek Yüksekokulu"
                         },
                         new
                         {
                             Id = 40,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(491),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1064),
+                            IsActive = true,
                             Name = "Yahya Kaptan Meslek Yüksekokulu"
                         },
                         new
                         {
                             Id = 41,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(492),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1065),
+                            IsActive = true,
                             Name = "Ziraat Fakültesi"
-                        });
-                });
-
-            modelBuilder.Entity("KouArge.Core.Models.GeneralAssembly", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("EndDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PıctureUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("StartDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
-
-                    b.ToTable("GeneralAssemblies");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(689),
-                            EndDate = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(690),
-                            PıctureUrl = "pictureUrl",
-                            StartDate = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(690),
-                            Status = 0,
-                            UserId = "1"
                         });
                 });
 
@@ -738,36 +929,38 @@ namespace KouArge.Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("ApplyTime")
+                    b.Property<int>("AppStatus")
+                        .HasColumnType("int");
+
+                    b.Property<string>("AppUserId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("ApplyTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<int?>("EventParticipantId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Introducing")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("SituationDescription")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Staus")
+                    b.Property<int>("TeamId")
                         .HasColumnType("int");
 
-                    b.Property<int>("TeamId")
+                    b.Property<int>("TitleId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Why")
                         .IsRequired()
@@ -775,7 +968,11 @@ namespace KouArge.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("EventParticipantId");
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("TeamId");
+
+                    b.HasIndex("TitleId");
 
                     b.ToTable("GeneralAssemblyApplies");
 
@@ -783,52 +980,30 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            ApplyTime = "ApplyTime",
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(600),
+                            AppStatus = 0,
+                            AppUserId = "1",
+                            ApplyTime = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1169),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1168),
                             Introducing = "Introducing",
+                            IsActive = true,
                             SituationDescription = "SituationDescription",
-                            Staus = 200,
                             TeamId = 1,
-                            UserId = "1",
+                            TitleId = 1,
                             Why = "why"
-                        });
-                });
-
-            modelBuilder.Entity("KouArge.Core.Models.GeneralAssemblyTeam", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("GeneralAssemblyId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TeamId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GeneralAssemblyId");
-
-                    b.HasIndex("TeamId");
-
-                    b.ToTable("GeneralAssemblyTeams");
-
-                    b.HasData(
+                        },
                         new
                         {
-                            Id = 1,
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(782),
-                            GeneralAssemblyId = 1,
-                            TeamId = 1
+                            Id = 2,
+                            AppStatus = 1,
+                            AppUserId = "1",
+                            ApplyTime = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1172),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1171),
+                            Introducing = "Introducing2",
+                            IsActive = true,
+                            SituationDescription = "SituationDescription2",
+                            TeamId = 1,
+                            TitleId = 2,
+                            Why = "why2"
                         });
                 });
 
@@ -846,6 +1021,9 @@ namespace KouArge.Repository.Migrations
                     b.Property<int>("Email")
                         .HasColumnType("int");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<int>("Sms")
                         .HasColumnType("int");
 
@@ -860,29 +1038,33 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(881),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1320),
                             Email = 1,
+                            IsActive = true,
                             Sms = 1
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(882),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1321),
                             Email = 1,
+                            IsActive = true,
                             Sms = 0
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(883),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1322),
                             Email = 0,
+                            IsActive = true,
                             Sms = 1
                         },
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(884),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1323),
                             Email = 0,
+                            IsActive = true,
                             Sms = 0
                         });
                 });
@@ -903,6 +1085,13 @@ namespace KouArge.Repository.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<string>("ImgUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Keywords")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -912,20 +1101,64 @@ namespace KouArge.Repository.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("Picture")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Type")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
                     b.ToTable("OurFormats");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1437),
+                            Description = "Description1",
+                            ImgUrl = "Url1",
+                            IsActive = true,
+                            Keywords = "Keywords1",
+                            Name = "Format1"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1441),
+                            Description = "Description2",
+                            ImgUrl = "Url2",
+                            IsActive = true,
+                            Keywords = "Keywords2",
+                            Name = "Format2"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1443),
+                            Description = "Description3",
+                            ImgUrl = "Url3",
+                            IsActive = true,
+                            Keywords = "Keywords3",
+                            Name = "Format3"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1445),
+                            Description = "Description4",
+                            ImgUrl = "Url4",
+                            IsActive = true,
+                            Keywords = "Keywords4",
+                            Name = "Format4"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1447),
+                            Description = "Description5",
+                            ImgUrl = "Url5",
+                            IsActive = true,
+                            Keywords = "Keywords5",
+                            Name = "Format5"
+                        });
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.Redirect", b =>
@@ -942,12 +1175,12 @@ namespace KouArge.Repository.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Status")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
@@ -972,8 +1205,11 @@ namespace KouArge.Repository.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -988,6 +1224,48 @@ namespace KouArge.Repository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Semesters");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1563),
+                            IsActive = true,
+                            Name = "Semester1",
+                            StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1565),
+                            IsActive = true,
+                            Name = "Semester2",
+                            StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1566),
+                            IsActive = true,
+                            Name = "Semester3",
+                            StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1567),
+                            IsActive = true,
+                            Name = "Semester4",
+                            StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1568),
+                            IsActive = true,
+                            Name = "Semester5",
+                            StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.SocialMedia", b =>
@@ -1001,21 +1279,26 @@ namespace KouArge.Repository.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Link")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
-                    b.Property<int>("TypeId")
+                    b.Property<int>("SocaialMediaTypeId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeamMemberId")
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("generalAssemblyId")
-                        .HasColumnType("int");
+                    b.Property<string>("Url")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("generalAssemblyId");
+                    b.HasIndex("SocaialMediaTypeId");
+
+                    b.HasIndex("TeamMemberId");
 
                     b.ToTable("SocialMedias");
                 });
@@ -1035,21 +1318,139 @@ namespace KouArge.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("SocialMediaId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("SocialMediaId");
-
                     b.ToTable("SocaialMediaTypes");
+                });
+
+            modelBuilder.Entity("KouArge.Core.Models.Speaker", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EventId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ImgUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EventId");
+
+                    b.ToTable("Speaker");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1692),
+                            EventId = 2,
+                            ImgUrl = "Spekare Url 1",
+                            IsActive = true,
+                            Name = "Speaker Name 1",
+                            Url = "spekaer Url 1"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1697),
+                            EventId = 2,
+                            ImgUrl = "Spekare Url 11",
+                            IsActive = true,
+                            Name = "Speaker Name 11",
+                            Url = "spekaer Url 11"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1700),
+                            EventId = 1,
+                            ImgUrl = "Spekare Url 2",
+                            IsActive = true,
+                            Name = "Speaker Name 2",
+                            Url = "spekaer Url 2"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1703),
+                            EventId = 1,
+                            ImgUrl = "Spekare Url 21",
+                            IsActive = true,
+                            Name = "Speaker Name 21",
+                            Url = "spekaer Url 21"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1705),
+                            EventId = 2,
+                            ImgUrl = "Spekare Url 3",
+                            IsActive = true,
+                            Name = "Speaker Name 3",
+                            Url = "spekaer Url 3"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1708),
+                            EventId = 2,
+                            ImgUrl = "Spekare Url 31",
+                            IsActive = true,
+                            Name = "Speaker Name 31",
+                            Url = "spekaer Url 31"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1732),
+                            EventId = 1,
+                            ImgUrl = "Spekare Url 4",
+                            IsActive = true,
+                            Name = "Speaker Name 4",
+                            Url = "spekaer Url 4"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1734),
+                            EventId = 1,
+                            ImgUrl = "Spekare Url 41",
+                            IsActive = true,
+                            Name = "Speaker Name 41",
+                            Url = "spekaer Url 41"
+                        });
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.SponsorsAndPartners", b =>
@@ -1063,12 +1464,15 @@ namespace KouArge.Repository.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("LogoUrl")
+                    b.Property<string>("ImgUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1083,6 +1487,10 @@ namespace KouArge.Repository.Migrations
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("Url")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -1104,15 +1512,12 @@ namespace KouArge.Repository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("GeneralAssemblyApplyId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("GeneralAssemblyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("LogoUrl")
+                    b.Property<string>("ImgUrl")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1123,20 +1528,26 @@ namespace KouArge.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GeneralAssemblyApplyId");
-
-                    b.HasIndex("GeneralAssemblyId");
-
                     b.ToTable("Teams");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(1206),
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1937),
                             Description = "Webino Takımı",
-                            LogoUrl = "logoUrl",
+                            ImgUrl = "logoUrl",
+                            IsActive = true,
                             Name = "Webino"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1939),
+                            Description = "Mobil Takımı",
+                            ImgUrl = "logoUrl2",
+                            IsActive = true,
+                            Name = "Mobil"
                         });
                 });
 
@@ -1148,14 +1559,25 @@ namespace KouArge.Repository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<string>("AppUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("EndDate")
+                    b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("GeneralAssemblyId")
+                    b.Property<int>("GeneralAssemblyApplyId")
                         .HasColumnType("int");
+
+                    b.Property<string>("ImgUrl")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
@@ -1163,7 +1585,55 @@ namespace KouArge.Repository.Migrations
                     b.Property<int>("TeamId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Title")
+                    b.Property<int>("TitleId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("GeneralAssemblyApplyId");
+
+                    b.HasIndex("TeamId");
+
+                    b.HasIndex("TitleId");
+
+                    b.ToTable("TeamMembers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AppUserId = "1",
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1836),
+                            EndDate = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1838),
+                            GeneralAssemblyApplyId = 2,
+                            ImgUrl = "ImageUrl",
+                            IsActive = true,
+                            StartDate = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1837),
+                            TeamId = 1,
+                            TitleId = 1
+                        });
+                });
+
+            modelBuilder.Entity("KouArge.Core.Models.Title", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -1172,18 +1642,29 @@ namespace KouArge.Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TeamMembers");
+                    b.ToTable("Titles");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(985),
-                            EndDate = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(987),
-                            GeneralAssemblyId = 1,
-                            StartDate = new DateTime(2022, 10, 23, 10, 38, 52, 587, DateTimeKind.Local).AddTicks(986),
-                            TeamId = 1,
-                            Title = "titleTeamMember"
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(2035),
+                            IsActive = true,
+                            Name = "Takım Kaptanı"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(2036),
+                            IsActive = true,
+                            Name = "Takım Kaptan Yardımcısı"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(2037),
+                            IsActive = true,
+                            Name = "Takım Üyesi"
                         });
                 });
 
@@ -1293,51 +1774,6 @@ namespace KouArge.Repository.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("TeamTeamMember", b =>
-                {
-                    b.Property<int>("TeamsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("teamMembersId")
-                        .HasColumnType("int");
-
-                    b.HasKey("TeamsId", "teamMembersId");
-
-                    b.HasIndex("teamMembersId");
-
-                    b.ToTable("TeamTeamMember");
-                });
-
-            modelBuilder.Entity("AppUserGeneralAssemblyApply", b =>
-                {
-                    b.HasOne("KouArge.Core.Models.GeneralAssemblyApply", null)
-                        .WithMany()
-                        .HasForeignKey("GeneralAssemblyApplysId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("KouArge.Core.Models.AppUser", null)
-                        .WithMany()
-                        .HasForeignKey("UsersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("GeneralAssemblyTeamMember", b =>
-                {
-                    b.HasOne("KouArge.Core.Models.GeneralAssembly", null)
-                        .WithMany()
-                        .HasForeignKey("GeneralAssembliesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("KouArge.Core.Models.TeamMember", null)
-                        .WithMany()
-                        .HasForeignKey("TeamMembersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("KouArge.Core.Models.AppUser", b =>
                 {
                     b.HasOne("KouArge.Core.Models.Department", "Department")
@@ -1357,6 +1793,25 @@ namespace KouArge.Repository.Migrations
                     b.Navigation("Notification");
                 });
 
+            modelBuilder.Entity("KouArge.Core.Models.Certificate", b =>
+                {
+                    b.HasOne("KouArge.Core.Models.AppUser", "AppUser")
+                        .WithMany("Certificates")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KouArge.Core.Models.Event", "Event")
+                        .WithMany("Certificates")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Event");
+                });
+
             modelBuilder.Entity("KouArge.Core.Models.Department", b =>
                 {
                     b.HasOne("KouArge.Core.Models.Faculty", "Faculty")
@@ -1371,8 +1826,8 @@ namespace KouArge.Repository.Migrations
             modelBuilder.Entity("KouArge.Core.Models.Event", b =>
                 {
                     b.HasOne("KouArge.Core.Models.OurFormat", "OurFormat")
-                        .WithOne("Event")
-                        .HasForeignKey("KouArge.Core.Models.Event", "OurFormatId")
+                        .WithMany("Event")
+                        .HasForeignKey("OurFormatId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1389,15 +1844,19 @@ namespace KouArge.Repository.Migrations
 
             modelBuilder.Entity("KouArge.Core.Models.EventParticipant", b =>
                 {
-                    b.HasOne("KouArge.Core.Models.AppUser", null)
+                    b.HasOne("KouArge.Core.Models.AppUser", "AppUser")
                         .WithMany("EventParticipantLists")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("KouArge.Core.Models.Event", "Event")
                         .WithMany("EventParticipants")
                         .HasForeignKey("EventId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Event");
                 });
@@ -1413,74 +1872,95 @@ namespace KouArge.Repository.Migrations
                     b.Navigation("Event");
                 });
 
-            modelBuilder.Entity("KouArge.Core.Models.GeneralAssembly", b =>
-                {
-                    b.HasOne("KouArge.Core.Models.AppUser", "User")
-                        .WithOne("GeneralAssembly")
-                        .HasForeignKey("KouArge.Core.Models.GeneralAssembly", "UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("KouArge.Core.Models.GeneralAssemblyApply", b =>
                 {
-                    b.HasOne("KouArge.Core.Models.EventParticipant", null)
-                        .WithMany("GeneralAssemblyApplies")
-                        .HasForeignKey("EventParticipantId");
-                });
-
-            modelBuilder.Entity("KouArge.Core.Models.GeneralAssemblyTeam", b =>
-                {
-                    b.HasOne("KouArge.Core.Models.GeneralAssembly", "GeneralAssembly")
-                        .WithMany()
-                        .HasForeignKey("GeneralAssemblyId")
+                    b.HasOne("KouArge.Core.Models.AppUser", "AppUser")
+                        .WithMany("GeneralAssemblyApplyies")
+                        .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("KouArge.Core.Models.Team", "Team")
-                        .WithMany()
+                        .WithMany("GeneralAssemblyApplies")
                         .HasForeignKey("TeamId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("GeneralAssembly");
+                    b.HasOne("KouArge.Core.Models.Title", "Title")
+                        .WithMany("GeneralAssemblyApplies")
+                        .HasForeignKey("TitleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Team");
+
+                    b.Navigation("Title");
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.SocialMedia", b =>
                 {
-                    b.HasOne("KouArge.Core.Models.GeneralAssembly", "GeneralAssembly")
+                    b.HasOne("KouArge.Core.Models.SocialMediaType", "SocaialMediaType")
                         .WithMany("SocialMedias")
-                        .HasForeignKey("generalAssemblyId")
+                        .HasForeignKey("SocaialMediaTypeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("GeneralAssembly");
-                });
-
-            modelBuilder.Entity("KouArge.Core.Models.SocialMediaType", b =>
-                {
-                    b.HasOne("KouArge.Core.Models.SocialMedia", "SocialMedia")
-                        .WithMany("SocaialMediaType")
-                        .HasForeignKey("SocialMediaId")
+                    b.HasOne("KouArge.Core.Models.TeamMember", "TeamMember")
+                        .WithMany("SocialMedias")
+                        .HasForeignKey("TeamMemberId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("SocialMedia");
+                    b.Navigation("SocaialMediaType");
+
+                    b.Navigation("TeamMember");
                 });
 
-            modelBuilder.Entity("KouArge.Core.Models.Team", b =>
+            modelBuilder.Entity("KouArge.Core.Models.Speaker", b =>
                 {
-                    b.HasOne("KouArge.Core.Models.GeneralAssemblyApply", null)
-                        .WithMany("Team")
-                        .HasForeignKey("GeneralAssemblyApplyId");
+                    b.HasOne("KouArge.Core.Models.Event", "Event")
+                        .WithMany("Speakers")
+                        .HasForeignKey("EventId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("KouArge.Core.Models.GeneralAssembly", null)
-                        .WithMany("Teams")
-                        .HasForeignKey("GeneralAssemblyId");
+                    b.Navigation("Event");
+                });
+
+            modelBuilder.Entity("KouArge.Core.Models.TeamMember", b =>
+                {
+                    b.HasOne("KouArge.Core.Models.AppUser", "AppUser")
+                        .WithMany()
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KouArge.Core.Models.GeneralAssemblyApply", "GeneralAssemblyApply")
+                        .WithMany("TeamMembers")
+                        .HasForeignKey("GeneralAssemblyApplyId")
+                        .IsRequired();
+
+                    b.HasOne("KouArge.Core.Models.Team", "Team")
+                        .WithMany("TeamMembers")
+                        .HasForeignKey("TeamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("KouArge.Core.Models.Title", "Title")
+                        .WithMany()
+                        .HasForeignKey("TitleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("GeneralAssemblyApply");
+
+                    b.Navigation("Team");
+
+                    b.Navigation("Title");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1534,27 +2014,13 @@ namespace KouArge.Repository.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("TeamTeamMember", b =>
-                {
-                    b.HasOne("KouArge.Core.Models.Team", null)
-                        .WithMany()
-                        .HasForeignKey("TeamsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("KouArge.Core.Models.TeamMember", null)
-                        .WithMany()
-                        .HasForeignKey("teamMembersId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
             modelBuilder.Entity("KouArge.Core.Models.AppUser", b =>
                 {
+                    b.Navigation("Certificates");
+
                     b.Navigation("EventParticipantLists");
 
-                    b.Navigation("GeneralAssembly")
-                        .IsRequired();
+                    b.Navigation("GeneralAssemblyApplyies");
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.Department", b =>
@@ -1564,14 +2030,13 @@ namespace KouArge.Repository.Migrations
 
             modelBuilder.Entity("KouArge.Core.Models.Event", b =>
                 {
+                    b.Navigation("Certificates");
+
                     b.Navigation("EventParticipants");
 
                     b.Navigation("EventPictures");
-                });
 
-            modelBuilder.Entity("KouArge.Core.Models.EventParticipant", b =>
-                {
-                    b.Navigation("GeneralAssemblyApplies");
+                    b.Navigation("Speakers");
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.Faculty", b =>
@@ -1579,16 +2044,9 @@ namespace KouArge.Repository.Migrations
                     b.Navigation("Departments");
                 });
 
-            modelBuilder.Entity("KouArge.Core.Models.GeneralAssembly", b =>
-                {
-                    b.Navigation("SocialMedias");
-
-                    b.Navigation("Teams");
-                });
-
             modelBuilder.Entity("KouArge.Core.Models.GeneralAssemblyApply", b =>
                 {
-                    b.Navigation("Team");
+                    b.Navigation("TeamMembers");
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.Notification", b =>
@@ -1598,8 +2056,7 @@ namespace KouArge.Repository.Migrations
 
             modelBuilder.Entity("KouArge.Core.Models.OurFormat", b =>
                 {
-                    b.Navigation("Event")
-                        .IsRequired();
+                    b.Navigation("Event");
                 });
 
             modelBuilder.Entity("KouArge.Core.Models.Semester", b =>
@@ -1607,9 +2064,26 @@ namespace KouArge.Repository.Migrations
                     b.Navigation("Events");
                 });
 
-            modelBuilder.Entity("KouArge.Core.Models.SocialMedia", b =>
+            modelBuilder.Entity("KouArge.Core.Models.SocialMediaType", b =>
                 {
-                    b.Navigation("SocaialMediaType");
+                    b.Navigation("SocialMedias");
+                });
+
+            modelBuilder.Entity("KouArge.Core.Models.Team", b =>
+                {
+                    b.Navigation("GeneralAssemblyApplies");
+
+                    b.Navigation("TeamMembers");
+                });
+
+            modelBuilder.Entity("KouArge.Core.Models.TeamMember", b =>
+                {
+                    b.Navigation("SocialMedias");
+                });
+
+            modelBuilder.Entity("KouArge.Core.Models.Title", b =>
+                {
+                    b.Navigation("GeneralAssemblyApplies");
                 });
 #pragma warning restore 612, 618
         }

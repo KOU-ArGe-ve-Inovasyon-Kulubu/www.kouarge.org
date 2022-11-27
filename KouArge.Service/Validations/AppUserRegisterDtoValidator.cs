@@ -1,10 +1,5 @@
 ﻿using FluentValidation;
 using KouArge.Core.DTOs;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KouArge.Service.Validations
 {
@@ -19,7 +14,7 @@ namespace KouArge.Service.Validations
                 .MinimumLength(2).WithMessage("Lütfen adınızı giriniz.");
 
             int i = 0;
-            RuleFor(x => x.StudentNo).NotNull().WithMessage("Lütfen okul numaranızı giriniz.")
+            RuleFor(x => x.StudentNumber).NotNull().WithMessage("Lütfen okul numaranızı giriniz.")
                 .Length(9, 9).WithMessage("Lütfen okul numaranızı giriniz.")
                 .Must(x => int.TryParse(x, out i)).WithMessage("Lütfen okul numaranızı giriniz.")
                 .Matches(@"^([1-2]\d{2,}|[0-9]\d)$").WithMessage("Lütfen okul numaranızı giriniz.");
@@ -39,12 +34,12 @@ namespace KouArge.Service.Validations
             RuleFor(x => x.Year).InclusiveBetween(0, 7).WithMessage("Lütfen sınıfınızı seçiniz.")
                .NotNull().WithMessage("Lütfen sınıfınızı seçiniz.");
 
-            RuleFor(x => x.Email).NotNull().WithMessage("Lütfen mail adresinizi giriniz.")
-                .EmailAddress().WithMessage("Lütfen geçerli bir mail adresi giriniz.");
+            RuleFor(x => x.Email).NotNull().WithMessage("Lütfen mail adresinizi giriniz.").WithErrorCode("Email")
+                .EmailAddress().WithErrorCode("Email").WithMessage("Lütfen geçerli bir mail adresi giriniz.");
 
 
-            RuleFor(x => x.Password).NotNull().WithMessage("Lütfen şifrenizi giriniz.")
-                .MinimumLength(8).WithMessage("Şifreniz en az 8 karakter olmalıdır.")
+            RuleFor(x => x.Password).NotNull().WithMessage("Lütfen şifrenizi giriniz.").WithErrorCode("Email")
+                .MinimumLength(8).WithMessage("Şifreniz en az 8 karakter olmalıdır.").WithErrorCode("Email")
                 .Matches("^(?=.*?[A-Z ÜÖİŞ])(?=.*?[a-z şöüı])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{1,}$")
                 .WithMessage("Şifrenizde en az bir adet büyük karakter, bir adet sayi ve bir adet özel karakter bulunmalıdır.");
 

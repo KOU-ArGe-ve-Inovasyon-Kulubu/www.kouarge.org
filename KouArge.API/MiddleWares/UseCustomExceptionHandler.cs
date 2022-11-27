@@ -1,8 +1,6 @@
 ﻿using KouArge.Core.DTOs;
 using KouArge.Service.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Abstractions;
 using System.Text.Json;
 
 namespace KouArge.API.MiddleWares
@@ -60,7 +58,7 @@ namespace KouArge.API.MiddleWares
 
                     context.Response.StatusCode = statusCode;
 
-                    var response = CustomResponseDto<NoContentDto>.Fail(statusCode, exceptionFeature.Error.Message);
+                    var response = CustomResponseDto<NoContentDto>.Fail(statusCode, new ErrorViewModel() { ErrorCode = exceptionFeature.Error.Message, ErrorMessage = exceptionFeature.Error.Message });
 
                     await context.Response.WriteAsync(JsonSerializer.Serialize(response));
 

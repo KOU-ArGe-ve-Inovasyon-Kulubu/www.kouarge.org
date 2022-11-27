@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace www.kouarge.org.Controllers
 {
-    
+
     public class AdminController : Controller
     {
         private readonly AppIdentityDbContext _app1;
@@ -31,6 +31,6 @@ namespace www.kouarge.org.Controllers
             return View(roles);
         }
 
-       
+
     }
 }

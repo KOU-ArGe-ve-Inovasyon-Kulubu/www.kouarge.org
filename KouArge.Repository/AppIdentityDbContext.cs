@@ -15,7 +15,7 @@ namespace KouArge.Repository
         public DbSet<EventParticipant> EventParticipants { get; set; }
         public DbSet<EventPicture> EventPictures { get; set; }
         public DbSet<Faculty> Faculties { get; set; }
-        public DbSet<GeneralAssembly> GeneralAssemblies { get; set; }
+        //public DbSet<GeneralAssembly> GeneralAssemblies { get; set; }
         public DbSet<GeneralAssemblyApply> GeneralAssemblyApplies { get; set; }
         public DbSet<OurFormat> OurFormats { get; set; }
         public DbSet<Semester> Semesters { get; set; }
@@ -24,8 +24,13 @@ namespace KouArge.Repository
         public DbSet<SponsorsAndPartners> SponsorsAndPartners { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<TeamMember> TeamMembers { get; set; }
-        public DbSet<GeneralAssemblyTeam> GeneralAssemblyTeams { get; set; }
+        //public DbSet<GeneralAssemblyTeam> GeneralAssemblyTeams { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+
+        public DbSet<Title> Titles { get; set; }
+
+        public DbSet<Certificate> Certificates { get; set; }
+
 
         //***************
         public DbSet<Redirect> Redirects { get; set; }
@@ -159,6 +164,13 @@ namespace KouArge.Repository
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
+
+
+            //modelBuilder.Entity<Department>().HasQueryFilter(p => p.IsActive);
+
+
+
+
 
             base.OnModelCreating(modelBuilder);
         }

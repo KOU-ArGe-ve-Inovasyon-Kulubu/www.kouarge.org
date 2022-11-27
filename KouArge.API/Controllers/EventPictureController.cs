@@ -1,9 +1,10 @@
 ﻿using AutoMapper;
-using KouArge.Core.DTOs.UpdateDto;
 using KouArge.Core.DTOs;
+using KouArge.Core.DTOs.UpdateDto;
 using KouArge.Core.Models;
 using KouArge.Core.Services;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KouArge.API.Controllers
@@ -19,6 +20,7 @@ namespace KouArge.API.Controllers
             _eventPictureService = eventPictureService;
         }
 
+        [AllowAnonymous]
 
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
@@ -28,6 +30,8 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<List<EventPictureDto>>.Success(200, eventPicturesDto));
         }
 
+
+        [AllowAnonymous]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
@@ -37,6 +41,18 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<EventPictureDto>.Success(200, eventPictureDto));
         }
 
+        [AllowAnonymous]
+        [HttpGet("[Action]")]
+        public async Task<IActionResult> GetByEventIdAsync(int eventId)
+        {
+            var eventPicture = await _eventPictureService.GetByEventId(eventId);
+            //hata dondur
+            var eventPictureDto = _mapper.Map<IEnumerable<EventPictureDto>>(eventPicture);
+            return CreateActionResult(CustomResponseDto<IEnumerable<EventPictureDto>>.Success(200, eventPictureDto));
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,Admin,SuperAdmin")]
+
         [HttpPost]
         public async Task<IActionResult> Save(EventPictureDto eventPictureDto)
         {
@@ -45,12 +61,29 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<EventPictureDto>.Success(201, eventPictureDtos));
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,Admin,SuperAdmin")]
+
+
+        [HttpPost("[Action]")]
+        public async Task<IActionResult> SaveRange(IEnumerable<EventPictureDto> eventPictureDto)
+        {
+            var eventPicture = await _eventPictureService.AddRangeAsync(_mapper.Map<IEnumerable<EventPicture>>(eventPictureDto));
+            var eventPictureDtos = _mapper.Map<IEnumerable<EventPictureDto>>(eventPicture);
+            return CreateActionResult(CustomResponseDto<IEnumerable<EventPictureDto>>.Success(201, eventPictureDtos));
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,Admin,SuperAdmin")]
+
         [HttpPut]
         public async Task<IActionResult> UpdateAsync(EventPictureUpdateDto eventPictureDto)
         {
             await _eventPictureService.UpdateAsync(_mapper.Map<EventPicture>(eventPictureDto));
-            return CreateActionResult(CustomResponseDto<EventPicture>.Success(204));
+            return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
+
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,Admin,SuperAdmin")]
+
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
@@ -58,7 +91,19 @@ namespace KouArge.API.Controllers
             var eventPicture = await _eventPictureService.GetByIdAsync(id);
             //hata dondur
             await _eventPictureService.RemoveAsync(eventPicture);
-            return CreateActionResult(CustomResponseDto<EventPicture>.Success(204));
+            return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,Admin,SuperAdmin")]
+
+        [HttpPost("[Action]")]
+        public async Task<IActionResult> SoftDeleteAsync(int id)
+        {
+            var eventPicture = await _eventPictureService.GetByIdAsync(id);
+            //hata dondur
+            eventPicture.IsActive = false;
+            await _eventPictureService.SoftRemove(eventPicture);
+            return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
     }
 }

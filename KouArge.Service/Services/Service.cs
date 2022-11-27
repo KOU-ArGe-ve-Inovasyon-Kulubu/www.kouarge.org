@@ -3,12 +3,7 @@ using KouArge.Core.Services;
 using KouArge.Core.UnitOfWorks;
 using KouArge.Service.Exceptions;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KouArge.Service.Services
 {
@@ -62,6 +57,13 @@ namespace KouArge.Service.Services
             await _unitOfWork.CommitAsync();
         }
 
+        public async
+            Task SoftRemove(T entity)
+        {
+            _repository.Update(entity);
+            await _unitOfWork.CommitAsync();
+        }
+
         public async Task RemoveRangeAsync(IEnumerable<T> entities)
         {
             _repository.RemoveRange(entities);
@@ -78,5 +80,32 @@ namespace KouArge.Service.Services
         {
             return _repository.Where(expression);
         }
+
+        public async Task<IEnumerable<T>> GetAllInclude(params Expression<Func<T, object>>[] includes)
+        {
+            return await _repository.GetAllInclude(includes).ToListAsync();
+        }
+
+        public async Task<IEnumerable<T>> GetAllIncludeFindBy(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
+        {
+            return await _repository.GetAllIncludeFindBy(predicate, includes).ToListAsync();
+        }
+
+        public async Task<IEnumerable<T>> GetAllPredicate(Expression<Func<T, bool>> predicate)
+        {
+            return await _repository.GetAllPredicate(predicate).ToListAsync();
+        }
+
+        public async Task<T> GetByIdPredicateAsync(Expression<Func<T, bool>> predicate)
+        {
+
+            var entity = await _repository.GetByIdPredicateAsync(predicate);
+            if (entity == null)
+                throw new NotFoundException($"{typeof(T).Name}({predicate.Body}) not found.");
+
+            return entity;
+
+        }
+
     }
 }

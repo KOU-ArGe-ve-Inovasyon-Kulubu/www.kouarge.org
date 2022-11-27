@@ -3,7 +3,8 @@ using KouArge.Core.DTOs;
 using KouArge.Core.DTOs.UpdateDto;
 using KouArge.Core.Models;
 using KouArge.Core.Services;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace KouArge.API.Controllers
@@ -36,6 +37,8 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<SponsorAndPartnersDto>.Success(200, sponsorAndPartnerDto));
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,Admin,SuperAdmin")]
+
         [HttpPost]
         public async Task<IActionResult> Save(SponsorAndPartnersDto sponsorAndPartnerDto)
         {
@@ -44,12 +47,16 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<SponsorAndPartnersDto>.Success(201, sponsorAndPartnerDtos));
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,Admin,SuperAdmin")]
+
         [HttpPut]
         public async Task<IActionResult> UpdateAsync(SponsorAndPartnersUpdateDto sponsorAndPartnerDto)
         {
             await _sponsorAndPartnersService.UpdateAsync(_mapper.Map<SponsorsAndPartners>(sponsorAndPartnerDto));
-            return CreateActionResult(CustomResponseDto<SponsorsAndPartners>.Success(204));
+            return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,Admin,SuperAdmin")]
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteAsync(int id)
@@ -57,7 +64,19 @@ namespace KouArge.API.Controllers
             var sponsorAndPartner = await _sponsorAndPartnersService.GetByIdAsync(id);
             //hata dondur
             await _sponsorAndPartnersService.RemoveAsync(sponsorAndPartner);
-            return CreateActionResult(CustomResponseDto<SponsorsAndPartners>.Success(204));
+            return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
+        }
+
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,Admin,SuperAdmin")]
+
+        [HttpPost("[Action]")]
+        public async Task<IActionResult> SoftDeleteAsync(int id)
+        {
+            var sponsorAndPartner = await _sponsorAndPartnersService.GetByIdAsync(id);
+            //hata dondur
+            sponsorAndPartner.IsActive = false;
+            await _sponsorAndPartnersService.SoftRemove(sponsorAndPartner);
+            return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
     }
 }

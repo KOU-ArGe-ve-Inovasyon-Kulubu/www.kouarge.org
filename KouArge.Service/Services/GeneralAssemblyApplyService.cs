@@ -1,21 +1,101 @@
-﻿using KouArge.Core.Models;
+﻿using AutoMapper;
+using KouArge.Core.DTOs;
+using KouArge.Core.Models;
 using KouArge.Core.Repositories;
 using KouArge.Core.Services;
+using KouArge.Core.Tokens;
 using KouArge.Core.UnitOfWorks;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using KouArge.Service.Exceptions;
 
 namespace KouArge.Service.Services
 {
     public class GeneralAssemblyApplyService : Service<GeneralAssemblyApply>, IGeneralAssemblyApplyService
     {
-        public GeneralAssemblyApplyService(IUnitOfWork unitOfWork, IGenericRepository<GeneralAssemblyApply> repository) : base(unitOfWork, repository)
+        private readonly IGeneralAssemblyApplyRepository _generalAssemblyApplyRepository;
+        private readonly IMapper _mapper;
+        private readonly ITokenHandler _tokenHandler;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly ITeamMemberRepository _teamMemberRepository;
+        public GeneralAssemblyApplyService(IUnitOfWork unitOfWork, IGenericRepository<GeneralAssemblyApply> repository, IGeneralAssemblyApplyRepository generalAssemblyApplyRepository, IMapper mapper, ITokenHandler tokenHandler, ITeamMemberRepository teamMemberRepository) : base(unitOfWork, repository)
         {
+            _generalAssemblyApplyRepository = generalAssemblyApplyRepository;
+            _mapper = mapper;
+            _tokenHandler = tokenHandler;
+            _unitOfWork = unitOfWork;
+            _teamMemberRepository = teamMemberRepository;
         }
 
-     
+
+        public async Task DuplicateData(int teamId, string userId, int titleId)
+        {
+            var data = await _generalAssemblyApplyRepository.DuplicateData(teamId, userId, titleId);
+
+            if (data)
+                throw new ClientSideException("Dublicate data");
+        }
+
+        public async Task<CustomResponseDto<GeneralAssemblyApplyDto>> GetByUserId(int id,string Token)
+        {
+            var decodedtoken = _tokenHandler.DecodeToken(Token);
+            var userId = decodedtoken.FirstOrDefault(x => x.Type == "UserId")?.Value;
+            var generalAssemblyApply = _generalAssemblyApplyRepository.GetByUserId(userId, id);
+
+            if(generalAssemblyApply==null)
+                throw new ClientSideException("Notfound data");
+
+            var generalAssemblyApplyDto = _mapper.Map<GeneralAssemblyApplyDto>(generalAssemblyApply);
+
+            return CustomResponseDto<GeneralAssemblyApplyDto>.Success(200, generalAssemblyApplyDto);
+
+        }
+
+        public async Task<CustomResponseDto<GeneralAssemblyApplyDto>> AddAsync(string token, GeneralAssemblyApply generalAssemblyApply)
+        {
+
+            var decodedtoken = _tokenHandler.DecodeToken(token);
+            var userId = decodedtoken.FirstOrDefault(x => x.Type == "UserId")?.Value;
+
+
+            generalAssemblyApply.AppUserId = userId;
+
+            //if (userId != generalAssemblyApply.AppUserId)
+            //    throw new NotFoundException($"{typeof(AppUser).Name}({userId}) not found.");
+
+            //var user = await _userManager.FindByIdAsync(userId);
+
+            //if (user == null)
+            //    throw new NotFoundException($"{typeof(AppUser).Name}({userId}) not found.");
+
+            var generalAssemblyApplys = await AddAsync(generalAssemblyApply);
+            var generalAssemblyApplyDto = _mapper.Map<GeneralAssemblyApplyDto>(generalAssemblyApplys);
+
+            return CustomResponseDto<GeneralAssemblyApplyDto>.Success(201, generalAssemblyApplyDto);
+        }
+
+        public async Task<CustomResponseDto<NoContentDto>> RemoveAsync(DeleteDto deleteDto)
+        {
+            var decodedtoken = _tokenHandler.DecodeToken(deleteDto.Token);
+            var userId = decodedtoken.FirstOrDefault(x => x.Type == "UserId")?.Value;
+
+            var gApply = await _generalAssemblyApplyRepository.GetByIdAsync(deleteDto.Id);
+
+            if (gApply == null || gApply.AppUserId != userId)
+                throw new ClientSideException("User not found.");
+
+            var teammember = await _teamMemberRepository.GetByGeneralAssemblyApplyId(userId, gApply.Id);
+
+            if (teammember == null)
+                throw new ClientSideException("User not found.");
+
+            _teamMemberRepository.Remove(teammember);
+
+            _generalAssemblyApplyRepository.Remove(gApply);
+
+            await _unitOfWork.CommitAsync();
+
+            return CustomResponseDto<NoContentDto>.Success(204);
+
+        }
+
     }
 }

@@ -1,11 +1,6 @@
 ﻿using KouArge.Core.Models;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace KouArge.Repository.Seeds
 {
@@ -17,9 +12,10 @@ namespace KouArge.Repository.Seeds
             builder.HasData(new Notification()
             {
                 Id = 1,
-                Email =1,
-                Sms =1,
+                Email = 1,
+                Sms = 1,
                 CreatedAt = DateTime.Now,
+                IsActive = true,
             },
             new Notification()
             {
@@ -27,6 +23,8 @@ namespace KouArge.Repository.Seeds
                 Email = 1,
                 Sms = 0,
                 CreatedAt = DateTime.Now,
+                IsActive = true,
+
             },
             new Notification()
             {
@@ -34,6 +32,8 @@ namespace KouArge.Repository.Seeds
                 Email = 0,
                 Sms = 1,
                 CreatedAt = DateTime.Now,
+                IsActive = true,
+
             },
             new Notification()
             {
@@ -41,6 +41,8 @@ namespace KouArge.Repository.Seeds
                 Email = 0,
                 Sms = 0,
                 CreatedAt = DateTime.Now,
+                IsActive = true,
+
             });
         }
     }

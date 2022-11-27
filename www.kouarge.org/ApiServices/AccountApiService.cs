@@ -1,10 +1,9 @@
 ﻿using KouArge.Core.DTOs;
 using KouArge.Core.Services.ApiService;
-using KouArge.Service.Exceptions;
 
 namespace www.kouarge.org.ApiServices
 {
-    public class AccountApiService: IAccountApiService
+    public class AccountApiService : IAccountApiService
     {
         private readonly HttpClient _httpClient;
 
@@ -13,7 +12,6 @@ namespace www.kouarge.org.ApiServices
             _httpClient = httpClient;
         }
 
-
         public async Task<AppUserDto> Login(AppUserLoginDto user)
         {
             var response = await _httpClient.PostAsJsonAsync("Account/Login", user);
@@ -21,7 +19,7 @@ namespace www.kouarge.org.ApiServices
 
             if (!response.IsSuccessStatusCode)
             {
-                return new AppUserDto() { Errors = responseBody.Errors, ErrorStatus = responseBody.ErrorStatus };
+                return new AppUserDto() { Errors = responseBody.Errors };
             }
 
             return responseBody.Data;
@@ -35,7 +33,7 @@ namespace www.kouarge.org.ApiServices
             //responseBody.Errors!=null
             if (!response.IsSuccessStatusCode)
             {
-                return new AppUserDto() { Errors = responseBody.Errors, ErrorStatus = responseBody.ErrorStatus };
+                return new AppUserDto() { Errors = responseBody.Errors };
             }
 
             return responseBody.Data;
@@ -48,9 +46,9 @@ namespace www.kouarge.org.ApiServices
 
             if (!response.IsSuccessStatusCode)
             {
-                return new AppUserDto() { Errors = responseBody.Errors, ErrorStatus = responseBody.ErrorStatus };
+                return new AppUserDto() { Errors = responseBody.Errors };
             }
-          
+
             return responseBody.Data;
         }
     }

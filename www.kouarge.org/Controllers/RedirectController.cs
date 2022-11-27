@@ -1,16 +1,14 @@
-﻿using KouArge.Core.Services;
-using KouArge.Service.Services;
+﻿using KouArge.Core.Services.ApiService;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
-using www.kouarge.org.ApiServices;
 
 namespace www.kouarge.org.Controllers
 {
     public class RedirectController : Controller
     {
 
-        private readonly IRedirectService _redirectService;
-        public RedirectController(IRedirectService service)
+        private readonly IRedirectApiService _redirectService;
+        public RedirectController(IRedirectApiService service)
         {
             _redirectService = service;
         }
@@ -35,8 +33,8 @@ namespace www.kouarge.org.Controllers
             if (url == null)
                 return RedirectToAction("Error", "Department");
 
-            return Redirect(url);
-        
+            return Redirect(url.Data);
+
         }
 
         [Route("[Action]")]
@@ -50,7 +48,7 @@ namespace www.kouarge.org.Controllers
             if (url == null)
                 return RedirectToAction("Error", "Department");
 
-            return Redirect(url);
+            return Redirect(url.Data);
 
         }
     }

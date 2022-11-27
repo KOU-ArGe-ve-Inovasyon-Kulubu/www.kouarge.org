@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace KouArge.Core.DTOs
 {
@@ -15,7 +10,7 @@ namespace KouArge.Core.DTOs
         [Display(Name = "Soyad:")]
         public string Surname { get; set; }
         [Display(Name = "Öğrenci Numarası:")]
-        public string StudentNo { get; set; }
+        public string StudentNumber { get; set; }
         [Display(Name = "Telefon Numarası:")]
         public string PhoneNumber { get; set; }
 
@@ -39,13 +34,13 @@ namespace KouArge.Core.DTOs
         [Display(Name = "KVKK")]
         public bool KVKK { get; set; }
         public bool NotificationId { get; set; } = true;
-        public int Status { get; set; }
+        public bool IsActive { get; set; }
 
         [JsonIgnore]
-        public List<string> Errors { get; set; }
+        public List<ErrorViewModel> Errors { get; set; }
 
-        [JsonIgnore]
-        public int ErrorStatus { get; set; }
+        //[JsonIgnore]
+        //public int ErrorStatus { get; set; }
 
     }
 }

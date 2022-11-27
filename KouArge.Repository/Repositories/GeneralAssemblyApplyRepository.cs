@@ -1,10 +1,6 @@
 ﻿using KouArge.Core.Models;
 using KouArge.Core.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace KouArge.Repository.Repositories
 {
@@ -13,5 +9,17 @@ namespace KouArge.Repository.Repositories
         public GeneralAssemblyApplyRepository(AppIdentityDbContext context) : base(context)
         {
         }
+
+        public async Task<GeneralAssemblyApply> GetByUserId(string userId,int Id)
+        {
+            return await _context.GeneralAssemblyApplies.Where(x => x.Id == Id && x.AppUserId == userId).FirstOrDefaultAsync();
+        }
+        public async Task<bool> DuplicateData(int teamId, string userId, int titleId)
+        {
+            return await _context.GeneralAssemblyApplies.AnyAsync(x => x.TeamId == teamId && x.AppUserId == userId && x.TitleId == titleId && x.AppStatus == 0 || x.AppStatus == 1);
+
+            //return await _context.GeneralAssemblyApplies.FirstOrDefaultAsync(x => x.TeamId == teamId && x.AppUserId == userId && x.TitleId == titleId && x.AppStatus == 0 || x.AppStatus == 1);
+        }
     }
+
 }

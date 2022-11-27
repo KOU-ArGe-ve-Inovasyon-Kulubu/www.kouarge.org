@@ -1,7 +1,6 @@
 ﻿using KouArge.Core.DTOs;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Abstractions;
 using System.Net;
 
 namespace KouArge.API.MiddleWares.UseAuthorizeExceptionHandler
@@ -28,7 +27,7 @@ namespace KouArge.API.MiddleWares.UseAuthorizeExceptionHandler
                         var routeData = httpContext.GetRouteData();
                         var actionContext = new ActionContext(httpContext, routeData, new ActionDescriptor());
 
-                        var data = CustomResponseDto<NoContentDto>.Fail(401, "Giriş yapın.", 3);
+                        var data = CustomResponseDto<NoContentDto>.Fail(401, new ErrorViewModel() { ErrorCode = "Unauthorized", ErrorMessage = "Giriş Yapın." });
 
                         var result = new ObjectResult(data) { StatusCode = (int)HttpStatusCode.Unauthorized };
                         await result.ExecuteResultAsync(actionContext);
@@ -45,7 +44,7 @@ namespace KouArge.API.MiddleWares.UseAuthorizeExceptionHandler
                             var routeData = httpContext.GetRouteData();
                             var actionContext = new ActionContext(httpContext, routeData, new ActionDescriptor());
 
-                            var data = CustomResponseDto<NoContentDto>.Fail(403, "Yetkisiz giriş.", 3);
+                            var data = CustomResponseDto<NoContentDto>.Fail(403, new ErrorViewModel() { ErrorCode = "Forbidden", ErrorMessage = "Yetkisiz Giriş." });
 
                             var result = new ObjectResult(data) { StatusCode = (int)HttpStatusCode.Forbidden };
                             await result.ExecuteResultAsync(actionContext);

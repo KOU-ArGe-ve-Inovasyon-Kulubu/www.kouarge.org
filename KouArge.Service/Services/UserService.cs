@@ -1,151 +1,145 @@
 ﻿using AutoMapper;
 using KouArge.Core.DTOs;
+using KouArge.Core.DTOs.UpdateDto;
 using KouArge.Core.Models;
+using KouArge.Core.Repositories;
 using KouArge.Core.Services;
 using KouArge.Core.Tokens;
 using KouArge.Service.Exceptions;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KouArge.Service.Services
 {
     public class UserService : IUserService
     {
+        private readonly IUserRepository _userRepository;
         private readonly UserManager<AppUser> _userManager;
-        private readonly SignInManager<AppUser> _signInManager;
-        private readonly RoleManager<AppRole> _roleManager;
         private readonly IMapper _mapper;
         private readonly ITokenHandler _tokenHandler;
 
-        public UserService(UserManager<AppUser> userManager, IMapper mapper, SignInManager<AppUser> signInManager, ITokenHandler tokenHandler, RoleManager<AppRole> roleManager)
+
+        public UserService(IUserRepository userRepository, UserManager<AppUser> userManager, IMapper mapper, ITokenHandler tokenHandler)
         {
+            _userRepository = userRepository;
             _userManager = userManager;
-            _signInManager = signInManager;
             _mapper = mapper;
             _tokenHandler = tokenHandler;
-            _roleManager = roleManager;
         }
 
-        public async Task<CustomResponseDto<AppUserDto>> Login(AppUserLoginDto appuser)
+        public async Task<CustomResponseDto<AppUserDto>> GetUserDataAsync(string token)
         {
+            var decodedtoken = _tokenHandler.DecodeToken(token);
+            var userId = decodedtoken.FirstOrDefault(x => x.Type == "UserId")?.Value;
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+                throw new NotFoundException($"{typeof(AppUser).Name}({userId}) not found.");
 
-            var user = await _userManager.FindByEmailAsync(appuser.Email);
+            var data = await _userRepository.GetUserDataAsync(user.Id);
+
+            return CustomResponseDto<AppUserDto>.Success(200, _mapper.Map<AppUserDto>(data));
+        }
+
+        public async Task<CustomResponseDto<IEnumerable<EventDto>>> GetUserEventAttended(string token)
+        {
+            var decodedtoken = _tokenHandler.DecodeToken(token);
+            var userId = decodedtoken.FirstOrDefault(x => x.Type == "UserId")?.Value;
+            var data = await _userRepository.GetUserEventAttended(userId).ToListAsync();
+            return CustomResponseDto<IEnumerable<EventDto>>.Success(200, _mapper.Map<IEnumerable<EventDto>>(data));
+        }
+
+        public async Task<CustomResponseDto<NoContentDto>> UpdateUser(AppUserUpdateDto userDto)
+        {
+            var decodedtoken = _tokenHandler.DecodeToken(userDto.AccessToken);
+            var userId = decodedtoken.FirstOrDefault(x => x.Type == "UserId")?.Value;
+
+            var user = await _userManager.FindByIdAsync(userId);
+
+            var listModel = new List<ErrorViewModel>();
+
 
             if (user == null)
-                return CustomResponseDto<AppUserDto>.Fail(400, "E-Mail veya şifre yanlış.", 1);//boyle bir kullanıcı mevcut degil
+                return CustomResponseDto<NoContentDto>.Fail(400, new List<ErrorViewModel>() { new ErrorViewModel() { ErrorCode = "", ErrorMessage = $"{typeof(AppUser).Name}({userId}) not found." } });
 
-            await _signInManager.SignOutAsync();
+            if (userDto.StudentNumber != user.StudentNumber && await _userManager.Users.FirstOrDefaultAsync(x => x.StudentNumber == userDto.StudentNumber) != null)
+            {
+                listModel.Add(new ErrorViewModel() { ErrorCode = "StudentNumber", ErrorMessage = $"Öğrenci numarası {userDto.StudentNumber} zaten kayıtlı." });
+                //return CustomResponseDto<NoContentDto>.Fail(400, $"StudentNumber({userDto.StudentNumber}) zaten kayıtlı.", 1);
+            }
 
-            //SignInResult result = await _signInManager.CheckPasswordSignInAsync(user, appuser.Password, false);
+            if (userDto.Email != user.Email && await _userManager.FindByEmailAsync(userDto.Email) != null)
+            {
+                listModel.Add(new ErrorViewModel() { ErrorCode = "Email", ErrorMessage = $"Email adresi {userDto.Email} zaten kayıtlı." });
+                //return CustomResponseDto<NoContentDto>.Fail(400, $"Email({userDto.Email}) zaten kayıtlı.", 2);
+            }
 
-            SignInResult result = await _signInManager.PasswordSignInAsync(user, appuser.Password, false, false);
+            if (userDto.PhoneNumber != user.PhoneNumber && await _userManager.Users.FirstOrDefaultAsync(x => x.PhoneNumber == userDto.PhoneNumber) != null)
+            {
+                listModel.Add(new ErrorViewModel() { ErrorCode = "PhoneNumber", ErrorMessage = $"Telefon numarası {userDto.PhoneNumber} zaten kayıtlı." });
+                //return CustomResponseDto<NoContentDto>.Fail(400, $"PhoneNumber({userDto.PhoneNumber}) zaten kayıtlı.", 3);
+            }
+
+            user.Name = userDto.Name;
+            user.Surname = userDto.Surname;
+            user.StudentNumber = userDto.StudentNumber;
+            user.Email = userDto.Email;
+            user.PhoneNumber = userDto.PhoneNumber;
+            user.DepartmentId = userDto.DepartmentId;
+            user.Year = userDto.Year;
+            user.IsActive = userDto.IsActive;
+            user.NotificationId = userDto.NotificationId;
+
+            var result = await _userRepository.UpdateUser(user);
 
             if (result.Succeeded)
-            {
-                var roles = await _userManager.GetRolesAsync(user);
-                if (roles.Count == 0)
-                    roles = new List<string>();
-                Token token = _tokenHandler.CreateAccessToken(15, roles.ToList(), user.Id);
-                await UpdateRefreshToken(token, user, 60);
-
-                var data = _mapper.Map<AppUserDto>(user);
-                data.Token = token;
-                return CustomResponseDto<AppUserDto>.Success(200, data);
-
-            }
-            else
-                return CustomResponseDto<AppUserDto>.Fail(400, "E-Mail veya şifre yanlış.", 1);
-        }
-
-        public async Task<CustomResponseDto<AppUserDto>> RefreshTokenLogin(GetRefreshTokenDto getRefreshToken)
-        {
-            var user = await _userManager.Users.FirstOrDefaultAsync(x => x.RefreshToken == getRefreshToken.RefreshToken);
-
-            if (user != null && user.RefreshTokenExpires > DateTime.UtcNow)
-            {
-                var roles = await _userManager.GetRolesAsync(user);
-                if (roles.Count == 0)
-                    roles = new List<string>();
-
-                Token token = _tokenHandler.CreateAccessToken(15, roles.ToList(), user.Id);
-                await UpdateRefreshToken(token, user, 60);
-
-                var data = _mapper.Map<AppUserDto>(user);
-                data.Token = token;
-
-                return CustomResponseDto<AppUserDto>.Success(200, data);
-            }
-            else
-                throw new UnAuthorizedException("401");
-            //return CustomResponseDto<AppUserDto>.Fail(401, "UnAuthorizedException.", 1);
-
-
-        }
-
-        public async Task<CustomResponseDto<AppUserDto>> Register(AppUserRegisterDto appuserRegisterDto)
-        {
-            if (await _userManager.Users.FirstOrDefaultAsync(x => x.StudentNo == appuserRegisterDto.StudentNo) != null)
-                return CustomResponseDto<AppUserDto>.Fail(400, $"StudentNumber({appuserRegisterDto.StudentNo}) already register.", 1);
-
-            if (await _userManager.FindByEmailAsync(appuserRegisterDto.Email) != null)
-                return CustomResponseDto<AppUserDto>.Fail(400, $"Email({appuserRegisterDto.Email}) already register.", 2);
-
-            if (await _userManager.Users.FirstOrDefaultAsync(x => x.PhoneNumber == appuserRegisterDto.PhoneNumber) != null)
-                return CustomResponseDto<AppUserDto>.Fail(400, $"PhoneNumber({appuserRegisterDto.PhoneNumber}) already register.", 3);
-
-            //TODO: Department kontrolu yap. Access Token ekle
-
-            var error = new List<string>();
-            appuserRegisterDto.Status = 1;
-
-            var user = _mapper.Map<AppUser>(appuserRegisterDto);
-
-            if (appuserRegisterDto.NotificationId)
-                user.NotificationId = 1;
-            else
-                user.NotificationId = 4;
-
-            user.UserName = appuserRegisterDto.StudentNo;
-            IdentityResult result = await _userManager.CreateAsync(user, appuserRegisterDto.Password);
-
-            Token token = _tokenHandler.CreateAccessToken(15, new List<string>(), user.Id);
-            await UpdateRefreshToken(token, user, 60);
-
-            var data = _mapper.Map<AppUserDto>(user);
-            data.Token = token;
-
-
-            if (result.Succeeded)
-                return CustomResponseDto<AppUserDto>.Success(201, data);
+                return CustomResponseDto<NoContentDto>.Success(204);
             else
             {
+                var list = new List<string>();
                 foreach (var item in result.Errors)
                 {
-                    error.Add(item.Description.ToString());
+                    listModel.Add(new ErrorViewModel() { ErrorCode = item.Code, ErrorMessage = item.Description });
                 }
-                return CustomResponseDto<AppUserDto>.Fail(400, error);
+                return CustomResponseDto<NoContentDto>.Fail(400, listModel);
             }
+
         }
 
-        public async Task UpdateRefreshToken(Token token, AppUser user, int addRefreshTokenLifeTime)
+        //genelKurul başvuruları
+
+        public async Task<CustomResponseDto<IEnumerable<AppUserWithApplyDto>>> GetUserGeneralAssamblyApply(string token)
         {
-            if (user != null)
-            {
-                user.RefreshToken = token.RefreshToken;
-                user.RefreshTokenExpires = token.Expiration.AddSeconds(addRefreshTokenLifeTime);
-                token.RefreshTokenExpiration = token.Expiration.AddSeconds(addRefreshTokenLifeTime);
-                await _userManager.UpdateAsync(user);
-            }
-            else
-                throw new UnAuthorizedException("401");
+            var decodedtoken = _tokenHandler.DecodeToken(token);
+            var userId = decodedtoken.FirstOrDefault(x => x.Type == "UserId")?.Value;
+            var data = await _userRepository.GetUserGeneralAssamblyApply(userId).ToListAsync();
+            return CustomResponseDto<IEnumerable<AppUserWithApplyDto>>.Success(200, _mapper.Map<IEnumerable<AppUserWithApplyDto>>(data));
+        }
+
+        public async Task<CustomResponseDto<IEnumerable<AppUserWithTeamDto>>> GetUserTeam(string token)
+        {
+            var decodedtoken = _tokenHandler.DecodeToken(token);
+            var userId = decodedtoken.FirstOrDefault(x => x.Type == "UserId")?.Value;
+            var data = await _userRepository.GetUserTeam(userId).ToListAsync();
+            return CustomResponseDto<IEnumerable<AppUserWithTeamDto>>.Success(200, _mapper.Map<IEnumerable<AppUserWithTeamDto>>(data));
+        }
+
+        public async Task<CustomResponseDto<IEnumerable<SocialMediaDto>>> GetUserSocialMedias(string token)
+        {
+            var decodedtoken = _tokenHandler.DecodeToken(token);
+            var userId = decodedtoken.FirstOrDefault(x => x.Type == "UserId")?.Value;
+            var data = await _userRepository.GetUserSocialMedias(userId).ToListAsync();
+
+            return CustomResponseDto<IEnumerable<SocialMediaDto>>.Success(200, _mapper.Map<IEnumerable<SocialMediaDto>>(data));
+        }
+
+        public async Task<CustomResponseDto<IEnumerable<AppUserWithCertificas>>> GetUserCertificas(string token)
+        {
+            //sertifica id sine gore.
+            var decodedtoken = _tokenHandler.DecodeToken(token);
+            var userId = decodedtoken.FirstOrDefault(x => x.Type == "UserId")?.Value;
+            var data = await _userRepository.GetUserCertificas(userId).ToListAsync();
+
+            return CustomResponseDto<IEnumerable<AppUserWithCertificas>>.Success(200, _mapper.Map<IEnumerable<AppUserWithCertificas>>(data));
         }
     }
 }

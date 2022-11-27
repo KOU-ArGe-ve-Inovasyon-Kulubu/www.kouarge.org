@@ -1,11 +1,6 @@
 ﻿using KouArge.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace KouArge.Repository.Seeds
 {
@@ -18,14 +13,28 @@ namespace KouArge.Repository.Seeds
                 Id = 1,
                 CreatedAt = DateTime.Now,
                 TeamId = 1,
+                TitleId = 1,
                 Introducing = "Introducing",
-                ApplyTime = "ApplyTime",
+                ApplyTime = DateTime.Now,
                 SituationDescription = "SituationDescription",
-                Staus = 200,
-                UserId = "1",
-                Why="why"
-                
-
+                AppStatus = 0,
+                IsActive = true,
+                AppUserId = "1",
+                Why = "why"
+            },
+            new GeneralAssemblyApply()
+            {
+                Id = 2,
+                CreatedAt = DateTime.Now,
+                TeamId = 1,
+                TitleId = 2,
+                Introducing = "Introducing2",
+                ApplyTime = DateTime.Now,
+                SituationDescription = "SituationDescription2",
+                AppStatus = 1,
+                IsActive = true,
+                AppUserId = "1",
+                Why = "why2"
             });
         }
     }

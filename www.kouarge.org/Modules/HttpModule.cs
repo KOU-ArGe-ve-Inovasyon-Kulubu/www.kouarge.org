@@ -4,6 +4,7 @@ using KouArge.Core.UnitOfWorks;
 using KouArge.Repository.UnitOfWork;
 using KouArge.Service.Services;
 using System.Reflection;
+using www.kouarge.org.ApiServices;
 using Module = Autofac.Module;
 
 namespace www.kouarge.org.Modules
@@ -15,6 +16,8 @@ namespace www.kouarge.org.Modules
             //***
             builder.RegisterType<UnitOfWork>().As<IUnitOfWork>();
             builder.RegisterType<RedirectService>().As<IRedirectService>();
+            builder.RegisterType<FileApiService>();
+
             //***
 
             //builder.RegisterType<TokenHandler>().As<ITokenHandler>();
