@@ -24,7 +24,6 @@ namespace KouArge.API.Controllers
         }
 
         //api/controller_ismi/action    api/Department/DepartmentWithFaculty
-        [AllowAnonymous]
         [HttpGet("[Action]")]
         public async Task<IActionResult> DepartmentWithFaculty()
         {
@@ -32,7 +31,7 @@ namespace KouArge.API.Controllers
 
         }
 
-        [AllowAnonymous]
+
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {

@@ -1,4 +1,5 @@
 ﻿using KouArge.Core.Models;
+using System.Collections.Generic;
 
 namespace KouArge.Core.Repositories
 {
@@ -6,5 +7,7 @@ namespace KouArge.Core.Repositories
     {
         Task<bool> DuplicateData(int teamId, string userId, int titleId);
         Task<GeneralAssemblyApply> GetByUserId(string userId, int Id);
+
+        IQueryable<GeneralAssemblyApply> GetAllWithUser();
     }
 }

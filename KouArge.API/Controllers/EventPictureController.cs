@@ -42,13 +42,10 @@ namespace KouArge.API.Controllers
         }
 
         [AllowAnonymous]
-        [HttpGet("[Action]")]
-        public async Task<IActionResult> GetByEventIdAsync(int eventId)
+        [HttpGet("[Action]/{eventId}")]
+        public async Task<IActionResult> GetAllByEventIdAsync(int eventId)
         {
-            var eventPicture = await _eventPictureService.GetByEventId(eventId);
-            //hata dondur
-            var eventPictureDto = _mapper.Map<IEnumerable<EventPictureDto>>(eventPicture);
-            return CreateActionResult(CustomResponseDto<IEnumerable<EventPictureDto>>.Success(200, eventPictureDto));
+            return CreateActionResult(await _eventPictureService.GetAllByEventId(eventId));
         }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,Admin,SuperAdmin")]

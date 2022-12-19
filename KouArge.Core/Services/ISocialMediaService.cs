@@ -11,5 +11,7 @@ namespace KouArge.Core.Services
         public Task<CustomResponseDto<SocialMediaDto>> GetByIdWithDetailsAsync(int id);
         public Task<CustomResponseDto<NoContentDto>> UpdateAsync(SocialMediaUpdateDto socialMediaDto);
         public Task<CustomResponseDto<NoContentDto>> RemoveAsync(DeleteDto deleteDto);
+        public Task<CustomResponseDto<NoContentDto>> RemoveWithIdAsync(int Id);
+        public Task DuplicateDataId(int socialMediaTypeId, string userId);
     }
 }

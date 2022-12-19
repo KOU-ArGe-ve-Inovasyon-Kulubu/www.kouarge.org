@@ -47,7 +47,7 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<TeamDto>.Success(201, teamDto));
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin,SuperAdmin")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin,SuperAdmin")]
 
         [HttpPut]
         public async Task<IActionResult> Update(TeamUpdateDto newTeamDto)

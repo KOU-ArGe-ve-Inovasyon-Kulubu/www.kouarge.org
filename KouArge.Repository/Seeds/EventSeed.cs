@@ -19,6 +19,7 @@ namespace KouArge.Repository.Seeds
                     Description = "Descript" + i,
                     EventDate = DateTime.Now,
                     Title = "Title" + i,
+                    Adress="adress"+i,
                     ImgBackUrl = "Url" + i,
                     CreatedAt = DateTime.Now,
                     IsActive = true,

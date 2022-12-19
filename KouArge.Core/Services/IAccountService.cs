@@ -14,7 +14,8 @@ namespace KouArge.Core.Services
         public Task<CustomResponseDto<NoContentDto>> DeleteUser(string Token);
         public Task<CustomResponseDto<NoContentDto>> SoftDeleteUser(string Token);
         public Task<CustomResponseDto<NoContentDto>> ChangePassword(ChangePasswordDto data);
+        public Task<CustomResponseDto<UserDecodeToken>> DecodeUserToken(string Token);
 
-
+        public Task<CustomResponseDto<NoContentDto>> DeleteUserWithId(string userId);
     }
 }

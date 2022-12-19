@@ -1,6 +1,6 @@
 ﻿namespace KouArge.Core.DTOs
 {
-    public class SpeakerDto
+    public class SpeakerDto:BaseDto
     {
         public int EventId { get; set; }
         public string Name { get; set; }

@@ -1,4 +1,5 @@
-﻿using KouArge.Core.Models;
+﻿using KouArge.Core.DTOs;
+using KouArge.Core.Models;
 using KouArge.Core.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -19,10 +20,20 @@ namespace KouArge.Repository.Repositories
             _context = context;
         }
 
+        public async Task<IEnumerable<EventParticipant>> GetAllUserEventsWithEventIdAsync(int eventId)
+        {
+            return await _context.EventParticipants.Include(x => x.AppUser).Where(x => x.EventId == eventId).AsNoTracking().ToListAsync();
+        }
+
         public async Task<AppUser> GetUserDataAsync(string UserId)
         {
+            return await _context.Users.Include(x => x.Department).Where(x=>x.Id==UserId).FirstOrDefaultAsync();
+        }
 
-            return await _context.Users.Include(x => x.Department).FirstOrDefaultAsync();
+        public async Task<AppUser> GetUserDataWithStudentNumberAsync(string studentNumber)
+        {
+
+            return await _context.Users.Where(x => x.StudentNumber == studentNumber).FirstOrDefaultAsync();
         }
 
         public IQueryable<Event> GetUserEventAttended(string UserId)
@@ -58,6 +69,13 @@ namespace KouArge.Repository.Repositories
             return data;
         }
 
+        public async Task<GeneralAssemblyApply> GetUserSingleGeneralAssamblyApplyAsync(string UserId,int AppId)
+        {
+            var data = await _context.GeneralAssemblyApplies.Include(x => x.Team).Include(x=>x.AppUser).Include(x => x.Title).Where(x => x.Id==AppId && x.AppUserId == UserId && x.IsActive).FirstOrDefaultAsync();
+
+            return data;
+        }
+
         public IQueryable<TeamMember> GetUserTeam(string UserId)
         {
             var data = _context.TeamMembers.Include(x => x.Team).Include(x => x.Title).Where(x => x.AppUserId == UserId && x.IsActive)
@@ -82,9 +100,14 @@ namespace KouArge.Repository.Repositories
             var data = _context.Certificates.Include(x => x.AppUser).Include(x => x.Event)
                 .Where(x => x.AppUserId == userId).AsQueryable().AsNoTracking();
 
-            var data2 = _context.Users.Include(x => x.Certificates).Where(x => x.Id == userId).AsQueryable().AsNoTracking();
+            //var data2 = _context.Users.Include(x => x.Certificates).Where(x => x.Id == userId).AsQueryable().AsNoTracking();
 
             return data;
+        }
+
+        public IQueryable<AppUser> GetAllUser()
+        {
+            return _context.Users.Include(x=>x.Department).AsQueryable(); 
         }
 
 

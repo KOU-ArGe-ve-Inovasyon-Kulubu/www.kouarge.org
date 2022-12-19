@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using KouArge.Core.DTOs;
 using KouArge.Core.DTOs.UpdateDto;
+using KouArge.Core.DTOs.ViewModel;
 using KouArge.Core.Models;
 using KouArge.Core.Repositories;
 using KouArge.Core.Services;
@@ -27,6 +28,17 @@ namespace KouArge.Service.Services
             _tokenHandler = tokenHandler;
         }
 
+        public async Task<CustomResponseDto<AppUserDto>> GetUserDataWithIdAsync(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+                throw new NotFoundException($"{typeof(AppUser).Name}({userId}) not found.");
+
+            var data = await _userRepository.GetUserDataAsync(user.Id);
+
+            return CustomResponseDto<AppUserDto>.Success(200, _mapper.Map<AppUserDto>(data));
+        }
+
         public async Task<CustomResponseDto<AppUserDto>> GetUserDataAsync(string token)
         {
             var decodedtoken = _tokenHandler.DecodeToken(token);
@@ -47,6 +59,8 @@ namespace KouArge.Service.Services
             var data = await _userRepository.GetUserEventAttended(userId).ToListAsync();
             return CustomResponseDto<IEnumerable<EventDto>>.Success(200, _mapper.Map<IEnumerable<EventDto>>(data));
         }
+
+ 
 
         public async Task<CustomResponseDto<NoContentDto>> UpdateUser(AppUserUpdateDto userDto)
         {
@@ -79,6 +93,9 @@ namespace KouArge.Service.Services
                 //return CustomResponseDto<NoContentDto>.Fail(400, $"PhoneNumber({userDto.PhoneNumber}) zaten kayıtlı.", 3);
             }
 
+            if (listModel.Count > 0)
+                return CustomResponseDto<NoContentDto>.Fail(400, listModel);
+
             user.Name = userDto.Name;
             user.Surname = userDto.Surname;
             user.StudentNumber = userDto.StudentNumber;
@@ -104,6 +121,67 @@ namespace KouArge.Service.Services
             }
 
         }
+
+
+        public async Task<CustomResponseDto<NoContentDto>> UpdateUserWithId(AppUserUpdateViewModel userDto)
+        {
+
+            var user = await _userManager.FindByIdAsync(userDto.Id);
+
+            var listModel = new List<ErrorViewModel>();
+
+            if (user == null)
+                return CustomResponseDto<NoContentDto>.Fail(400, new List<ErrorViewModel>() { new ErrorViewModel() { ErrorCode = "", ErrorMessage = $"{typeof(AppUser).Name}({userDto.Id}) not found." } });
+
+            if (userDto.StudentNumber != user.StudentNumber && await _userManager.Users.FirstOrDefaultAsync(x => x.StudentNumber == userDto.StudentNumber) != null)
+            {
+                listModel.Add(new ErrorViewModel() { ErrorCode = "StudentNumber", ErrorMessage = $"Öğrenci numarası {userDto.StudentNumber} zaten kayıtlı." });
+                //return CustomResponseDto<NoContentDto>.Fail(400, $"StudentNumber({userDto.StudentNumber}) zaten kayıtlı.", 1);
+            }
+
+            if (userDto.Email != user.Email && await _userManager.FindByEmailAsync(userDto.Email) != null)
+            {
+                listModel.Add(new ErrorViewModel() { ErrorCode = "Email", ErrorMessage = $"Email adresi {userDto.Email} zaten kayıtlı." });
+                //return CustomResponseDto<NoContentDto>.Fail(400, $"Email({userDto.Email}) zaten kayıtlı.", 2);
+            }
+
+            if (userDto.PhoneNumber != user.PhoneNumber && await _userManager.Users.FirstOrDefaultAsync(x => x.PhoneNumber == userDto.PhoneNumber) != null)
+            {
+                listModel.Add(new ErrorViewModel() { ErrorCode = "PhoneNumber", ErrorMessage = $"Telefon numarası {userDto.PhoneNumber} zaten kayıtlı." });
+                //return CustomResponseDto<NoContentDto>.Fail(400, $"PhoneNumber({userDto.PhoneNumber}) zaten kayıtlı.", 3);
+            }
+
+            if (listModel.Count > 0)
+                return CustomResponseDto<NoContentDto>.Fail(400, listModel);
+
+
+
+            user.Name = userDto.Name;
+            user.Surname = userDto.Surname;
+            user.StudentNumber = userDto.StudentNumber;
+            user.Email = userDto.Email;
+            user.PhoneNumber = userDto.PhoneNumber;
+            user.DepartmentId = userDto.DepartmentId;
+            user.Year = userDto.Year;
+            user.IsActive = userDto.IsActive;
+            user.NotificationId = userDto.NotificationId;
+
+            var result = await _userRepository.UpdateUser(user);
+
+            if (result.Succeeded)
+                return CustomResponseDto<NoContentDto>.Success(204);
+            else
+            {
+                var list = new List<string>();
+                foreach (var item in result.Errors)
+                {
+                    listModel.Add(new ErrorViewModel() { ErrorCode = item.Code, ErrorMessage = item.Description });
+                }
+                return CustomResponseDto<NoContentDto>.Fail(400, listModel);
+            }
+
+        }
+
 
         //genelKurul başvuruları
 
@@ -140,6 +218,15 @@ namespace KouArge.Service.Services
             var data = await _userRepository.GetUserCertificas(userId).ToListAsync();
 
             return CustomResponseDto<IEnumerable<AppUserWithCertificas>>.Success(200, _mapper.Map<IEnumerable<AppUserWithCertificas>>(data));
+        }
+
+
+        public async Task<CustomResponseDto<IEnumerable<AppUserDto>>> GetAllUser()
+        {
+
+            var data =  _userRepository.GetAllUser();
+            var dataDto = _mapper.Map<IEnumerable<AppUserDto>>(data);
+            return CustomResponseDto<IEnumerable<AppUserDto>>.Success(200, _mapper.Map<IEnumerable<AppUserDto>>(dataDto));
         }
     }
 }

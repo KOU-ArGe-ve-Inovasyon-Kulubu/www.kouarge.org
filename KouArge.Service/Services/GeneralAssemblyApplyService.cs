@@ -6,6 +6,7 @@ using KouArge.Core.Services;
 using KouArge.Core.Tokens;
 using KouArge.Core.UnitOfWorks;
 using KouArge.Service.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace KouArge.Service.Services
 {
@@ -34,13 +35,13 @@ namespace KouArge.Service.Services
                 throw new ClientSideException("Dublicate data");
         }
 
-        public async Task<CustomResponseDto<GeneralAssemblyApplyDto>> GetByUserId(int id,string Token)
+        public async Task<CustomResponseDto<GeneralAssemblyApplyDto>> GetByUserId(int id, string Token)
         {
             var decodedtoken = _tokenHandler.DecodeToken(Token);
             var userId = decodedtoken.FirstOrDefault(x => x.Type == "UserId")?.Value;
             var generalAssemblyApply = _generalAssemblyApplyRepository.GetByUserId(userId, id);
 
-            if(generalAssemblyApply==null)
+            if (generalAssemblyApply == null)
                 throw new ClientSideException("Notfound data");
 
             var generalAssemblyApplyDto = _mapper.Map<GeneralAssemblyApplyDto>(generalAssemblyApply);
@@ -55,19 +56,22 @@ namespace KouArge.Service.Services
             var decodedtoken = _tokenHandler.DecodeToken(token);
             var userId = decodedtoken.FirstOrDefault(x => x.Type == "UserId")?.Value;
 
-
             generalAssemblyApply.AppUserId = userId;
 
-            //if (userId != generalAssemblyApply.AppUserId)
-            //    throw new NotFoundException($"{typeof(AppUser).Name}({userId}) not found.");
+            await _generalAssemblyApplyRepository.AddAsync(generalAssemblyApply);
+            await _unitOfWork.CommitAsync();
 
-            //var user = await _userManager.FindByIdAsync(userId);
+            var generalAssemblyApplyDto = _mapper.Map<GeneralAssemblyApplyDto>(generalAssemblyApply);
 
-            //if (user == null)
-            //    throw new NotFoundException($"{typeof(AppUser).Name}({userId}) not found.");
+            return CustomResponseDto<GeneralAssemblyApplyDto>.Success(201, generalAssemblyApplyDto);
+        }
 
-            var generalAssemblyApplys = await AddAsync(generalAssemblyApply);
-            var generalAssemblyApplyDto = _mapper.Map<GeneralAssemblyApplyDto>(generalAssemblyApplys);
+        public async Task<CustomResponseDto<GeneralAssemblyApplyDto>> AddAsync(GeneralAssemblyApply generalAssemblyApply)
+        {
+            await _generalAssemblyApplyRepository.AddAsync(generalAssemblyApply);
+            await _unitOfWork.CommitAsync();
+
+            var generalAssemblyApplyDto = _mapper.Map<GeneralAssemblyApplyDto>(generalAssemblyApply);
 
             return CustomResponseDto<GeneralAssemblyApplyDto>.Success(201, generalAssemblyApplyDto);
         }
@@ -84,10 +88,10 @@ namespace KouArge.Service.Services
 
             var teammember = await _teamMemberRepository.GetByGeneralAssemblyApplyId(userId, gApply.Id);
 
-            if (teammember == null)
-                throw new ClientSideException("User not found.");
+            if (teammember != null)
+                _teamMemberRepository.Remove(teammember);
 
-            _teamMemberRepository.Remove(teammember);
+            //throw new ClientSideException("User not found.");
 
             _generalAssemblyApplyRepository.Remove(gApply);
 
@@ -97,5 +101,37 @@ namespace KouArge.Service.Services
 
         }
 
+
+        public async Task<CustomResponseDto<NoContentDto>> RemoveByIdAsync(int id)
+        {
+
+
+            var gApply = await _generalAssemblyApplyRepository.GetByIdAsync(id);
+
+            if (gApply == null)
+                throw new ClientSideException("User not found.");
+
+            var teammember = await _teamMemberRepository.GetByGeneralAssemblyApplyId(gApply.AppUserId, gApply.Id);
+
+            if (teammember != null)
+                _teamMemberRepository.Remove(teammember);
+
+            _generalAssemblyApplyRepository.Remove(gApply);
+
+            await _unitOfWork.CommitAsync();
+
+            return CustomResponseDto<NoContentDto>.Success(204);
+
+        }
+
+
+        public async Task<CustomResponseDto<IEnumerable<GeneralAssemblyApplyWithUserDto>>> GetAllWithUserAsync()
+        {
+            var generalAssemblyApply = await _generalAssemblyApplyRepository.GetAllWithUser().ToListAsync();
+            var generalAssemblyApplyDto = _mapper.Map<List<GeneralAssemblyApplyWithUserDto>>(generalAssemblyApply);
+
+            return CustomResponseDto<IEnumerable<GeneralAssemblyApplyWithUserDto>>.Success(200, generalAssemblyApplyDto);
+
+        }
     }
 }

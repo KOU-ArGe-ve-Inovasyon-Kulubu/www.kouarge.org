@@ -17,6 +17,9 @@ namespace KouArge.Repository.Repositories
             if (teamMember != null && teamMember.Id != teamMemberId)
                 return true;
 
+            if (teamMember == null)
+                return false;
+
             // var data = await _context.SocialMedias.FirstOrDefaultAsync(x => x.SocaialMediaTypeId == socialMediaTypeId
             //&& x.TeamMemberId == teamMember.Id);
 
@@ -24,6 +27,19 @@ namespace KouArge.Repository.Repositories
             //    return true;
             //else
             //    return false;
+
+            var data = await _context.SocialMedias.AnyAsync(x => x.SocaialMediaTypeId == socialMediaTypeId
+         && x.TeamMemberId == teamMember.Id);
+
+            return data;
+        }
+
+        public async Task<bool> DuplicateData(int socialMediaTypeId, string userId)
+        {
+            var teamMember = await _context.TeamMembers.FirstOrDefaultAsync(x => x.AppUserId == userId);
+
+            if (teamMember == null)
+                return false;
 
             var data = await _context.SocialMedias.AnyAsync(x => x.SocaialMediaTypeId == socialMediaTypeId
          && x.TeamMemberId == teamMember.Id);

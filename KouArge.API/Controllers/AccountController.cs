@@ -51,6 +51,11 @@ namespace KouArge.API.Controllers
             return CreateActionResult(await _service.Register(user));
         }
 
+        [HttpGet("[Action]/{Token}")]
+        public async Task<IActionResult> DecodeToken(string Token)
+        {
+            return CreateActionResult(await _service.DecodeUserToken(Token));
+        }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin,SuperAdmin")]
 
@@ -62,10 +67,18 @@ namespace KouArge.API.Controllers
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin,SuperAdmin")]
 
-        [HttpDelete]
+        [HttpDelete("{Token}")]
         public async Task<IActionResult> Delete(string Token)
         {
             return CreateActionResult(await _service.DeleteUser(Token));
+        }
+
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin,SuperAdmin")]
+
+        [HttpDelete("[action]/{userId}")]
+        public async Task<IActionResult> DeleteWithUserId(string userId)
+        {
+            return CreateActionResult(await _service.DeleteUserWithId(userId));
         }
 
     }

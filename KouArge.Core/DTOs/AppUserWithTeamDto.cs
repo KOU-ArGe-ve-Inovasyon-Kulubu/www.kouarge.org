@@ -2,6 +2,7 @@
 {
     public class AppUserWithTeamDto : BaseDto
     {
+        public AppUserBasicDto AppUser { get; set; }
         public string AppUserId { get; set; }
         public int GeneralAssemblyApplyId { get; set; }
         public int TeamId { get; set; }

@@ -7,6 +7,8 @@ namespace KouArge.Core.Services
     {
         Task<CustomResponseDto<IEnumerable<EventWithPictureDto>>> GetAllWithDetails();
         Task<CustomResponseDto<EventWithPictureDto>> GetByIdWithDetailsAsync(int id);
+        Task AddReadCountAsync(int id);
+        Task<CustomResponseDto<IEnumerable<EventWithFormatDto>>> GetAllWithFormatAsync();
 
 
     }

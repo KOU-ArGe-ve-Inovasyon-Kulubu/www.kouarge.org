@@ -17,5 +17,15 @@ namespace KouArge.Repository.Repositories
             //return await _context.EventParticipants.SingleOrDefaultAsync(x => x.EventId == eventId && x.AppUserId == userId);
         }
 
+        public async Task<EventParticipant> GetByEventId(int eventId)
+        {
+            return await _context.EventParticipants.Where(x => x.EventId == eventId).FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<EventParticipant>> GetAllByEventIdAsync(int eventId)
+        {
+            return await _context.EventParticipants.Where(x => x.EventId == eventId).ToListAsync();
+        }
+
     }
 }

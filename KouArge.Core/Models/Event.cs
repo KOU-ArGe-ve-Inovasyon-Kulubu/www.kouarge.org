@@ -7,6 +7,9 @@
         public int OurFormatId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+
+        public string Adress { get; set; }
+
         //public string Speaker { get; set; }//TODO: Tablo ekle sosyal medya fotograf ?
         public DateTime EventDate { get; set; }
         public string ImgBackUrl { get; set; }

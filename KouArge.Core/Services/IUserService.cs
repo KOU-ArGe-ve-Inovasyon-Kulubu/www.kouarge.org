@@ -1,5 +1,6 @@
 ﻿using KouArge.Core.DTOs;
 using KouArge.Core.DTOs.UpdateDto;
+using KouArge.Core.DTOs.ViewModel;
 
 namespace KouArge.Core.Services
 {
@@ -12,6 +13,9 @@ namespace KouArge.Core.Services
         Task<CustomResponseDto<IEnumerable<AppUserWithTeamDto>>> GetUserTeam(string token);
         Task<CustomResponseDto<IEnumerable<SocialMediaDto>>> GetUserSocialMedias(string token);
         Task<CustomResponseDto<IEnumerable<AppUserWithCertificas>>> GetUserCertificas(string token);
-
+        Task<CustomResponseDto<AppUserDto>> GetUserDataWithIdAsync(string userId);
+        Task<CustomResponseDto<IEnumerable<AppUserDto>>> GetAllUser();
+        Task<CustomResponseDto<NoContentDto>> UpdateUserWithId(AppUserUpdateViewModel userDto);
+ 
     }
 }

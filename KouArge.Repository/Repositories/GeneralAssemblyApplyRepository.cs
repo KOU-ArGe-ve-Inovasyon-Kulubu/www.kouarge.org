@@ -16,9 +16,17 @@ namespace KouArge.Repository.Repositories
         }
         public async Task<bool> DuplicateData(int teamId, string userId, int titleId)
         {
-            return await _context.GeneralAssemblyApplies.AnyAsync(x => x.TeamId == teamId && x.AppUserId == userId && x.TitleId == titleId && x.AppStatus == 0 || x.AppStatus == 1);
+            
+            return await _context.GeneralAssemblyApplies.AnyAsync(x => x.TeamId == teamId && x.AppUserId == userId && x.TitleId == titleId && (x.AppStatus == 0 || x.AppStatus == 1));
 
             //return await _context.GeneralAssemblyApplies.FirstOrDefaultAsync(x => x.TeamId == teamId && x.AppUserId == userId && x.TitleId == titleId && x.AppStatus == 0 || x.AppStatus == 1);
+        }
+
+        public  IQueryable<GeneralAssemblyApply> GetAllWithUser()
+        {
+            return _context.GeneralAssemblyApplies.Include(x => x.AppUser).Include(x=>x.Team).Include(x=>x.Title)
+                .AsQueryable().AsNoTracking();
+
         }
     }
 

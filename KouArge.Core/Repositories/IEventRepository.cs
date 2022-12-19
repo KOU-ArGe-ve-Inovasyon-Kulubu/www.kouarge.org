@@ -6,6 +6,7 @@ namespace KouArge.Core.Repositories
     {
         IQueryable<Event> GetAllWithDetails();
         Task<Event> GetByIdWithDetailsAsync(int id);
+        IQueryable<Event> GetAllWithFormat();
 
     }
 }

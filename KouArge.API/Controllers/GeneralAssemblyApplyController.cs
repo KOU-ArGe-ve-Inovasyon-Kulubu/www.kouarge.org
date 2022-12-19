@@ -13,14 +13,23 @@ namespace KouArge.API.Controllers
     {
         private readonly IGeneralAssemblyApplyService _generalAssemblyApplyService;
         private readonly IMapper _mapper;
+        private readonly ITeamMemberService _teamMemberService;
 
-        public GeneralAssemblyApplyController(IGeneralAssemblyApplyService generalAssemblyApplyService, IMapper mapper)
+        public GeneralAssemblyApplyController(IGeneralAssemblyApplyService generalAssemblyApplyService, IMapper mapper, ITeamMemberService teamMemberService)
         {
             _generalAssemblyApplyService = generalAssemblyApplyService;
             _mapper = mapper;
+            _teamMemberService = teamMemberService;
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "ReadOnly,TeamManager,Admin,SuperAdmin")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "ReadOnly,TeamManager,Admin,SuperAdmin")]
+
+        [HttpGet("[Action]")]
+        public async Task<IActionResult> GetAllWithUser()
+        {
+            return CreateActionResult(await _generalAssemblyApplyService.GetAllWithUserAsync());
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
@@ -36,7 +45,7 @@ namespace KouArge.API.Controllers
         public async Task<IActionResult> GetById(DeleteDto dto)
         {
             //DeleteDto id ve Token var.
-            return CreateActionResult(await _generalAssemblyApplyService.GetByUserId(dto.Id,dto.Token));
+            return CreateActionResult(await _generalAssemblyApplyService.GetByUserId(dto.Id, dto.Token));
         }
 
 
@@ -48,7 +57,7 @@ namespace KouArge.API.Controllers
         //    return CreateActionResult(CustomResponseDto<GeneralAssemblyApplyDto>.Success(200, generalAssemblyApplyDto));
         //}
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 
         [HttpPost]
         public async Task<IActionResult> Save(GeneralAssemblyApplyDto generalAssemblyApplyDto)
@@ -56,6 +65,14 @@ namespace KouArge.API.Controllers
             await _generalAssemblyApplyService.DuplicateData(generalAssemblyApplyDto.TeamId, generalAssemblyApplyDto.AppUserId, generalAssemblyApplyDto.TitleId);
 
             return CreateActionResult(await _generalAssemblyApplyService.AddAsync(generalAssemblyApplyDto.Token, _mapper.Map<GeneralAssemblyApply>(generalAssemblyApplyDto)));
+        }
+
+        [HttpPost("[Action]")]
+        public async Task<IActionResult> SaveWithId(GeneralAssemblyApplyDto generalAssemblyApplyDto)
+        {
+            await _generalAssemblyApplyService.DuplicateData(generalAssemblyApplyDto.TeamId, generalAssemblyApplyDto.AppUserId, generalAssemblyApplyDto.TitleId);
+
+            return CreateActionResult(await _generalAssemblyApplyService.AddAsync(_mapper.Map<GeneralAssemblyApply>(generalAssemblyApplyDto)));
         }
 
         //[HttpPost]
@@ -72,6 +89,40 @@ namespace KouArge.API.Controllers
         public async Task<IActionResult> Update(GeneralAssemblyApplyUpdateDto newGeneralAssemblyApplyDto)
         {
             await _generalAssemblyApplyService.UpdateAsync(_mapper.Map<GeneralAssemblyApply>(newGeneralAssemblyApplyDto));
+
+            TeamMember teamMember;
+            if (newGeneralAssemblyApplyDto.AppStatus == 1)
+            {
+
+                var data = await _teamMemberService.GetByUserId(newGeneralAssemblyApplyDto.AppUserId);
+
+                if (data == null)
+                {
+                    teamMember = new TeamMember()
+                    {
+                        AppUserId = newGeneralAssemblyApplyDto.AppUserId,
+                        GeneralAssemblyApplyId = newGeneralAssemblyApplyDto.Id,
+                        TeamId = newGeneralAssemblyApplyDto.TeamId,
+                        TitleId = newGeneralAssemblyApplyDto.TitleId,
+                        IsActive = true,
+                        StartDate = DateTime.Now,
+                        ImgUrl = "",
+                    };
+                    await _teamMemberService.AddAsync(teamMember);
+                }
+
+            }
+            else if(newGeneralAssemblyApplyDto.AppStatus == 2)
+            {
+                var data = await _teamMemberService.GetByUserId(newGeneralAssemblyApplyDto.AppUserId);
+
+                if (data != null)
+                {
+                    await _teamMemberService.RemoveAsync(data);
+                }
+            }
+
+
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
         }
 
@@ -81,6 +132,12 @@ namespace KouArge.API.Controllers
         public async Task<IActionResult> Delete(DeleteDto deleteDto)
         {
             return CreateActionResult(await _generalAssemblyApplyService.RemoveAsync(deleteDto));
+        }
+
+        [HttpDelete("[Action]/{id}")]
+        public async Task<IActionResult> DeleteById(int id)
+        {
+            return CreateActionResult(await _generalAssemblyApplyService.RemoveByIdAsync(id));
         }
 
         //[HttpDelete("{id}")]

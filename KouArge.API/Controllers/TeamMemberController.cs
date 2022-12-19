@@ -25,7 +25,25 @@ namespace KouArge.API.Controllers
         }
 
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "ReadOnly,TeamManager,Admin,SuperAdmin")]
+        [HttpGet("[Action]")]
+        public async Task<IActionResult> GetAllWithDetails()
+        {
+            return CreateActionResult(await _teamMemberService.GetAllWithDetails());
+        }
+
+        [HttpGet("[Action]/{id}")]
+        public async Task<IActionResult> GetAllWithDetailsId(int id)
+        {
+            return CreateActionResult(await _teamMemberService.GetAllWithDetails(id));
+        }
+
+        [HttpGet("[Action]/{id}")]
+        public async Task<IActionResult> GetSingleDetailsById(int id)
+        {
+            return CreateActionResult(await _teamMemberService.GetSingleWithDetailsAsync(id));
+        }
+
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "ReadOnly,TeamManager,Admin,SuperAdmin")]
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
@@ -35,7 +53,7 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<List<TeamMemberDto>>.Success(200, teamMemberDto));
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "ReadOnly,TeamManager,Admin,SuperAdmin")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "ReadOnly,TeamManager,Admin,SuperAdmin")]
 
 
         [HttpGet("{id}")]
@@ -51,7 +69,7 @@ namespace KouArge.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Save(TeamMemberDto teamMemberDto)
         {
-            var addRole = await _roleService.AddRoleUserAsync(new AppRoleUserDto() { AppUserId = teamMemberDto.AppUserId, RoleName = "TeamMember" });
+            var addRole = await _roleService.AssignRoleAsync(new AppRoleUserDto() { AppUserId = teamMemberDto.AppUserId, RoleName = "TeamMember" });
 
             if (addRole.Errors != null)
                 throw new ClientSideException("Not found");

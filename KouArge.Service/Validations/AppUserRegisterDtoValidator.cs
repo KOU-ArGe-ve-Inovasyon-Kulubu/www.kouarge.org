@@ -24,7 +24,8 @@ namespace KouArge.Service.Validations
                 .Length(10, 10).WithMessage("Lütfen geçerli bir telefon numarası giriniz.")
                 .Matches(@"^(5(\d{9}))$").WithMessage("Lütfen geçerli bir telefon numarası giriniz.");
 
-            RuleFor(x => x.FacultyId).NotNull().WithMessage("Lütfen fakültenizi seçiniz.");
+            RuleFor(x => x.FacultyId)
+                .NotNull().WithMessage("Lütfen fakültenizi seçiniz."); ;
 
             RuleFor(x => x.KVKK).Equal(true).WithMessage("Lütfen fakültenizi seçiniz.");
 

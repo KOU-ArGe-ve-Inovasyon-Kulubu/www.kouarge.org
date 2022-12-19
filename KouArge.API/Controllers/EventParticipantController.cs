@@ -6,6 +6,7 @@ using KouArge.Core.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace KouArge.API.Controllers
 {
@@ -20,7 +21,14 @@ namespace KouArge.API.Controllers
             _eventParticipantService = eventParticipantService;
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "ReadOnly,Admin,SuperAdmin")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "ReadOnly,Admin,SuperAdmin")]
+
+        [HttpGet("[Action]/{eventId}")]
+        public async Task<IActionResult> GetAllByEventIdAsync(int eventId)
+        {
+            return CreateActionResult(await _eventParticipantService.GetAllByEventIdAsync(eventId));
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
@@ -30,7 +38,7 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<List<EventParticipantDto>>.Success(200, eventParticipantDto));
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "ReadOnly,Admin,SuperAdmin")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "ReadOnly,Admin,SuperAdmin")]
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(int id)
@@ -77,15 +85,20 @@ namespace KouArge.API.Controllers
             return CreateActionResult(await _eventParticipantService.RemoveAsync(deleteDto));
         }
 
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteAsync(DeleteDto deleteDto)
-        //{
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin,SuperAdmin")]
 
-        //    var eventParticipant = await _eventParticipantService.GetByIdAsync(deleteDto.Id);
-        //    //hata dondur
-        //    await _eventParticipantService.RemoveAsync(eventParticipant);
-        //    return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));
-        //}
+        [HttpDelete("[Action]/{eventId}/{userId}")]
+        public async Task<IActionResult> DeleteByUserIdAsync(int eventId, string userId)
+        {
+            return CreateActionResult(await _eventParticipantService.RemoveByUserIdAsync(new DeleteByUserIdDto() { Id=eventId,UserId=userId}));
+        }
+
+        [HttpDelete("[Action]/{id}")]
+        public async Task<IActionResult> DeleteByIdAsync(int id)
+        {
+            return CreateActionResult(await _eventParticipantService.RemoveByIdAsync(id));
+
+        }
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Admin,SuperAdmin")]
 

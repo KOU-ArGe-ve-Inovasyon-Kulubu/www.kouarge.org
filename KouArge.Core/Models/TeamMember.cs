@@ -9,7 +9,7 @@
         public int TeamId { get; set; }
         public int TitleId { get; set; }
         public DateTime StartDate { get; set; }
-        public DateTime? EndDate { get; set; }
+        public System.Nullable<DateTime> EndDate { get; set; }
         public string ImgUrl { get; set; }
         public Title Title { get; set; }
         public AppUser AppUser { get; set; }

@@ -8,9 +8,6 @@ namespace KouArge.Core.DTOs
         public string Password { get; set; }
 
         [JsonIgnore]
-        public List<string> Errors { get; set; }
-
-        [JsonIgnore]
         public int ErrorStatus { get; set; }
     }
 }

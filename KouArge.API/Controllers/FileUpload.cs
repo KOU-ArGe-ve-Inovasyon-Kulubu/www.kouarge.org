@@ -1,4 +1,5 @@
-﻿using KouArge.Service.Exceptions;
+﻿using KouArge.Core.DTOs;
+using KouArge.Service.Exceptions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -17,10 +18,7 @@ namespace KouArge.API.Controllers
             _env = env;
         }
 
-        public class Test
-        {
-            public List<string> Data { get; set; } = new List<string>();
-        }
+    
         public class UploadFile
         {
             public List<IFormFile> files { get; set; }
@@ -31,12 +29,12 @@ namespace KouArge.API.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,TeamManager,TeamMember,Admin,SuperAdmin")]
 
         [HttpPost]
-        public async Task<Test> UploadImage([FromForm] UploadFile data)
+        public async Task<IActionResult> UploadImage([FromForm] UploadFile data)
         {
             try
             {
                 var path = $"/Uploads/{data.Path}/";
-                var list = new Test();
+                var list = new FilePathDto();
                 var time = "-" + DateTime.Now.ToString("yyyyMMddHHmmssfff");
                 string fileName;
 
@@ -55,20 +53,17 @@ namespace KouArge.API.Controllers
                         {
                             file.CopyTo(fileStream);
                             fileStream.Flush();
-                            list.Data.Add(path + fileName);
+                            list.Url.Add(path + fileName);
                         }
                     }
                 }
 
-                return list;
-
+                return CreateActionResult(CustomResponseDto<FilePathDto>.Success(201,list));
             }
             catch
             {
-
                 throw new ClientSideException("FileUpload");
             }
-
 
         }
 

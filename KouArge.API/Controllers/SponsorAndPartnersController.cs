@@ -9,7 +9,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace KouArge.API.Controllers
 {
-    [ApiController]
     public class SponsorAndPartnersController : CustomBaseController
     {
         private readonly IMapper _mapper;
@@ -37,7 +36,7 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<SponsorAndPartnersDto>.Success(200, sponsorAndPartnerDto));
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,Admin,SuperAdmin")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,Admin,SuperAdmin")]
 
         [HttpPost]
         public async Task<IActionResult> Save(SponsorAndPartnersDto sponsorAndPartnerDto)
@@ -50,7 +49,7 @@ namespace KouArge.API.Controllers
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,Admin,SuperAdmin")]
 
         [HttpPut]
-        public async Task<IActionResult> UpdateAsync(SponsorAndPartnersUpdateDto sponsorAndPartnerDto)
+        public async Task<IActionResult> UpdateAsync(SponsorAndPartnersDto sponsorAndPartnerDto)
         {
             await _sponsorAndPartnersService.UpdateAsync(_mapper.Map<SponsorsAndPartners>(sponsorAndPartnerDto));
             return CreateActionResult(CustomResponseDto<NoContentDto>.Success(204));

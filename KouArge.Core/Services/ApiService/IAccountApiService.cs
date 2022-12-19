@@ -6,7 +6,9 @@ namespace KouArge.Core.Services.ApiService
     {
         public Task<AppUserDto> Login(AppUserLoginDto user);
         public Task<AppUserDto> Register(AppUserRegisterDto newUser);
-        public Task<AppUserDto> RefreshTokenLogin(GetRefreshTokenDto refreshToken);
+        public Task<Token> RefreshTokenLogin(GetRefreshTokenDto refreshToken);
+
+        public Task<CustomResponseDto<NoContentDto>> SendResetPasswordMail(ResetPasswordDto email);
 
     }
 }

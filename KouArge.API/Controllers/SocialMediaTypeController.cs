@@ -41,7 +41,6 @@ namespace KouArge.API.Controllers
 
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "Manager,TeamMember,TeamManager,Admin,SuperAdmin")]
 
-
         [HttpPost]
         public async Task<IActionResult> Save(SocialMediaTypeDto socialMediaTypeDto)
         {

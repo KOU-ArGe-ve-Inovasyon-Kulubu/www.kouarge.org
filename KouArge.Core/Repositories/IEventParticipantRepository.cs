@@ -4,6 +4,8 @@ namespace KouArge.Core.Repositories
 {
     public interface IEventParticipantRepository : IGenericRepository<EventParticipant>
     {
-        public Task<bool> DuplicateData(int eventId, string userId);
+        Task<bool> DuplicateData(int eventId, string userId);
+        Task<EventParticipant> GetByEventId(int eventId);
+        Task<IEnumerable<EventParticipant>> GetAllByEventIdAsync(int eventId);
     }
 }

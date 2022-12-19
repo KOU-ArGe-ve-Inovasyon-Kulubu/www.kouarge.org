@@ -81,6 +81,14 @@ namespace KouArge.API.Controllers
             return CreateActionResult(await _socialMediaService.RemoveAsync(deleteDto));
         }
 
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "TeamManager,Admin,SuperAdmin")]
+
+        [HttpDelete("[Action]/{Id}")]
+        public async Task<IActionResult> DeleteWithIdAsync(int Id)
+        {
+            return CreateActionResult(await _socialMediaService.RemoveWithIdAsync(Id));
+        }
+
         //[HttpDelete("{id}")]
         //public async Task<IActionResult> DeleteAsync(int id)
         //{

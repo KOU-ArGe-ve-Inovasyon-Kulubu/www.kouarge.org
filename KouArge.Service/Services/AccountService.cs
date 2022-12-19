@@ -6,6 +6,8 @@ using KouArge.Core.Tokens;
 using KouArge.Service.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
 
 namespace KouArge.Service.Services
 {
@@ -16,14 +18,18 @@ namespace KouArge.Service.Services
         private readonly IMapper _mapper;
         private readonly ITokenHandler _tokenHandler;
         private readonly IMailService _mailService;
+        private readonly IDepartmentService _departmentService;
 
-        public AccountService(UserManager<AppUser> userManager, IMapper mapper, SignInManager<AppUser> signInManager, ITokenHandler tokenHandler, IMailService mailService)
+
+
+        public AccountService(UserManager<AppUser> userManager, IMapper mapper, SignInManager<AppUser> signInManager, ITokenHandler tokenHandler, IMailService mailService, IDepartmentService departmentService)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _mapper = mapper;
             _tokenHandler = tokenHandler;
             _mailService = mailService;
+            _departmentService = departmentService;
         }
 
         public async Task<CustomResponseDto<AppUserDto>> Login(AppUserLoginDto appuser)
@@ -67,8 +73,8 @@ namespace KouArge.Service.Services
                 var roles = await _userManager.GetRolesAsync(user);
                 if (roles.Count == 0)
                     roles = new List<string>();
-                Token token = _tokenHandler.CreateAccessToken(60, roles.ToList(), user.Id);
-                await UpdateRefreshToken(token, user, 60);
+                Token token = _tokenHandler.CreateAccessToken(2, roles.ToList(), user);
+                await UpdateRefreshToken(token, user, 3);
 
                 var data = _mapper.Map<AppUserDto>(user);
                 data.Token = token;
@@ -77,11 +83,14 @@ namespace KouArge.Service.Services
             }
             else
             {
-                await _userManager.AccessFailedAsync(user);
+                //await _userManager.AccessFailedAsync(user);
+
+                user.AccessFailedCount += 1;
+                await _userManager.UpdateAsync(user);
 
                 int fail = await _userManager.GetAccessFailedCountAsync(user);
 
-                if (fail == 3)
+                if (fail == 5)
                 {
                     await _userManager.SetLockoutEndDateAsync(user, new DateTimeOffset(DateTime.Now.AddMinutes(10)));
                     listModel.Add(new ErrorViewModel() { ErrorCode = "Lock", ErrorMessage = $"Hesabınız 5 başarısız girişten dolayı 10 dakika süreyle kilitlenmiştir. Lütfen daha sonra tekrar deneyiniz." });
@@ -108,8 +117,8 @@ namespace KouArge.Service.Services
                 if (roles.Count == 0)
                     roles = new List<string>();
 
-                Token token = _tokenHandler.CreateAccessToken(60, roles.ToList(), user.Id);
-                await UpdateRefreshToken(token, user, 60);
+                Token token = _tokenHandler.CreateAccessToken(2, roles.ToList(), user);
+                await UpdateRefreshToken(token, user, 3);
 
                 var data = _mapper.Map<AppUserDto>(user);
                 data.Token = token;
@@ -119,6 +128,29 @@ namespace KouArge.Service.Services
             else
                 throw new UnAuthorizedException("401");
             //return CustomResponseDto<AppUserDto>.Fail(401, "UnAuthorizedException.", 1);
+        }
+
+        public async Task<CustomResponseDto<UserDecodeToken>> DecodeUserToken(string Token)
+        {
+            var user = _tokenHandler.DecodeToken(Token);
+
+            var data = new UserDecodeToken();
+            data.Roles = new List<string>();
+
+            var roles = user.Where(x => x.Type == ClaimTypes.Role).ToList();
+
+            data.Roles.AddRange(roles.Select(x => x.Value).ToList());
+
+            data.Claims = user;
+            data.Id = user.FirstOrDefault(c => c.Type == ClaimTypes.Sid)?.Value;
+            data.Email = user.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            data.Name = user.FirstOrDefault(c => c.Type == ClaimTypes.Name)?.Value;
+            data.StudentNumber = user.FirstOrDefault(c => c.Type == "StudentNumber")?.Value;
+
+
+            return CustomResponseDto<UserDecodeToken>.Success(200, data);
+
+
         }
         public async Task<CustomResponseDto<NoContentDto>> ResetPassword(ResetPasswordDto email)
         {
@@ -187,6 +219,9 @@ namespace KouArge.Service.Services
 
             }
 
+            if(listModel.Count>0)
+                return CustomResponseDto<AppUserDto>.Fail(400, listModel);
+
 
             appuserRegisterDto.IsActive = true;
 
@@ -200,12 +235,15 @@ namespace KouArge.Service.Services
             user.UserName = appuserRegisterDto.StudentNumber;
             var result = await _userManager.CreateAsync(user, appuserRegisterDto.Password);
 
-            Token token = _tokenHandler.CreateAccessToken(60, new List<string>(), user.Id);
-            await UpdateRefreshToken(token, user, 60);
+            Token token = _tokenHandler.CreateAccessToken(2, new List<string>(), user);
+            await UpdateRefreshToken(token, user, 3);
 
             var data = _mapper.Map<AppUserDto>(user);
             data.Token = token;
 
+            var department = await _departmentService.GetByIdAsync(data.DepartmentId);
+            data.Department = _mapper.Map<DepartmentDto>(department);
+    
 
             if (result.Succeeded)
                 return CustomResponseDto<AppUserDto>.Success(201, data);
@@ -223,8 +261,8 @@ namespace KouArge.Service.Services
             if (user != null)
             {
                 user.RefreshToken = token.RefreshToken;
-                user.RefreshTokenExpires = token.Expiration.AddDays(addRefreshTokenLifeTimeDays);
-                token.RefreshTokenExpiration = token.Expiration.AddDays(addRefreshTokenLifeTimeDays);
+                user.RefreshTokenExpires = token.Expiration.AddSeconds(addRefreshTokenLifeTimeDays);
+                token.RefreshTokenExpiration = token.Expiration.AddSeconds(addRefreshTokenLifeTimeDays);
                 await _userManager.UpdateAsync(user);
             }
             else
@@ -283,6 +321,19 @@ namespace KouArge.Service.Services
         {
             var decodedtoken = _tokenHandler.DecodeToken(Token);
             var userId = decodedtoken.FirstOrDefault(x => x.Type == "UserId")?.Value;
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user != null)
+            {
+                await _userManager.DeleteAsync(user);
+                return CustomResponseDto<NoContentDto>.Success(204);
+            }
+            return CustomResponseDto<NoContentDto>.Fail(400, new ErrorViewModel() { ErrorCode = "NotFound", ErrorMessage = "Kullanıcı bulunamadı" });
+
+        }
+
+        public async Task<CustomResponseDto<NoContentDto>> DeleteUserWithId(string userId)
+        {
             var user = await _userManager.FindByIdAsync(userId);
 
             if (user != null)

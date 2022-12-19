@@ -15,16 +15,18 @@ namespace KouArge.Service.Services
     {
         private readonly ISocialMediaRepository _socialMediaRepository;
         private readonly ITeamMemberRepository _teamMemberRepository;
+        private readonly IUserService _userService;
         private readonly IMapper _mapper;
         private readonly ITokenHandler _tokenHandler;
         private readonly IUnitOfWork _unitOfWork;
-        public SocialMediaService(IUnitOfWork unitOfWork, IGenericRepository<SocialMedia> repository, ISocialMediaRepository socialMediaRepository, IMapper mapper, ITokenHandler tokenHandler, ITeamMemberRepository teamMemberRepository) : base(unitOfWork, repository)
+        public SocialMediaService(IUnitOfWork unitOfWork, IGenericRepository<SocialMedia> repository, ISocialMediaRepository socialMediaRepository, IMapper mapper, ITokenHandler tokenHandler, ITeamMemberRepository teamMemberRepository, IUserService userService) : base(unitOfWork, repository)
         {
             _socialMediaRepository = socialMediaRepository;
             _mapper = mapper;
             _tokenHandler = tokenHandler;
             _teamMemberRepository = teamMemberRepository;
             _unitOfWork = unitOfWork;
+            _userService = userService;
         }
 
         public async Task DuplicateData(int socialMediaTypeId, string token, int teamMemberId)
@@ -44,6 +46,12 @@ namespace KouArge.Service.Services
                 throw new ClientSideException("Dublicate data");
         }
 
+        public async Task DuplicateDataId(int socialMediaTypeId, string userId)
+        {
+            var data = await _socialMediaRepository.DuplicateData(socialMediaTypeId, userId);
+            if (data)
+                throw new ClientSideException("Dublicate data");
+        }
 
         //public async Task DuplicateData(int socialMediaTypeId)
         //{
@@ -103,6 +111,21 @@ namespace KouArge.Service.Services
             var teamMember = await _teamMemberRepository.GetByUserId(userId, socialMedia.TeamMemberId);
 
             if (teamMember == null || socialMedia.TeamMemberId != teamMember.Id)
+                throw new ClientSideException("User not found.");
+
+            _socialMediaRepository.Remove(socialMedia);
+            await _unitOfWork.CommitAsync();
+
+            return CustomResponseDto<NoContentDto>.Success(204);
+
+        }
+
+        public async Task<CustomResponseDto<NoContentDto>> RemoveWithIdAsync(int Id)
+        {
+       
+            var socialMedia = await _socialMediaRepository.GetByIdAsync(Id);
+
+            if (socialMedia == null)
                 throw new ClientSideException("User not found.");
 
             _socialMediaRepository.Remove(socialMedia);

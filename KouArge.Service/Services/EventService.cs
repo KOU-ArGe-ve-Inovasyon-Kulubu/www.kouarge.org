@@ -26,6 +26,13 @@ namespace KouArge.Service.Services
             return CustomResponseDto<IEnumerable<EventWithPictureDto>>.Success(200, dataDto.AsEnumerable());
         }
 
+        public async Task<CustomResponseDto<IEnumerable<EventWithFormatDto>>> GetAllWithFormatAsync()
+        {
+            var data = await _eventRepository.GetAllWithFormat().OrderByDescending(x => x.EventDate).ToListAsync();
+            var dataDto = _mapper.Map<IEnumerable<EventWithFormatDto>>(data);
+            return CustomResponseDto<IEnumerable<EventWithFormatDto>>.Success(200, dataDto.AsEnumerable());
+        }
+
         public async Task<CustomResponseDto<EventWithPictureDto>> GetByIdWithDetailsAsync(int id)
         {
             var data = await _eventRepository.GetByIdWithDetailsAsync(id);
@@ -37,6 +44,18 @@ namespace KouArge.Service.Services
             return CustomResponseDto<EventWithPictureDto>.Success(200, dataDto);
         }
 
+        public async Task AddReadCountAsync(int id)
+        {
+            var data = await _eventRepository.GetByIdWithDetailsAsync(id);
+
+            if (data == null)
+                throw new NotFoundException($"{typeof(Event).Name}({id}) not found.");
+
+            data.ReadCount += 1;
+
+            await UpdateAsync(data);
+  
+        }
 
     }
 }

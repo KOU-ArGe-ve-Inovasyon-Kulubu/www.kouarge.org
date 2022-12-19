@@ -36,7 +36,7 @@ namespace KouArge.API.Controllers
             return CreateActionResult(CustomResponseDto<string>.Success(200, url));
         }
 
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "ReadOnly,Admin,SuperAdmin")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "ReadOnly,Admin,SuperAdmin")]
 
         [HttpGet]
         public async Task<IActionResult> GettAllAsync()

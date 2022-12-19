@@ -169,8 +169,8 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = "1",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "b03b8cd7-9f5d-4a09-8c87-88c09d074ea0",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 299, DateTimeKind.Local).AddTicks(8429),
+                            ConcurrencyStamp = "a8a56eb6-fa36-4a0a-909a-fe9c4fbb5a69",
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 890, DateTimeKind.Local).AddTicks(439),
                             DepartmentId = "1",
                             Email = "test@gmail.com",
                             EmailConfirmed = false,
@@ -180,10 +180,10 @@ namespace KouArge.Repository.Migrations
                             NormalizedEmail = "TEST@GMAIL.COM",
                             NormalizedUserName = "1",
                             NotificationId = 1,
-                            PasswordHash = "AQAAAAEAACcQAAAAEGPJRk1vOxjaYUkOxAuU5gvYRB5l/OUutAlJBkhUDltYcL9MjIiOmznus+SinfMsuA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEK76eNbRGs5TvFF39Xc6bSPFgcuLsdlkFGXD05RfQvK4Ux5zyQvwYnl7EmtjQnkAuA==",
                             PhoneNumber = "5303003030",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "87de1be7-c7c2-4c31-ab33-50bc3381233d",
+                            SecurityStamp = "d1677991-ea87-44c1-8be9-ec62344e1923",
                             StudentNumber = "191307000",
                             Surname = "test",
                             TwoFactorEnabled = false,
@@ -194,8 +194,8 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = "2",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "4d86f5bb-ff8c-4d5d-8ec2-e6406968150d",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 300, DateTimeKind.Local).AddTicks(9521),
+                            ConcurrencyStamp = "ee87b9a7-1753-4dae-891d-ac321f9d376a",
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 891, DateTimeKind.Local).AddTicks(1525),
                             DepartmentId = "1",
                             Email = "test2@gmail.com",
                             EmailConfirmed = false,
@@ -207,7 +207,7 @@ namespace KouArge.Repository.Migrations
                             NotificationId = 1,
                             PhoneNumber = "5303003031",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f4a78588-2a4d-4d75-b5e5-efa692bc5c03",
+                            SecurityStamp = "0d325e6c-1ef1-477f-ba51-da7af2e13cc5",
                             StudentNumber = "191307001",
                             Surname = "test2",
                             TwoFactorEnabled = false,
@@ -255,7 +255,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = "1",
                             AppUserId = "1",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(450),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3019),
                             EventId = 1,
                             IsActive = true,
                             Template = 1
@@ -264,7 +264,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = "2",
                             AppUserId = "1",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(451),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3023),
                             EventId = 2,
                             IsActive = true,
                             Template = 1
@@ -303,7 +303,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = "1",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(543),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3122),
                             FacultyId = 1,
                             IsActive = true,
                             Name = "Bil Sis. Müh."
@@ -317,6 +317,10 @@ namespace KouArge.Repository.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Adress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
@@ -363,9 +367,10 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(895),
+                            Adress = "adress1",
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3454),
                             Description = "Descript1",
-                            EventDate = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(893),
+                            EventDate = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3452),
                             ImgBackUrl = "Url1",
                             IsActive = true,
                             OurFormatId = 2,
@@ -376,9 +381,10 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(899),
+                            Adress = "adress2",
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3458),
                             Description = "Descript2",
-                            EventDate = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(898),
+                            EventDate = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3456),
                             ImgBackUrl = "Url2",
                             IsActive = true,
                             OurFormatId = 1,
@@ -389,9 +395,10 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(901),
+                            Adress = "adress3",
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3460),
                             Description = "Descript3",
-                            EventDate = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(900),
+                            EventDate = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3459),
                             ImgBackUrl = "Url3",
                             IsActive = true,
                             OurFormatId = 2,
@@ -402,9 +409,10 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(928),
+                            Adress = "adress4",
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3506),
                             Description = "Descript4",
-                            EventDate = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(902),
+                            EventDate = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3504),
                             ImgBackUrl = "Url4",
                             IsActive = true,
                             OurFormatId = 1,
@@ -415,9 +423,10 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(931),
+                            Adress = "adress5",
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3508),
                             Description = "Descript5",
-                            EventDate = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(929),
+                            EventDate = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3507),
                             ImgBackUrl = "Url5",
                             IsActive = true,
                             OurFormatId = 2,
@@ -464,7 +473,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 2,
                             AppUserId = "1",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(643),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3222),
                             EventId = 1,
                             IsActive = true
                         },
@@ -472,7 +481,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 3,
                             AppUserId = "2",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(648),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3228),
                             EventId = 1,
                             IsActive = true
                         },
@@ -480,7 +489,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 4,
                             AppUserId = "1",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(649),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3229),
                             EventId = 2,
                             IsActive = true
                         });
@@ -520,7 +529,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(774),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3336),
                             EventId = 1,
                             ImgUrl = "Url1",
                             IsActive = true
@@ -528,7 +537,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(778),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3338),
                             EventId = 2,
                             ImgUrl = "Url2",
                             IsActive = true
@@ -536,7 +545,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(780),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3340),
                             EventId = 3,
                             ImgUrl = "Url3",
                             IsActive = true
@@ -544,7 +553,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(781),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3341),
                             EventId = 4,
                             ImgUrl = "Url4",
                             IsActive = true
@@ -552,7 +561,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(782),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3342),
                             EventId = 5,
                             ImgUrl = "Url5",
                             IsActive = true
@@ -595,7 +604,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 1,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1028),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3665),
                             IsActive = true,
                             Name = "Ali Rıza Veziroğlu Meslek Yüksekokulu"
                         },
@@ -603,7 +612,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 2,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1029),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3666),
                             IsActive = true,
                             Name = "Asım Kocabıyık Meslek Yüksekokulu"
                         },
@@ -611,7 +620,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 3,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1030),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3667),
                             IsActive = true,
                             Name = "Değirmendere Ali ÖZBAY Meslek Yüksekokulu"
                         },
@@ -619,7 +628,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 4,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1031),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3668),
                             IsActive = true,
                             Name = "Teknoloji"
                         },
@@ -627,7 +636,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 5,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1032),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3669),
                             IsActive = true,
                             Name = "Denizcilik Fakültesi"
                         },
@@ -635,7 +644,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 6,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1033),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3670),
                             IsActive = true,
                             Name = "Diş Hekimliği Fakültesi"
                         },
@@ -643,7 +652,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 7,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1034),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3671),
                             IsActive = true,
                             Name = "Diş Hekimliği Fakültesi"
                         },
@@ -651,7 +660,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 8,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1035),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3672),
                             IsActive = true,
                             Name = "Eğitim Fakültesi"
                         },
@@ -659,7 +668,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 9,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1036),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3673),
                             IsActive = true,
                             Name = "Fen - Edebiyat Fakültesi"
                         },
@@ -667,7 +676,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 10,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1037),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3675),
                             IsActive = true,
                             Name = "Ford Otosan İhsaniye Otomotiv Meslek Yüksekokulu"
                         },
@@ -675,7 +684,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 11,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1038),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3675),
                             IsActive = true,
                             Name = "Gazanfer Bilge Meslek Yüksekokulu"
                         },
@@ -683,7 +692,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 12,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1039),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3676),
                             IsActive = true,
                             Name = "Gıda ve Tarım Meslek Yüksekokulu"
                         },
@@ -691,7 +700,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 13,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1039),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3677),
                             IsActive = true,
                             Name = "Gölcük Meslek Yüksekokulu"
                         },
@@ -699,7 +708,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 14,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1040),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3678),
                             IsActive = true,
                             Name = "Güzel Sanatlar Fakültesi"
                         },
@@ -707,7 +716,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 15,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1041),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3679),
                             IsActive = true,
                             Name = "Havacılık ve Uzay Bilimleri Fakültesi"
                         },
@@ -715,7 +724,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 16,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1042),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3680),
                             IsActive = true,
                             Name = "Hereke Asım Kocabıyık Meslek Yüksekokulu"
                         },
@@ -723,7 +732,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 17,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1043),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3681),
                             IsActive = true,
                             Name = "Hereke Meslek Yüksekokulu"
                         },
@@ -731,7 +740,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 18,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1044),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3682),
                             IsActive = true,
                             Name = "Hereke Ömer İsmet Uzunyol Meslek Yüksekokulu"
                         },
@@ -739,7 +748,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 19,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1045),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3683),
                             IsActive = true,
                             Name = "Hukuk Fakültesi"
                         },
@@ -747,7 +756,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 20,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1046),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3684),
                             IsActive = true,
                             Name = "İktisadi ve İdari Bilimler Fakültesi"
                         },
@@ -755,7 +764,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 21,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1047),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3685),
                             IsActive = true,
                             Name = "İlahiyat Fakültesi"
                         },
@@ -763,7 +772,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 22,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1048),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3686),
                             IsActive = true,
                             Name = "İletişim Fakültesi"
                         },
@@ -771,7 +780,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 23,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1049),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3687),
                             IsActive = true,
                             Name = "İzmit Meslek Yüksekokulu"
                         },
@@ -779,7 +788,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 24,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1050),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3689),
                             IsActive = true,
                             Name = "Kandıra Meslek Yüksekokulu"
                         },
@@ -787,7 +796,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 25,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1051),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3690),
                             IsActive = true,
                             Name = "Karamürsel Meslek Yüksekokulu"
                         },
@@ -795,7 +804,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 26,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1051),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3691),
                             IsActive = true,
                             Name = "Kartepe Atçılık Meslek Yüksekokulu"
                         },
@@ -803,7 +812,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 27,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1052),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3691),
                             IsActive = true,
                             Name = "Kartepe Turizm Meslek Yüksekokulu"
                         },
@@ -811,7 +820,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 28,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1053),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3692),
                             IsActive = true,
                             Name = "Kocaeli Meslek Yüksekokulu"
                         },
@@ -819,7 +828,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 29,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1054),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3693),
                             IsActive = true,
                             Name = "Kocaeli Sağlık Hizmetleri Meslek Yüksekokulu"
                         },
@@ -827,7 +836,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 30,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1055),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3694),
                             IsActive = true,
                             Name = "Koseköy Meslek Yüksekokulu"
                         },
@@ -835,7 +844,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 31,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1056),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3695),
                             IsActive = true,
                             Name = "Mimarlık ve Tasarım Fakültesi"
                         },
@@ -843,7 +852,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 32,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1057),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3696),
                             IsActive = true,
                             Name = "Mühendislik Fakültesi"
                         },
@@ -851,7 +860,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 33,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1058),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3697),
                             IsActive = true,
                             Name = "Sağlık Bilimleri Fakültesi"
                         },
@@ -859,7 +868,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 34,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1059),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3698),
                             IsActive = true,
                             Name = "Spor Bilimleri Fakültesi"
                         },
@@ -867,7 +876,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 35,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1060),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3699),
                             IsActive = true,
                             Name = "Teknoloji Fakültesi"
                         },
@@ -875,7 +884,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 36,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1061),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3700),
                             IsActive = true,
                             Name = "Tıp Fakültesi"
                         },
@@ -883,7 +892,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 37,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1062),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3701),
                             IsActive = true,
                             Name = "Turizm Fakültesi"
                         },
@@ -891,7 +900,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 38,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1063),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3702),
                             IsActive = true,
                             Name = "Turizm İşletmecliliği ve Otelcilik Yüksekokulu"
                         },
@@ -899,7 +908,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 39,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1063),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3703),
                             IsActive = true,
                             Name = "Uzunçiftlik Nuh Çimento Meslek Yüksekokulu"
                         },
@@ -907,7 +916,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 40,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1064),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3703),
                             IsActive = true,
                             Name = "Yahya Kaptan Meslek Yüksekokulu"
                         },
@@ -915,7 +924,7 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 41,
                             Campus = "Kocaeli",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1065),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3704),
                             IsActive = true,
                             Name = "Ziraat Fakültesi"
                         });
@@ -982,8 +991,8 @@ namespace KouArge.Repository.Migrations
                             Id = 1,
                             AppStatus = 0,
                             AppUserId = "1",
-                            ApplyTime = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1169),
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1168),
+                            ApplyTime = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3851),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3850),
                             Introducing = "Introducing",
                             IsActive = true,
                             SituationDescription = "SituationDescription",
@@ -996,8 +1005,8 @@ namespace KouArge.Repository.Migrations
                             Id = 2,
                             AppStatus = 1,
                             AppUserId = "1",
-                            ApplyTime = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1172),
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1171),
+                            ApplyTime = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3854),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3853),
                             Introducing = "Introducing2",
                             IsActive = true,
                             SituationDescription = "SituationDescription2",
@@ -1038,7 +1047,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1320),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3948),
                             Email = 1,
                             IsActive = true,
                             Sms = 1
@@ -1046,7 +1055,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1321),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3949),
                             Email = 1,
                             IsActive = true,
                             Sms = 0
@@ -1054,7 +1063,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1322),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3950),
                             Email = 0,
                             IsActive = true,
                             Sms = 1
@@ -1062,7 +1071,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1323),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(3974),
                             Email = 0,
                             IsActive = true,
                             Sms = 0
@@ -1112,7 +1121,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1437),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4076),
                             Description = "Description1",
                             ImgUrl = "Url1",
                             IsActive = true,
@@ -1122,7 +1131,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1441),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4080),
                             Description = "Description2",
                             ImgUrl = "Url2",
                             IsActive = true,
@@ -1132,7 +1141,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1443),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4082),
                             Description = "Description3",
                             ImgUrl = "Url3",
                             IsActive = true,
@@ -1142,7 +1151,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1445),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4084),
                             Description = "Description4",
                             ImgUrl = "Url4",
                             IsActive = true,
@@ -1152,7 +1161,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1447),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4086),
                             Description = "Description5",
                             ImgUrl = "Url5",
                             IsActive = true,
@@ -1229,7 +1238,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1563),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4181),
                             IsActive = true,
                             Name = "Semester1",
                             StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1237,7 +1246,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1565),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4183),
                             IsActive = true,
                             Name = "Semester2",
                             StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1245,7 +1254,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1566),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4184),
                             IsActive = true,
                             Name = "Semester3",
                             StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1253,7 +1262,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1567),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4185),
                             IsActive = true,
                             Name = "Semester4",
                             StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1261,7 +1270,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 5,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1568),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4186),
                             IsActive = true,
                             Name = "Semester5",
                             StartDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
@@ -1368,13 +1377,13 @@ namespace KouArge.Repository.Migrations
 
                     b.HasIndex("EventId");
 
-                    b.ToTable("Speaker");
+                    b.ToTable("Speakers");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1692),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4291),
                             EventId = 2,
                             ImgUrl = "Spekare Url 1",
                             IsActive = true,
@@ -1384,7 +1393,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 6,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1697),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4296),
                             EventId = 2,
                             ImgUrl = "Spekare Url 11",
                             IsActive = true,
@@ -1394,7 +1403,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1700),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4298),
                             EventId = 1,
                             ImgUrl = "Spekare Url 2",
                             IsActive = true,
@@ -1404,7 +1413,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 7,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1703),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4300),
                             EventId = 1,
                             ImgUrl = "Spekare Url 21",
                             IsActive = true,
@@ -1414,7 +1423,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1705),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4302),
                             EventId = 2,
                             ImgUrl = "Spekare Url 3",
                             IsActive = true,
@@ -1424,7 +1433,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 8,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1708),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4305),
                             EventId = 2,
                             ImgUrl = "Spekare Url 31",
                             IsActive = true,
@@ -1434,7 +1443,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1732),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4306),
                             EventId = 1,
                             ImgUrl = "Spekare Url 4",
                             IsActive = true,
@@ -1444,7 +1453,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 9,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1734),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4308),
                             EventId = 1,
                             ImgUrl = "Spekare Url 41",
                             IsActive = true,
@@ -1534,7 +1543,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1937),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4529),
                             Description = "Webino Takımı",
                             ImgUrl = "logoUrl",
                             IsActive = true,
@@ -1543,7 +1552,7 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1939),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4530),
                             Description = "Mobil Takımı",
                             ImgUrl = "logoUrl2",
                             IsActive = true,
@@ -1608,12 +1617,12 @@ namespace KouArge.Repository.Migrations
                         {
                             Id = 1,
                             AppUserId = "1",
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1836),
-                            EndDate = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1838),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4427),
+                            EndDate = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4428),
                             GeneralAssemblyApplyId = 2,
                             ImgUrl = "ImageUrl",
                             IsActive = true,
-                            StartDate = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(1837),
+                            StartDate = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4428),
                             TeamId = 1,
                             TitleId = 1
                         });
@@ -1648,21 +1657,21 @@ namespace KouArge.Repository.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(2035),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4645),
                             IsActive = true,
                             Name = "Takım Kaptanı"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(2036),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4646),
                             IsActive = true,
                             Name = "Takım Kaptan Yardımcısı"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedAt = new DateTime(2022, 11, 27, 16, 16, 42, 302, DateTimeKind.Local).AddTicks(2037),
+                            CreatedAt = new DateTime(2022, 12, 9, 23, 14, 50, 892, DateTimeKind.Local).AddTicks(4647),
                             IsActive = true,
                             Name = "Takım Üyesi"
                         });

@@ -5,8 +5,12 @@ namespace KouArge.Core.Services
 {
     public interface IEventParticipantService : IService<EventParticipant>
     {
-        public Task DuplicateData(int eventId, string userId);
-        public Task<CustomResponseDto<EventParticipantDto>> AddAsync(string token, EventParticipant eventParticipant);
-        public Task<CustomResponseDto<NoContentDto>> RemoveAsync(DeleteDto deleteDto);
+        Task DuplicateData(int eventId, string userId);
+        Task<CustomResponseDto<EventParticipantDto>> AddAsync(string token, EventParticipant eventParticipant);
+        Task<CustomResponseDto<NoContentDto>> RemoveAsync(DeleteDto deleteDto);
+        Task<CustomResponseDto<NoContentDto>> RemoveByUserIdAsync(DeleteByUserIdDto deleteDto);
+        Task<EventParticipant> GetByEventId(int eventId);
+        Task<CustomResponseDto<IEnumerable<EventParticipantDto>>> GetAllByEventIdAsync(int eventId);
+        Task<CustomResponseDto<NoContentDto>> RemoveByIdAsync(int id);
     }
 }

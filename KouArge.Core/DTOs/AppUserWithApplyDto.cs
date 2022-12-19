@@ -11,6 +11,8 @@
         public int AppStatus { get; set; } //ToDo : Enum eklenecek
         public DateTime ApplyTime { get; set; }
         public TeamDto Team { get; set; }
+
+        public int MyProperty { get; set; }
         public TitleDto Title { get; set; }
 
     }

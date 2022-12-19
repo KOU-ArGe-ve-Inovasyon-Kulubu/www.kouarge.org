@@ -1,4 +1,5 @@
 ﻿using KouArge.Core.DTOs;
+using KouArge.Core.Models;
 using KouArge.Core.Tokens;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -19,7 +20,7 @@ namespace KouArge.Service.Services.Tokens
             _configruation = configruation;
         }
 
-        public Token CreateAccessToken(int minute, List<string> roles, string userId)
+        public Token CreateAccessToken(int minute, List<string> roles, AppUser user)
         {
             Token token = new();
 
@@ -31,6 +32,7 @@ namespace KouArge.Service.Services.Tokens
 
             //oluşturulacak token ayarlarını veriyoruz
             token.Expiration = DateTime.UtcNow.AddMinutes(minute);
+            //token.Expiration = DateTime.Now.AddSeconds(minute);
 
             //claims
             var claims = new List<Claim>();
@@ -38,7 +40,11 @@ namespace KouArge.Service.Services.Tokens
                 foreach (var item in roles)
                     claims.Add(new Claim(ClaimTypes.Role, item));
 
-            claims.Add(new Claim("UserId", userId));
+
+            claims.Add(new Claim("UserId", user.Id));
+            claims.Add(new Claim(ClaimTypes.Name, user.Name + " " + user.Surname));
+            claims.Add(new Claim(ClaimTypes.Email, user.Email));
+            claims.Add(new Claim("StudentNumber", user.StudentNumber));
 
             JwtSecurityToken securityToken = new(
                 audience: _configruation["Token:Audience"],

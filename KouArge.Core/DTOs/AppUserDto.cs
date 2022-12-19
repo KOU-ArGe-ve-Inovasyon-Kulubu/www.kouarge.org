@@ -4,6 +4,7 @@ namespace KouArge.Core.DTOs
 {
     public class AppUserDto
     {
+        public string Id { get; set; }
         public string Name { get; set; }
         public string Surname { get; set; }
         public string StudentNumber { get; set; }
@@ -19,7 +20,7 @@ namespace KouArge.Core.DTOs
 
         public Token Token { get; set; }
 
-        [JsonIgnore]
+        //[JsonIgnore]
         public List<ErrorViewModel> Errors { get; set; }
 
         //[JsonIgnore]

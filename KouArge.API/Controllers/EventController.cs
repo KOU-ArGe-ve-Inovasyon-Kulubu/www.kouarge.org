@@ -28,6 +28,13 @@ namespace KouArge.API.Controllers
         }
 
         [AllowAnonymous]
+        [HttpGet("[Action]")]
+        public async Task<IActionResult> GetAllWithFormat()
+        {
+            return CreateActionResult(await _eventService.GetAllWithFormatAsync());
+        }
+
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> GetAllAsync()
         {
@@ -41,6 +48,7 @@ namespace KouArge.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetByIdAsync(int id)
         {
+            await _eventService.AddReadCountAsync(id);
             return CreateActionResult(await _eventService.GetByIdWithDetailsAsync(id));
         }
 

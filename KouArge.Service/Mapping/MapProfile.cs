@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using KouArge.Core.DTOs;
 using KouArge.Core.DTOs.UpdateDto;
+using KouArge.Core.DTOs.ViewModel;
 using KouArge.Core.Models;
 
 namespace KouArge.Service.Mapping
@@ -13,6 +14,8 @@ namespace KouArge.Service.Mapping
 
             //appuser
             CreateMap<AppUser, AppUserDto>().ReverseMap();
+            CreateMap<AppUserDto, AppUserUpdateDto>();
+            CreateMap<AppUserUpdateViewModel, AppUserDto>().ReverseMap();
             CreateMap<AppUserRegisterDto, AppUser>();
             CreateMap<AppUserUpdateDto, AppUser>();
             CreateMap<AppUser, AppUserBasicDto>();
@@ -43,6 +46,8 @@ namespace KouArge.Service.Mapping
             //generalassemblyapply
             CreateMap<GeneralAssemblyApply, GeneralAssemblyApplyDto>().ReverseMap();
             CreateMap<GeneralAssemblyApplyUpdateDto, GeneralAssemblyApply>();
+            CreateMap<GeneralAssemblyApply, GeneralAssemblyApplyWithUserDto>().ReverseMap();
+            CreateMap<GeneralAssemblyApplyPostDto, GeneralAssemblyApply>();
 
             //generalassemblyteam
             //CreateMap<GeneralAssemblyTeam, GeneralAssemblyTeamDto>().ReverseMap();
@@ -60,6 +65,8 @@ namespace KouArge.Service.Mapping
             //socialMedia
             CreateMap<SocialMedia, SocialMediaDto>().ReverseMap();
             CreateMap<SocialMedia, SocialMediaPostDto>().ReverseMap();
+            CreateMap<SocialMedia, SocialMediaPostIdDto>().ReverseMap();
+
 
             CreateMap<SocialMediaUpdateDto, SocialMedia>();
 
@@ -75,11 +82,12 @@ namespace KouArge.Service.Mapping
             CreateMap<Event, EventDto>().ReverseMap();
             CreateMap<EventUpdateDto, Event>();
             CreateMap<Event, EventWithSpeakersDto>().ReverseMap();
+            CreateMap<Event, EventWithFormatDto>();
 
             //event participant
             CreateMap<EventParticipant, EventParticipantDto>().ReverseMap();
             CreateMap<EventParticipantUpdateDto, EventParticipant>();
-
+            CreateMap<EventParticipant, EventParticipantWithUserDto>();
 
             //event picture
             CreateMap<EventPicture, EventPictureDto>().ReverseMap();

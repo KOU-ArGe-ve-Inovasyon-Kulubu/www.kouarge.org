@@ -30,6 +30,8 @@ namespace KouArge.Repository
         public DbSet<Title> Titles { get; set; }
 
         public DbSet<Certificate> Certificates { get; set; }
+        public DbSet<Speaker> Speakers { get; set; }
+
 
 
         //***************

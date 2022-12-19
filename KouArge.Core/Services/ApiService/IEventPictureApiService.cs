@@ -4,9 +4,12 @@ namespace KouArge.Core.Services.ApiService
 {
     public interface IEventPictureApiService
     {
-        //public Task<IEnumerable<EventPictureDto>> Save(List<EventPictureDto> eventPictureDto);
-        Task<IEnumerable<EventPictureDto>> Save(IEnumerable<EventPictureDto> eventPictureDto);
-        public Task<EventPictureDto> Save(EventPictureDto eventPictureDto);
+        Task<CustomResponseDto<IEnumerable<EventPictureDto>>> Save(IEnumerable<EventPictureDto> eventPictureDto);
+        Task<CustomResponseDto<EventPictureDto>> Save(EventPictureDto eventPictureDto);
+        Task<CustomResponseDto<IEnumerable<EventPictureDto>>> GetAllByEventIdAsync(int eventId);
+        Task<CustomResponseDto<EventPictureDto>> GetByIdAsync(int id);
+        Task<CustomResponseDto<NoContentDto>> UpdateAsync(EventPictureDto eventPictureDto);
+        Task<CustomResponseDto<NoContentDto>> DeleteAsync(int id);
 
     }
 }
